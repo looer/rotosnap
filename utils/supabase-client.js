@@ -30,3 +30,24 @@ export const updateUserName = async (user, name) => {
     })
     .eq('id', user.id);
 };
+
+export const getPic = async (pictures) => {
+  const url = pictures[0]
+  const { publicURL, error } = await supabase.storage.from('avatars').getPublicUrl(url)
+
+  if (error) {
+    console.log(error.message);
+    throw error
+  }
+  return publicURL || {}
+}
+
+export const getUserPics = async (pictures) => {
+
+  const { publicURL, error } = await supabase.storage.from('avatars').getPublicUrl(url)
+  if (error) {
+    console.log(error.message);
+    throw error
+  }
+  return publicURL || {}
+}

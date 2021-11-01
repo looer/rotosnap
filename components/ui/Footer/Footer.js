@@ -14,7 +14,7 @@ export default function Footer() {
               <span className="rounded-full border border-gray-700 mr-2">
                 <Logo />
               </span>
-              <span>ACME</span>
+              <span>Simply360</span>
             </a>
           </Link>
         </div>

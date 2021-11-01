@@ -21,11 +21,17 @@ const Navbar = () => {
               </a>
             </Link>
             <nav className="space-x-2 ml-6 hidden lg:block">
-              <Link href="/">
+              <Link href="/documentation">
+                <a className={s.link}>Documentation</a>
+              </Link>
+              <Link href="/pricing">
                 <a className={s.link}>Pricing</a>
               </Link>
               <Link href="/account">
                 <a className={s.link}>Account</a>
+              </Link>
+              <Link href="/app">
+                <a className={s.link}>App</a>
               </Link>
             </nav>
           </div>

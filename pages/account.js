@@ -93,7 +93,7 @@ export default function Account() {
             ) : subscriptionPrice ? (
               `${subscriptionPrice}/${subscription.prices.interval}`
             ) : (
-              <Link href="/">
+              <Link href="/pricing">
                 <a>Choose your plan</a>
               </Link>
             )}
