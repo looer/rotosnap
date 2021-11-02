@@ -1,43 +1,21 @@
 import { useUser } from '@/utils/useUser';
-import { supabase, getPic } from '@/utils/supabase-client'
+import { supabase } from '@/utils/supabase-client'
 import Image from 'next/image'
 import { useState, useEffect } from 'react';
 import { FileDrop } from 'react-file-drop'
-
-async function getList() {
-    const { data, error } = await supabase
-        .storage
-        .listBuckets()
-
-    if (error) {
-        console.error(error)
-    }
-    if (data) {
-        console.log(data)
-    }
-}
-
-function droppedFiles(files, e) {
-    console.log(files)
-    createProject(files)
-}
-
-
 
 export const Project = (props) => {
 
     const url = props.proj.pictures[0]
     const [profile, setProfile] = useState('')
     useEffect(() => {
-        console.log('url: ', url)
         if (url) downloadImage(url)
     }, [])
 
     async function downloadImage(path) {
         try {
             const { data, error } = await supabase.storage.from('avatars').getPublicUrl(path)
-            console.log('Path', path)
-            console.log('Data: ', data)
+
             if (error) {
                 throw error
             }
@@ -51,7 +29,7 @@ export const Project = (props) => {
 
     return (
         <div className='p-5 m-5' >
-            <h3 className='text-3xl my-5'>{props.proj.name}</h3>
+            <h3 className='text-3xl my-5'>{props.proj.name.split('.')[0]}</h3>
             {profile &&
                 <Image src={profile}
                     alt='profile pic'
@@ -64,12 +42,12 @@ export const Project = (props) => {
                     <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-8l-4-4m0 0L8 8m4-4v12" />
                 </svg>
             </button>
-            <button>
+            <button onClick={(e) => props.onClick(e, props.index)}>
                 <svg xmlns="http://www.w3.org/2000/svg" className="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                     <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" />
                 </svg>
             </button>
-        </div>
+        </div >
     )
 }
 
@@ -83,6 +61,10 @@ export default function App() {
         user_id: 1234,
         name: 'Progetto1',
         pictures: [],
+    }, {
+        user_id: 545342,
+        name: 'Ultimate Spiderman',
+        pictures: [],
     }]
     useEffect(() => {
         allProjects()
@@ -92,29 +74,42 @@ export default function App() {
         if (!user) return []
         const { data, error, status } = await supabase.from('projects').select('id, user_id, name, pictures').eq('user_id', user.id)
         if (error) throw error
-        console.log('Returned ', typeof data)
 
         setProjects(data)
     }
 
     async function createProject(files) {
         setSubmitting(true)
-
         const uploadedImagePaths = await uploadImages(files)
-        const { error } = await supabase.from('projects').insert({
+        const newProject = {
             user_id: user.id,
             name: files[0].name,
             pictures: uploadedImagePaths,
-        })
-
+        }
+        const { error } = await supabase.from('projects').insert(newProject)
 
         if (!error) {
+            const updatedProjects = [...projects, newProject]
+            setProjects(updatedProjects)
             setSubmitting(false);
-            //router.push("/")
-            console.log('no error')
+        } else {
+            console.log('Error', error)
+            setSubmitting(false)
         }
-        console.log('Error', error)
-        setSubmitting(false)
+    }
+
+    async function deleteProject(e, i) {
+        const toRemove = projects[i].pictures
+        const { data, error } = await supabase.storage.from('avatars').remove(toRemove)
+        console.log('pictures to remove ', data, toRemove)
+        //console.log('error', error)
+        if (!error) {
+            const { data, error } = await supabase.from('projects').delete().match({ id: projects[i].id })
+            //    console.log('deleted project ', data)
+        }
+        const updatedProjects = projects.filter((p, j) => { return j !== i })
+        console.log('updated projects', updatedProjects)
+        setProjects(updatedProjects)
     }
 
     const uploadImages = async (files) => {
@@ -165,7 +160,7 @@ export default function App() {
             <h1 className='text-5xl text-center'>Hello Lorenzo,</h1>
             <h2 className='text-3xl text-center'>Your Projects</h2>
             <div className='flex'>
-                {projects.map(p => <Project proj={p} />)}
+                {projects.map((p, i) => <Project proj={p} key={i} index={i} onClick={deleteProject} />)}
                 <div className='p-3 m-4'>
                     <form onSubmit={handleSubmit}>
                         <label>
