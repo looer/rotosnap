@@ -3,6 +3,7 @@ import { supabase } from '@/utils/supabase-client'
 import Image from 'next/image'
 import { useState, useEffect } from 'react';
 import { FileDrop } from 'react-file-drop'
+import Viewer from '@/components/Viewer';
 
 export const Project = (props) => {
 
@@ -57,15 +58,12 @@ export default function App() {
     const [projectname, setProjectname] = useState('')
     const [submitting, setSubmitting] = useState(false);
     const [projects, setProjects] = useState([])
-    const fakeList = [{
-        user_id: 1234,
-        name: 'Progetto1',
-        pictures: [],
-    }, {
-        user_id: 545342,
-        name: 'Ultimate Spiderman',
-        pictures: [],
-    }]
+
+    const garzaImages = ['/Garza/F31 garza-360-01.jpg', '/Garza/F31 garza-360-02.jpg', '/Garza/F31 garza-360-03.jpg',
+        '/Garza/F31 garza-360-04.jpg', '/Garza/F31 garza-360-05.jpg', '/Garza/F31 garza-360-06.jpg',
+        '/Garza/F31 garza-360-07.jpg', '/Garza/F31 garza-360-08.jpg', '/Garza/F31 garza-360-09.jpg',
+        '/Garza/F31 garza-360-10.jpg', '/Garza/F31 garza-360-11.jpg', '/Garza/F31 garza-360-12.jpg',]
+
     useEffect(() => {
         allProjects()
     }, [session])
@@ -190,6 +188,12 @@ export default function App() {
                         )}</button>
                     </form>
                 </div>
+            </div>
+            <div>
+                <h2>
+                    360 Preview
+                </h2>
+                <Viewer images={garzaImages}></Viewer>
             </div>
         </div >)
 }
