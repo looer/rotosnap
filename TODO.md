@@ -1,4 +1,4 @@
-# TODO
+# To Do
 
 - have a 360 visualization
 - add the possibility to change the name
