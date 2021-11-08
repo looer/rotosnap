@@ -5,29 +5,47 @@ export default function Viewer(props) {
     const { id, images, playable, autoPlay, draggable, mouseMove, buttons, keys, scroll } = props
     const [source, setSource] = useState(images[0])
     const [index, setIndex] = useState(0)
-    let n = images.length;
+    const [dragging, setDragging] = useState(false)
+    const [position, setPosition] = useState(0)
 
-    //console.log('init component')
+    let n = images.length
 
     useEffect(() => {
         setSource(images[index])
     }, [index])
-    //console.log(`${id}-${playable ? 'playable ' : ''}${autoPlay ? 'autoPlay ' : ''}${draggable ? 'draggable ' : ''}${mouseMove ? 'mouseMove ' : ''}${buttons ? 'buttons ' : ''}${keys ? 'keys' : ''}${scroll ? 'scroll ' : ''}`);
 
-    //loaderNone(id);
-    //var i = 1, j = 0, move = [],
-    //var img = document.querySelector(`#${id} .${id}`);
-    function changeSource(e) {
-        e.preventDefault();
-        e.target.src = images[index]
-        console.log('index ', index, 'n ', n)
-        if (index + 1 >= n) {
-            setIndex(0)
-        } else {
-            setIndex(index + 1)
-        }
-    }
     return (<div className='bg-white w-auto h-auto cursor-move'>
-        <Image draggable={true} src={source} onClick={e => changeSource(e)} width={400} height={400}></Image>
+        <Image draggable={false} src={source}
+
+            onMouseDown={e => {
+                setDragging(true);
+            }}
+            onMouseUp={e => {
+                setDragging(false)
+            }}
+            onMouseOut={e => {
+                setDragging(false)
+            }}
+            onMouseMove={e => {
+                if (dragging) {
+
+                    var pos = position
+                    setPosition(pos - e.movementX)
+                    var _index = Math.abs(Math.floor(position / 30))
+                    setIndex(_index)
+
+                    if (_index + 1 >= n) {
+                        setIndex(_index % n)
+                    } else if (_index - 1 <= n) {
+                        setIndex(_index % n)
+                    } else {
+                        setIndex(_index + 1)
+                    }
+                }
+            }}
+            width={400} height={400}></Image>
+        <div className="text-black">{dragging ? 'dragging' : 'not dragging'}</div>
+        <div className="text-black">{position}</div>
+        <div className="text-black">{index}</div>
     </div>)
 }
