@@ -66,8 +66,8 @@ export default function Viewer(props) {
                     width={400} height={400}></img>
             </div>
 
-            <div className="absolute top-0" style={{ 'z-index': '-1' }}><Image draggable={false} src={images[nextIndex]} width={400} height={400}></Image></div>
-            <div className="absolute top-0" style={{ 'z-index': '-1' }}><Image draggable={false} src={images[prevIndex]} width={400} height={400}></Image></div>
+            <div className="absolute top-0" style={{ 'z-index': '-1' }}><img draggable={false} src={images[nextIndex]} width={400} height={400}></img></div>
+            <div className="absolute top-0" style={{ 'z-index': '-1' }}><img draggable={false} src={images[prevIndex]} width={400} height={400}></img></div>
         </div>
         <div className="text-black">{dragging ? 'dragging' : 'not dragging'}</div>
         <div className="text-black">{position}</div>
