@@ -4,6 +4,7 @@ import Image from 'next/image'
 import { useState, useEffect } from 'react';
 import { FileDrop } from 'react-file-drop'
 import Viewer from '@/components/Viewer';
+import Link from 'next/link';
 
 export const Project = (props) => {
 
@@ -24,36 +25,41 @@ export const Project = (props) => {
             setProfile(data.publicURL)
         }
         catch (error) {
-            console.log('Error dowloading image: ', error.message)
+            console.log('Error downloading image: ', error.message)
         }
     }
 
     return (
-        <div className="border border-gray-700 hover:border-gray-500 rounded-md w-64 h-64 flex-grow max-w-xs min-w-1/5">
-            {profile &&
-                <div className="relative w-full h-32">
-                    <Image src={profile}
-                        alt='profile pic'
-                        layout='fill'
-                        objectFit={'cover'}
-                        className='rounded-t-md'
-                    />
-                </div>}
-            <div className='mt-3 mb-2 px-4 break-words'>{props.proj.name.split('.')[0]}</div>
-            <div className='px-4'>
-                <button>
-                    <svg xmlns="http://www.w3.org/2000/svg" className="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-8l-4-4m0 0L8 8m4-4v12" />
-                    </svg>
-                </button>
-                <button onClick={(e) => props.onClick(e, props.index)}>
-                    <svg xmlns="http://www.w3.org/2000/svg" className="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" />
-                    </svg>
-                </button>
-            </div>
 
-        </div >
+        <div className="border border-gray-700 hover:border-gray-500 rounded-md w-64 h-64 flex-grow max-w-xs min-w-1/5">
+            <Link href={"/project/" + props.proj.id}>
+                <a>
+                    {profile &&
+                        <div className="relative w-full h-32">
+                            <Image src={profile}
+                                alt='profile pic'
+                                layout='fill'
+                                objectFit={'cover'}
+                                className='rounded-t-md'
+                            />
+                        </div>}
+                    <div className='mt-3 mb-2 px-4 break-words'>{props.proj.name.split('.')[0]}</div>
+                    <div className='px-4'>
+                        <button>
+                            <svg xmlns="http://www.w3.org/2000/svg" className="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-8l-4-4m0 0L8 8m4-4v12" />
+                            </svg>
+                        </button>
+                        <button onClick={(e) => props.onClick(e, props.index)}>
+                            <svg xmlns="http://www.w3.org/2000/svg" className="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" />
+                            </svg>
+                        </button>
+                    </div>
+                </a>
+            </Link>
+        </div>
+
     )
 }
 
@@ -160,8 +166,11 @@ export default function App() {
         return (<div>User not defined</div>)
     } else return (
         <div className='max-w-8xl mx-auto px-8 mt-12'>
-            <h2 className='text-4xl font-bold mb-8'>Your Projects</h2>
-            <div className='flex gap-8 flex-wrap'>
+            <div className='flex'>
+                <h2 className='text-4xl font-bold mb-12 flex-grow'>Your Projects</h2>
+                <div>Create</div>
+            </div>
+            <div className='flex gap-8 flex-wrap mb-12'>
                 {projects.map((p, i) => <Project proj={p} key={i} index={i} onClick={deleteProject} />)}
             </div>
             <div className='w-64'>
