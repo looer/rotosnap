@@ -1,5 +1,4 @@
 import { useState, useEffect } from "react";
-import Image from 'next/image'
 
 export default function Viewer(props) {
     const { id, images } = props
@@ -34,7 +33,7 @@ export default function Viewer(props) {
     return (<div className='bg-white w-auto h-auto cursor-move'>
         <div className="relative">
             <div className='z-10'>
-                <Image draggable={false} src={images[index]}
+                <img draggable={false} src={images[index]}
 
                     onMouseDown={e => {
                         setDragging(true);
@@ -64,7 +63,7 @@ export default function Viewer(props) {
                             }
                         }
                     }}
-                    width={400} height={400}></Image>
+                    width={400} height={400}></img>
             </div>
 
             <div className="absolute top-0" style={{ 'z-index': '-1' }}><Image draggable={false} src={images[nextIndex]} width={400} height={400}></Image></div>
