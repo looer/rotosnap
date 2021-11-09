@@ -12,12 +12,12 @@ const Navbar = () => {
       <a href="#skip" className="sr-only focus:not-sr-only">
         Skip to content
       </a>
-      <div className="mx-auto max-w-6xl px-6">
+      <div className="mx-auto max-w-8xl px-8">
         <div className="flex justify-between align-center flex-row py-4 md:py-6 relative">
           <div className="flex flex-1 items-center">
             <Link href="/">
-              <a className={s.logo} aria-label="Logo">
-                <Logo />
+              <a className="text-2xl font-bold mr-8" aria-label="Logo">
+                Simply360
               </a>
             </Link>
             <nav className="space-x-2 ml-6 hidden lg:block">

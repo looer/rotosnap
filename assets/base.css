@@ -7,11 +7,9 @@
   --hover-1: rgba(255, 255, 255, 0.15);
   --hover-2: rgba(255, 255, 255, 0.25);
   --selection: var(--purple);
-
   --text-base: white;
   --text-primary: white;
   --text-secondary: black;
-
   --accents-0: #212529;
   --accents-1: #343a40;
   --accents-2: #495057;
@@ -22,7 +20,6 @@
   --accents-7: #e9ecef;
   --accents-8: #f1f3f5;
   --accents-9: #f8f9fa;
-
   --cyan: #22b8cf;
   --green: #37b679;
   --red: #da3c3c;
@@ -31,17 +28,12 @@
   --blue: #0070f3;
   --violet-light: #7048e8;
   --violet: #5f3dc4;
-
-  --font-sans: -apple-system, system-ui, BlinkMacSystemFont, 'Helvetica Neue',
-    'Helvetica', sans-serif;
-
+  --font-sans: -apple-system, system-ui, BlinkMacSystemFont, 'Helvetica Neue', 'Helvetica', sans-serif;
   --header-height: 80px;
   --vh100-offset: calc(100vh - var(--header-height));
 }
 
-*,
-*:before,
-*:after {
+*, *:before, *:after {
   box-sizing: inherit;
 }
 
@@ -59,8 +51,7 @@ html {
   -moz-osx-font-smoothing: grayscale;
 }
 
-html,
-body {
+html, body {
   font-family: var(--font-sans);
   text-rendering: optimizeLegibility;
   -webkit-font-smoothing: antialiased;
@@ -97,7 +88,6 @@ a {
   from {
     opacity: 0;
   }
-
   to {
     opacity: 1;
   }
@@ -107,7 +97,6 @@ a {
   from {
     opacity: 0;
   }
-
   to {
     opacity: 1;
   }
