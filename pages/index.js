@@ -1,13 +1,13 @@
 
 export default function LandingPage() {
   return <div>
-    <div class="">
+    <div>
       <div class="container px-3 mx-auto flex flex-wrap flex-col md:flex-row items-center">
-        <div class="flex flex-col w-full justify-center text-center md:w-2/5 md:text-left bg-gradient-to-r from-green-400 to-blue-500">
+        <div class="flex flex-col w-full justify-center text-center md:w-2/5 md:text-left">
           <p class="uppercase tracking-loose w-full"></p>
           <h1 class="my-4 text-5xl font-bold leading-tight">Add 360 interactive visualization in minutes</h1>
           <p class="leading-normal text-2xl mb-8">Integrate 360 views of your products into your website. No servers required. It's fast, it's simple, and it just works. </p>
-          <a href="/pricing" class="self-center text-center w-1/3 mx-auto lg:mx-0 hover:underline bg-white text-gray-800 font-bold rounded-full mt-4 lg:mt-0 py-4 px-8 shadow opacity-75 z-10">Sign Up!</a>
+          <a href="/pricing" class="self-center text-center w-1/3 mx-auto lg:mx-0 hover:underline bg-primary font-bold rounded-full mt-4 lg:mt-0 py-4 px-8 shadow opacity-75 z-10">Sign Up!</a>
         </div>
         <div class="md:w-3/5 p-20 z-10">
           <img class="rounded-xl" src="https://gyymhkyxbfjcmrrbgqez.supabase.in/storage/v1/object/sign/test-pictures/F31-360/F31-360-01.jpg?token=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1cmwiOiJ0ZXN0LXBpY3R1cmVzL0YzMS0zNjAvRjMxLTM2MC0wMS5qcGciLCJpYXQiOjE2MzUwNzcyNzQsImV4cCI6MTk1MDQzNzI3NH0.MNij66FUsmoQcY1IcG2VzPNNrUJR_ftw3B_R2BJWNiw" alt="" />

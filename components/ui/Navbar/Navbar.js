@@ -16,7 +16,7 @@ const Navbar = () => {
         <div className="flex justify-between align-center flex-row py-4 md:py-6 relative">
           <div className="flex flex-1 items-center">
             <Link href="/">
-              <a className="text-2xl font-bold mr-8" aria-label="Logo">
+              <a className="text-2xl font-bold mr-8 text-secondary" aria-label="Logo">
                 Simply360
               </a>
             </Link>

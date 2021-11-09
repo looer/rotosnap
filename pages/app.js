@@ -31,7 +31,7 @@ export const Project = (props) => {
 
     return (
 
-        <div className="border border-gray-700 hover:border-gray-500 bg-primary-2 rounded-md w-64 h-64 flex-grow max-w-xs min-w-1/5">
+        <div className="border border-gray-200 hover:border-gray-300 bg-primary-2 rounded-md w-64 h-64 flex-grow max-w-xs min-w-1/5">
             <Link href={"/project/" + props.proj.id}>
                 <a>
                     {profile &&
