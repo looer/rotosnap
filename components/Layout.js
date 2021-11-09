@@ -36,7 +36,7 @@ export default function Layout({ children, meta: pageMeta }) {
         <meta name="twitter:image" content={meta.cardImage} />
       </Head>
       <Navbar />
-      <main id="skip">{children}</main>
+      <main>{children}</main>
       <Footer />
     </>
   );
