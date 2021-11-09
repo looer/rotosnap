@@ -31,7 +31,7 @@ export const Project = (props) => {
 
     return (
 
-        <div className="border border-gray-700 hover:border-gray-500 rounded-md w-64 h-64 flex-grow max-w-xs min-w-1/5">
+        <div className="border border-gray-700 hover:border-gray-500 bg-primary-2 rounded-md w-64 h-64 flex-grow max-w-xs min-w-1/5">
             <Link href={"/project/" + props.proj.id}>
                 <a>
                     {profile &&
@@ -43,7 +43,8 @@ export const Project = (props) => {
                                 className='rounded-t-md'
                             />
                         </div>}
-                    <div className='mt-3 mb-2 px-4 break-words'>{props.proj.name.split('.')[0]}</div>
+                    <div className='mt-3 px-4 break-words'>{props.proj.name.split('.')[0]}</div>
+                    <div className='mb-4 px-4 text-sm text-gray-400'>{props.proj.pictures.length} pictures</div>
                     <div className='px-4'>
                         <button>
                             <svg xmlns="http://www.w3.org/2000/svg" className="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
@@ -165,9 +166,9 @@ export default function App() {
     if (!user) {
         return (<div>User not defined</div>)
     } else return (
-        <div className='max-w-8xl mx-auto px-8 mt-12'>
-            <div className='flex'>
-                <h2 className='text-4xl font-bold mb-12 flex-grow'>Your Projects</h2>
+        <div className='max-w-8xl mx-auto px-8 mt-16'>
+            <div className='flex items-center mb-16'>
+                <h2 className='text-6xl font-extrabold flex-grow'>Projects</h2>
                 <div>Create</div>
             </div>
             <div className='flex gap-8 flex-wrap mb-12'>
