@@ -13,10 +13,10 @@ const Navbar = () => {
         Skip to content
       </a>
       <div className="mx-auto max-w-8xl px-8">
-        <div className="flex justify-between align-center flex-row py-4 md:py-6 relative">
+        <div className="flex justify-between align-center flex-row py-4 md:py-4 relative">
           <div className="flex flex-1 items-center">
             <Link href="/">
-              <a className="text-2xl font-bold mr-8" aria-label="Logo">
+              <a className="text-xl font-bold mr-4 text-secondary" aria-label="Logo">
                 Simply360
               </a>
             </Link>

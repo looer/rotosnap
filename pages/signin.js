@@ -62,11 +62,9 @@ const SignIn = () => {
           <div className="flex flex-col space-y-4">
             {message.content && (
               <div
-                className={`${
-                  message.type === 'error' ? 'text-pink' : 'text-green'
-                } border ${
-                  message.type === 'error' ? 'border-pink' : 'border-green'
-                } p-3`}
+                className={`${message.type === 'error' ? 'text-pink' : 'text-green'
+                  } border ${message.type === 'error' ? 'border-pink' : 'border-green'
+                  } p-3`}
               >
                 {message.content}
               </div>
@@ -123,21 +121,20 @@ const SignIn = () => {
             <span className="pt-1 text-center text-sm">
               <a
                 href="#"
-                className="text-accents-7 text-accent-9 hover:underline cursor-pointer"
+                className="text-accents-4 text-accent-9 hover:underline cursor-pointer"
                 onClick={() => {
                   if (showPasswordInput) setPassword('');
                   setShowPasswordInput(!showPasswordInput);
                   setMessage({});
                 }}
               >
-                {`Or sign in with ${
-                  showPasswordInput ? 'magic link' : 'password'
-                }.`}
+                {`Or sign in with ${showPasswordInput ? 'magic link' : 'password'
+                  }.`}
               </a>
             </span>
 
             <span className="pt-1 text-center text-sm">
-              <span className="text-accents-7">Don't have an account?</span>
+              <span className="text-accents-4">Don't have an account?</span>
               {` `}
               <Link href="/signup">
                 <a className="text-accent-9 font-bold hover:underline cursor-pointer">

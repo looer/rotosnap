@@ -70,9 +70,9 @@ export default function ProjectPage() {
 
 
     return (
-        <div>
-            <h1 className='text-5xl m-5 text-bold text-center'>{project ? project.name : ''}</h1>
-            {paths && paths.length ? <Viewer images={paths}></Viewer> : 'This product doesn\'t contain any images'}
+        <div className='max-w-screen-lg mx-auto px-12 mb-12'>
+            <h1 className='text-3xl my-12 font-bold'>{project ? project.name : ''}</h1>
+            <div>{paths && paths.length ? <Viewer images={paths}></Viewer> : 'This product doesn\'t contain any images'}</div>
         </div >
     )
 }

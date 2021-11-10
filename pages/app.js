@@ -6,6 +6,7 @@ import { FileDrop } from 'react-file-drop'
 import Viewer from '@/components/Viewer';
 import Link from 'next/link';
 import { useRouter } from 'next/router';
+import Button from '@/components/ui/Button';
 
 export const Project = (props) => {
 
@@ -71,6 +72,7 @@ export default function App() {
     const [projectname, setProjectname] = useState('')
     const [submitting, setSubmitting] = useState(false);
     const [projects, setProjects] = useState([])
+    const [loading, setLoading] = useState(false);
     const router = useRouter();
 
     useEffect(() => {
@@ -168,10 +170,15 @@ export default function App() {
     if (!user) {
         return (<div>User not defined</div>)
     } else return (
-        <div className='max-w-8xl mx-auto px-8 mt-16'>
-            <div className='flex items-center mb-16'>
-                <h2 className='text-6xl font-extrabold flex-grow'>Projects</h2>
-                <div>Create</div>
+        <div className='max-w-8xl mx-auto px-8 mt-8'>
+            <div className='flex items-center mb-8'>
+                <h2 className='text-3xl font-bold flex-grow'>Projects</h2>
+                <Button
+                    variant="slim"
+                    loading={loading}
+                >
+                    New
+                </Button>
             </div>
             <div className='flex gap-8 flex-wrap mb-12'>
                 {projects.map((p, i) => <Project proj={p} key={i} index={i} onClick={deleteProject} />)}
@@ -179,11 +186,11 @@ export default function App() {
             <div className='w-64'>
                 <form onSubmit={handleSubmit}>
                     <label>
-                        <input id='projectname' value={projectname} onChange={handleChange} placeholder='New project' type="text" name="nome" className='text-3xl my-5 bg-black' />
+                        <input id='projectname' value={projectname} onChange={handleChange} placeholder='New project' type="text" name="nome" className='text-3xl my-5' />
                     </label>
                     <FileDrop onDrop={(files, e) => createProject(files)}>
                         <div id='droppable'
-                            className='p-20 border-4 border-white border-opacity-50 border-dashed rounded-xl hover:bg-gray-800'>
+                            className='p-20 border-4 border-gray-200 border-opacity-50 border-dashed rounded-xl hover:bg-gray-100'>
                             <button>Select files or drop here
                                 <svg xmlns="http://www.w3.org/2000/svg" className="h-8 w-8" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                                     <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 4v16m8-8H4" />

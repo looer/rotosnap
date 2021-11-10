@@ -6,7 +6,10 @@ module.exports = {
         '8xl': '1920px'
       },
       colors: {
-        primary: 'var(--primary)',
+        primary: {
+          DEFAULT: 'rgba(106, 109, 255, 1)',
+          dark: 'rgba(80, 80, 255, 1)'
+        },
         'primary-2': 'var(--primary-2)',
         secondary: 'var(--secondary)',
         'secondary-2': 'var(--secondary-2)',
