@@ -1,7 +1,7 @@
 import { useState, useEffect } from "react";
 
 export default function Viewer(props) {
-    const { id, images } = props
+    const { id, images, debug } = props
     const [index, setIndex] = useState(0)
     const [nextIndex, setNextIndex] = useState(0)
     const [prevIndex, setPrevIndex] = useState(0)
@@ -28,12 +28,14 @@ export default function Viewer(props) {
         } else {
             setPrevIndex(_prevIndex + 1)
         }
+
+        if (debug) console.log(index)
     }, [index])
 
     return (<div className='mx-auto w-auto h-auto cursor-move'>
         <div className="relative">
             <div className='z-10'>
-                <img draggable={false} src={images[index]}
+                <img draggable={false} src={images[index]} className="rounded-3xl shadow-md"
 
                     onMouseDown={e => {
                         setDragging(true);
@@ -63,7 +65,7 @@ export default function Viewer(props) {
                             }
                         }
                     }}
-                    width={400} height={400}></img>
+                    width={props.width || 500} height={props.height || 500}></img>
             </div>
 
             {/* PREVIOUS AND NEXT IMAGES
