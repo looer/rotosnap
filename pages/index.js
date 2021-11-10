@@ -20,6 +20,19 @@ export default function LandingPage() {
     if (user) router.replace('/app');
   }, [user]);
 
+  const garzaImages = ['/Garza/F31 garza-360-01.jpg', '/Garza/F31 garza-360-02.jpg', '/Garza/F31 garza-360-03.jpg',
+    '/Garza/F31 garza-360-04.jpg', '/Garza/F31 garza-360-05.jpg', '/Garza/F31 garza-360-06.jpg',
+    '/Garza/F31 garza-360-07.jpg', '/Garza/F31 garza-360-08.jpg', '/Garza/F31 garza-360-09.jpg',
+    '/Garza/F31 garza-360-10.jpg', '/Garza/F31 garza-360-11.jpg', '/Garza/F31 garza-360-12.jpg',
+    '/Garza/F31 garza-360-13.jpg', '/Garza/F31 garza-360-14.jpg', '/Garza/F31 garza-360-15.jpg',
+    '/Garza/F31 garza-360-16.jpg', '/Garza/F31 garza-360-17.jpg', '/Garza/F31 garza-360-18.jpg',
+    '/Garza/F31 garza-360-19.jpg', '/Garza/F31 garza-360-20.jpg', '/Garza/F31 garza-360-21.jpg',
+    '/Garza/F31 garza-360-22.jpg', '/Garza/F31 garza-360-23.jpg', '/Garza/F31 garza-360-24.jpg',
+    '/Garza/F31 garza-360-25.jpg', '/Garza/F31 garza-360-26.jpg', '/Garza/F31 garza-360-27.jpg',
+    '/Garza/F31 garza-360-28.jpg', '/Garza/F31 garza-360-29.jpg', '/Garza/F31 garza-360-30.jpg',
+    '/Garza/F31 garza-360-31.jpg', '/Garza/F31 garza-360-32.jpg'
+  ]
+
   return <div>
     <div className="">
       <div className="container px-3 mx-auto flex flex-wrap flex-col md:flex-row items-center">
@@ -30,7 +43,7 @@ export default function LandingPage() {
           <a href="/pricing" className="self-center text-center w-1/3 mx-auto lg:mx-0 hover:underline bg-white text-gray-800 font-bold rounded-full mt-4 lg:mt-0 py-4 px-8 shadow opacity-75 z-10">Sign Up!</a>
         </div>
         <div className="md:w-3/5 p-20 z-10">
-          <img className="rounded-xl" src="https://gyymhkyxbfjcmrrbgqez.supabase.in/storage/v1/object/sign/test-pictures/F31-360/F31-360-01.jpg?token=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1cmwiOiJ0ZXN0LXBpY3R1cmVzL0YzMS0zNjAvRjMxLTM2MC0wMS5qcGciLCJpYXQiOjE2MzUwNzcyNzQsImV4cCI6MTk1MDQzNzI3NH0.MNij66FUsmoQcY1IcG2VzPNNrUJR_ftw3B_R2BJWNiw" alt="" />
+          <Viewer images={garzaImages} />
         </div>
       </div>
       <div className="relative -mt-12 lg:-mt-24">
@@ -49,10 +62,10 @@ export default function LandingPage() {
       </div>
       <section className="tx-lg border-b py-8 bg-white">
         <div className="container max-w-5xl mx-auto m-8">
-          <h1 className="w-full my-2 text-4xl font-bold leading-tight text-center text-black">Drop a file to try it live!</h1>
+          <h1 className="w-full my-2 text-4xl font-bold leading-tight text-center text-black">Drop some files to try it live!</h1>
           <div className="mt-8 flex flex-col items-center justify-center">
             {pictures.length > 0 ? <Viewer images={pictures} /> :
-              <div className="mx-auto text-center w-1/4 my-0 py-0 rounded-t text-black">
+              <div onDrop={e => e.preventDefault()} className="mx-auto text-center w-1/4 my-0 py-0 rounded-t text-black">
                 <form>
                   <FileDrop onDrop={(files, e) => { loadFiles(files) }}>
                     <div id='droppable'
