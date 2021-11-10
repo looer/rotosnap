@@ -1,15 +1,15 @@
 :root {
   --primary: #000000;
-  --primary-2: #111;
+  --primary-2: rgb(250, 250, 250);
   --secondary: #ffffff;
   --secondary-2: #f1f3f5;
   --hover: rgba(255, 255, 255, 0.075);
   --hover-1: rgba(255, 255, 255, 0.15);
   --hover-2: rgba(255, 255, 255, 0.25);
   --selection: var(--purple);
-  --text-base: white;
-  --text-primary: white;
-  --text-secondary: black;
+  --text-base: black;
+  --text-primary: black;
+  --text-secondary: white;
   --accents-0: #212529;
   --accents-1: #343a40;
   --accents-2: #495057;
