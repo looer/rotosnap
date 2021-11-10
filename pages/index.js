@@ -3,6 +3,7 @@ import { useState, useEffect } from 'react';
 import { FileDrop } from 'react-file-drop'
 import { useRouter } from 'next/router';
 import { useUser } from '@/utils/useUser';
+import GoingUp from '@/components/icons/GoingUp';
 
 export default function LandingPage() {
   const [pictures, setPictures] = useState([])
@@ -40,7 +41,7 @@ export default function LandingPage() {
           <p className="uppercase tracking-loose w-full"></p>
           <h1 className="my-4 text-5xl font-bold leading-tight">Add 360 interactive visualization in minutes</h1>
           <p className="leading-normal text-2xl mb-8">Integrate 360 views of your products into your website. No servers required. It's fast, it's simple, and it just works. </p>
-          <a href="/pricing" className="self-center text-center w-1/3 mx-auto lg:mx-0 hover:underline bg-white text-gray-800 font-bold rounded-full mt-4 lg:mt-0 py-4 px-8 shadow opacity-75 z-10">Sign Up!</a>
+          <a href="/pricing" className="self-center text-center w-1/3 mx-auto lg:mx-0 hover:underline bg-primary text-white font-bold rounded-full mt-4 lg:mt-0 py-4 px-8 shadow opacity-75 z-10">Sign Up!</a>
         </div>
         <div className="md:w-3/5 p-20 z-10">
           <Viewer images={garzaImages} />
@@ -69,7 +70,7 @@ export default function LandingPage() {
                 <form>
                   <FileDrop onDrop={(files, e) => { loadFiles(files) }}>
                     <div id='droppable'
-                      className='py-10 border-4 border-white bg-gray-300 border-opacity-50 border-dashed rounded-xl hover:bg-gray-400'>
+                      className='py-10 border-4 border-gray-300 bg-gray-100 border-dashed rounded-xl hover:bg-gray-200'>
                       <button>
                         <p>Select files or drop here</p>
                         <svg xmlns="http://www.w3.org/2000/svg" className="h-8 w-8 mx-auto" fill="none" viewBox="0 0 24 24" stroke="currentColor">
@@ -144,7 +145,7 @@ export default function LandingPage() {
 
         <div className="flex flex-wrap flex-col-reverse sm:flex-row">
           <div className="w-full sm:w-1/2 p-6 mt-6">
-            <img className="w-5/6 sm:h-64 mx-auto" src="https://d33wubrfki0l68.cloudfront.net/a35e897e77fccf26e69a7787c755d8c2860b7189/a4268/assets/direct_upload.svg" />
+            <GoingUp />
           </div>
           <div className="w-full sm:w-1/2 p-6 mt-6">
             <div className="align-middle">
@@ -183,5 +184,5 @@ export default function LandingPage() {
 
 
     </section>
-  </div>;
+  </div >;
 }
