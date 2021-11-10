@@ -5,6 +5,7 @@ import { useState, useEffect } from 'react';
 import { FileDrop } from 'react-file-drop'
 import Viewer from '@/components/Viewer';
 import Link from 'next/link';
+import { useRouter } from 'next/router';
 
 export const Project = (props) => {
 
@@ -70,15 +71,16 @@ export default function App() {
     const [projectname, setProjectname] = useState('')
     const [submitting, setSubmitting] = useState(false);
     const [projects, setProjects] = useState([])
-
-    const garzaImages = ['/Garza/F31 garza-360-01.jpg', '/Garza/F31 garza-360-02.jpg', '/Garza/F31 garza-360-03.jpg',
-        '/Garza/F31 garza-360-04.jpg', '/Garza/F31 garza-360-05.jpg', '/Garza/F31 garza-360-06.jpg',
-        '/Garza/F31 garza-360-07.jpg', '/Garza/F31 garza-360-08.jpg', '/Garza/F31 garza-360-09.jpg',
-        '/Garza/F31 garza-360-10.jpg', '/Garza/F31 garza-360-11.jpg', '/Garza/F31 garza-360-12.jpg']
+    const router = useRouter();
 
     useEffect(() => {
         allProjects()
     }, [session])
+
+    useEffect(() => {
+        if (!user) router.replace('/signin');
+    }, [user]);
+
 
     async function allProjects() {
         if (!user) return []

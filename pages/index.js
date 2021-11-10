@@ -1,15 +1,25 @@
 import Viewer from '@/components/Viewer';
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { FileDrop } from 'react-file-drop'
+import { useRouter } from 'next/router';
+import { useUser } from '@/utils/useUser';
 
 export default function LandingPage() {
   const [pictures, setPictures] = useState([])
+  const router = useRouter();
+
   const loadFiles = (files) => {
     console.log(files)
     const pics = [...files].map(f => URL.createObjectURL(f))
     console.log(pics)
     setPictures(pics)
   }
+
+  const { userLoaded, user, session, userDetails, subscription } = useUser();
+  useEffect(() => {
+    if (user) router.replace('/app');
+  }, [user]);
+
   return <div>
     <div className="">
       <div className="container px-3 mx-auto flex flex-wrap flex-col md:flex-row items-center">
