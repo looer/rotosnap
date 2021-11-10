@@ -30,7 +30,7 @@ export default function Viewer(props) {
         }
     }, [index])
 
-    return (<div className='bg-white w-auto h-auto cursor-move'>
+    return (<div className='mx-auto w-auto h-auto cursor-move'>
         <div className="relative">
             <div className='z-10'>
                 <img draggable={false} src={images[index]}
@@ -69,8 +69,5 @@ export default function Viewer(props) {
             <div className="absolute top-0" style={{ 'z-index': '-1' }}><img draggable={false} src={images[nextIndex]} width={400} height={400}></img></div>
             <div className="absolute top-0" style={{ 'z-index': '-1' }}><img draggable={false} src={images[prevIndex]} width={400} height={400}></img></div>
         </div>
-        <div className="text-black">{dragging ? 'dragging' : 'not dragging'}</div>
-        <div className="text-black">{position}</div>
-        <div className="text-black">{index}</div>
     </div >)
 }
