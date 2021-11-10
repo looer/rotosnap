@@ -7,7 +7,7 @@ module.exports = {
       },
       colors: {
         primary: {
-          DEFAULT: 'rgba(106, 109, 255, 1)',
+          DEFAULT: 'var(--primary)',
           dark: 'rgba(80, 80, 255, 1)'
         },
         'primary-2': 'var(--primary-2)',
@@ -16,7 +16,7 @@ module.exports = {
         hover: 'var(--hover)',
         'hover-1': 'var(--hover-1)',
         'hover-2': 'var(--hover-2)',
-        'accents-0': 'var(--accents-0)',
+        'accents-0': 'var(--primary)',
         'accents-1': 'var(--accents-1)',
         'accents-2': 'var(--accents-2)',
         'accents-3': 'var(--accents-3)',

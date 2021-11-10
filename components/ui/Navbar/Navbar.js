@@ -16,20 +16,20 @@ const Navbar = () => {
         <div className="flex justify-between align-center flex-row py-4 md:py-4 relative">
           <div className="flex flex-1 items-center">
             <Link href="/">
-              <a className="text-xl font-bold mr-4 text-secondary" aria-label="Logo">
+              <a className="text-xl font-extrabold mr-4 text-accents-0" aria-label="Logo">
                 Simply360
               </a>
             </Link>
             <nav className="space-x-2 ml-6 hidden lg:block">
+              {user ? <Link href="/dashboard">
+                <a className={s.link}>Dashboard</a>
+              </Link> : ''}
               <Link href="/pricing">
                 <a className={s.link}>Pricing</a>
               </Link>
-              <Link href="/account">
+              {user ? <Link href="/account">
                 <a className={s.link}>Account</a>
-              </Link>
-              <Link href="/app">
-                <a className={s.link}>App</a>
-              </Link>
+              </Link> : ''}
             </nav>
           </div>
 
@@ -48,7 +48,7 @@ const Navbar = () => {
           </div>
         </div>
       </div>
-    </nav>
+    </nav >
   );
 };
 

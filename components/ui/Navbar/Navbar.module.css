@@ -1,13 +1,13 @@
 .root {
-  @apply sticky top-0 bg-primary z-40 transition-all duration-150;
+  @apply sticky top-0 bg-white z-40 transition-all duration-150 border-b border-gray-200;
 }
 
 .link {
-  @apply inline-flex items-center text-primary leading-6 font-medium transition ease-in-out duration-75 cursor-pointer text-accents-6 rounded-md p-1;
+  @apply inline-flex items-center leading-6 font-medium transition ease-in-out duration-75 cursor-pointer text-accents-3 rounded-md p-1;
 }
 
 .link:hover {
-  @apply text-accents-9;
+  @apply text-accents-1;
 }
 
 .link:focus {
@@ -16,7 +16,6 @@
 
 .logo {
   @apply cursor-pointer rounded-full transform duration-100 ease-in-out;
-
   &:hover {
     @apply shadow-md;
     transform: scale(1.05);
