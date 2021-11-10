@@ -1,7 +1,7 @@
 import { useState, useEffect } from "react";
 
 export default function Viewer(props) {
-    const { id, images, debug } = props
+    const { id, images, debug, autoplay } = props
     const [index, setIndex] = useState(0)
     const [nextIndex, setNextIndex] = useState(0)
     const [prevIndex, setPrevIndex] = useState(0)
@@ -29,7 +29,9 @@ export default function Viewer(props) {
             setPrevIndex(_prevIndex + 1)
         }
 
-        if (debug) console.log(index)
+        if (true || debug) console.log(index)
+
+
     }, [index])
 
     return (<div className='mx-auto w-auto h-auto cursor-move'>
@@ -47,7 +49,7 @@ export default function Viewer(props) {
                         setDragging(false)
                     }}
                     onMouseMove={e => {
-                        if (dragging) {
+                        if (true) {
 
                             var pos = position
                             setPosition(pos - e.movementX)

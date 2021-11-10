@@ -80,8 +80,8 @@ export default function App() {
     }, [session])
 
     useEffect(() => {
-        if (!user) router.replace('/signin');
-    }, [user]);
+        if (userLoaded && !user) router.replace('/signin');
+    }, [userLoaded, user]);
 
 
     async function allProjects() {

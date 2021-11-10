@@ -1,5 +1,8 @@
 .root {
-  @apply sticky top-0 bg-white z-40 transition-all duration-150 border-b border-gray-200;
+  /*@apply sticky top-0 bg-white z-40 transition-all duration-150 border-b border-gray-200;*/
+  background: rgb(40, 87, 189);
+  background: linear-gradient(150deg, rgba(40, 87, 189, 1) 0%, rgba(19, 154, 147, 1) 100%);
+  @apply sticky top-0 z-40 transition-all duration-150;
 }
 
 .link {
