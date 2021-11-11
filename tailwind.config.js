@@ -7,7 +7,7 @@ module.exports = {
       },
       colors: {
         primary: {
-          DEFAULT: 'rgba(21,181,173,1)',
+          DEFAULT: 'var(--primary)',
           dark: 'rgba(80, 80, 255, 1)'
         },
         'primary-2': 'var(--primary-2)',
