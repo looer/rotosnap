@@ -26,10 +26,9 @@ export default function ProjectPage() {
 
     useEffect(() => {
         getProject()
-    }, [session])
+    }, [id])
 
     async function getProject() {
-        if (!user) return []
         const { data, error, status } = await supabase.from('projects').select('id, user_id, name, pictures').eq('id', id).single()
         if (error) throw error
         console.log(data)
@@ -71,8 +70,7 @@ export default function ProjectPage() {
 
     return (
         <div>
-            <h1 className='text-5xl m-5 text-bold text-center'>{project ? project.name : ''}</h1>
-            {paths && paths.length ? <Viewer images={paths}></Viewer> : 'This product doesn\'t contain any images'}
+            {paths && paths.length ? <Viewer images={paths}></Viewer> : 'Product not found'}
         </div >
     )
 }

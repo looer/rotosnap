@@ -7,6 +7,7 @@ import Viewer from '@/components/Viewer';
 import Link from 'next/link';
 import { useRouter } from 'next/router';
 import Button from '@/components/ui/Button';
+import LoadingDots from '@/components/ui/LoadingDots';
 
 export const Project = (props) => {
 
@@ -85,10 +86,11 @@ export default function App() {
 
 
     async function allProjects() {
+        setLoading(true)
         if (!user) return []
         const { data, error, status } = await supabase.from('projects').select('id, user_id, name, pictures').eq('user_id', user.id)
         if (error) throw error
-
+        setLoading(false)
         setProjects(data)
     }
 
@@ -172,7 +174,7 @@ export default function App() {
     } else return (
         <div className='max-w-8xl mx-auto px-8 mt-8'>
             <div className='flex items-center mb-8'>
-                <h2 className='text-3xl font-bold flex-grow'>Projects</h2>
+                <h2 className='text-3xl font-extrabold flex-grow'>{loading ? 'Loading projects...' : projects.length + ' projects'}</h2>
                 <Button
                     variant="slim"
                     loading={loading}
@@ -181,7 +183,7 @@ export default function App() {
                 </Button>
             </div>
             <div className='flex gap-8 flex-wrap mb-12'>
-                {projects.map((p, i) => <Project proj={p} key={i} index={i} onClick={deleteProject} />)}
+                {loading ? <div className='w-16 mt-16 mx-auto'><LoadingDots /></div> : projects.map((p, i) => <Project proj={p} key={i} index={i} onClick={deleteProject} />)}
             </div>
             <div className='w-64'>
                 <form onSubmit={handleSubmit}>
