@@ -46,8 +46,8 @@ export const Project = (props) => {
                                 className='rounded-t-md'
                             />
                         </div>}
-                    <div className='mt-3 px-4 break-words'>{props.proj.name.split('.')[0]}</div>
-                    <div className='mb-4 px-4 text-sm text-gray-400'>{props.proj.pictures.length} pictures</div>
+                    <div className='mt-3 px-4 text-sm font-medium break-words mb-1'>{props.proj.name.split('.')[0]}</div>
+                    <div className='mb-4 px-4 text-xs text-gray-400'>{props.proj.pictures.length} pictures</div>
                     <div className='px-4'>
                         <button>
                             <svg xmlns="http://www.w3.org/2000/svg" className="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
@@ -174,7 +174,7 @@ export default function App() {
     } else return (
         <div className='max-w-8xl mx-auto px-8 mt-8'>
             <div className='flex items-center mb-8'>
-                <h2 className='text-3xl font-extrabold flex-grow'>{loading ? 'Loading projects...' : projects.length + ' projects'}</h2>
+                <h2 className='text-2xl font-bold flex-grow'>{loading ? 'Loading projects...' : projects.length + ' projects'}</h2>
                 <Link href='/new'>
                     <a>
                         <Button
@@ -188,6 +188,7 @@ export default function App() {
             </div>
             <div className='flex gap-8 flex-wrap mb-12'>
                 {loading ? <div className='w-16 mt-16 mx-auto'><LoadingDots /></div> : projects.map((p, i) => <Project proj={p} key={i} index={i} onClick={deleteProject} />)}
+                {!loading && !projects.length && <div className='w-full my-8 text-accents-4 text-center font-medium'>There are no projects yet</div>}
             </div>
         </div >)
 }

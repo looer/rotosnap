@@ -7,7 +7,7 @@ import GitHub from '@/components/icons/GitHub';
 export default function Footer() {
   return (
     <footer className="mx-auto max-w-8xl px-6 bg-primary-2">
-      <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 border-b border-accents-2 py-12 text-primary transition-colors duration-150 bg-primary-2">
+      <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 border-b border-accents-6 py-12 text-primary transition-colors duration-150 bg-primary-2">
         <div className="col-span-1 lg:col-span-2">
           <Link href="/">
             <a className="flex flex-initial items-center font-bold md:mr-24">
@@ -19,31 +19,31 @@ export default function Footer() {
           </Link>
         </div>
         <div className="col-span-1 lg:col-span-2">
-          <ul className="flex flex-initial flex-col md:flex-1">
+          <ul className="flex flex-initial flex-col md:flex-1 text-accents-3 font-medium">
             <li className="py-3 md:py-0 md:pb-4">
               <Link href="/">
-                <a className="text-primary hover:text-accents-6 transition ease-in-out duration-150">
+                <a className="transition ease-in-out duration-150 hover:text-accents-2">
                   Home
                 </a>
               </Link>
             </li>
             <li className="py-3 md:py-0 md:pb-4">
               <Link href="/">
-                <a className="text-primary hover:text-accents-6 transition ease-in-out duration-150">
+                <a className="transition ease-in-out duration-150 hover:text-accents-2">
                   About
                 </a>
               </Link>
             </li>
             <li className="py-3 md:py-0 md:pb-4">
               <Link href="/">
-                <a className="text-primary hover:text-accents-6 transition ease-in-out duration-150">
+                <a className="transition ease-in-out duration-150 hover:text-accents-2">
                   Careers
                 </a>
               </Link>
             </li>
             <li className="py-3 md:py-0 md:pb-4">
               <Link href="/">
-                <a className="text-primary hover:text-accents-6 transition ease-in-out duration-150">
+                <a className="transition ease-in-out duration-150 hover:text-accents-2">
                   Blog
                 </a>
               </Link>
@@ -51,22 +51,22 @@ export default function Footer() {
           </ul>
         </div>
         <div className="col-span-1 lg:col-span-2">
-          <ul className="flex flex-initial flex-col md:flex-1">
+          <ul className="flex flex-initial flex-col md:flex-1 font-medium text-accents-3">
             <li className="py-3 md:py-0 md:pb-4">
-              <p className="text-primary font-bold hover:text-accents-6 transition ease-in-out duration-150">
+              <p className="text-primary font-bold transition ease-in-out duration-150">
                 LEGAL
               </p>
             </li>
             <li className="py-3 md:py-0 md:pb-4">
               <Link href="/">
-                <a className="text-primary hover:text-accents-6 transition ease-in-out duration-150">
+                <a className="transition ease-in-out duration-150 hover:text-accents-2">
                   Privacy Policy
                 </a>
               </Link>
             </li>
             <li className="py-3 md:py-0 md:pb-4">
               <Link href="/">
-                <a className="text-primary hover:text-accents-6 transition ease-in-out duration-150">
+                <a className="transition ease-in-out duration-150 hover:text-accents-2">
                   Terms of Use
                 </a>
               </Link>

@@ -1,12 +1,12 @@
 .root {
-  @apply sticky top-0 bg-white z-40 transition-all duration-150 border-b border-gray-200;
+  @apply sticky top-0 bg-white z-40 transition-all duration-150 border-b border-gray-200 text-sm
   /*background: rgb(40, 87, 189);
   background: linear-gradient(150deg, rgba(40, 87, 189, 1) 0%, rgba(19, 154, 147, 1) 100%);
   @apply sticky top-0 z-40 transition-all duration-150;*/
 }
 
 .link {
-  @apply inline-flex items-center leading-6 font-medium transition ease-in-out duration-75 cursor-pointer text-accents-3 rounded-md p-1;
+  @apply inline-flex items-center leading-6 font-medium transition ease-in-out duration-75 cursor-pointer text-accents-3 rounded-md p-1 px-2;
 }
 
 .link:hover {
