@@ -1,7 +1,7 @@
 import { useState, useEffect } from "react";
 
 export default function Viewer(props) {
-    const { id, images, debug, autoplay } = props
+    const { id, images, debug, embed } = props
     const [index, setIndex] = useState(0)
     const [nextIndex, setNextIndex] = useState(0)
     const [prevIndex, setPrevIndex] = useState(0)
@@ -37,7 +37,10 @@ export default function Viewer(props) {
     return (<div className='mx-auto w-auto h-auto cursor-move'>
         <div className="relative">
             <div className='z-10'>
-                <img draggable={false} src={images[index]} className="rounded-3xl shadow-md"
+                <img loading="lazy"
+                    draggable={false}
+                    src={images[index]}
+                    className={embed ? "" : "rounded-3xl shadow-md"}
 
                     onMouseDown={e => {
                         setDragging(true);
@@ -70,6 +73,7 @@ export default function Viewer(props) {
                     width={props.width || 500} height={props.height || 500}></img>
             </div>
 
+            {images.map((i, k) => <img src={i} key={k} hidden></img>)}
             {/* PREVIOUS AND NEXT IMAGES
 
             <div className="absolute top-0" style={{ 'z-index': '-1' }}><img draggable={false} src={images[nextIndex]} width={400} height={400}></img></div>
