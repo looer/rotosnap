@@ -37,7 +37,7 @@ export default function Viewer(props) {
     return (<div className='mx-auto w-auto h-auto cursor-move'>
         <div className="relative">
             <div className='z-10'>
-                <img loading="lazy"
+                <img
                     draggable={false}
                     src={images[index]}
                     className={embed ? "" : "rounded-3xl shadow-md"}
@@ -73,7 +73,7 @@ export default function Viewer(props) {
                     width={props.width || 500} height={props.height || 500}></img>
             </div>
 
-            {images.map((i, k) => <img src={i} key={k} hidden></img>)}
+            {images.map((i, k) => <img src={i} key={k} hidden loading="lazy"></img>)}
             {/* PREVIOUS AND NEXT IMAGES
 
             <div className="absolute top-0" style={{ 'z-index': '-1' }}><img draggable={false} src={images[nextIndex]} width={400} height={400}></img></div>

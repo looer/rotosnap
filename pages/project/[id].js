@@ -70,7 +70,7 @@ export default function ProjectPage() {
                     <div className='my-8'>
                         <div className='mb-4 text-xl font-bold'>Embed</div>
                         <div className='w-full text-accents-2 font-mono border rounded bg-primary-2 border-gray-200 p-8'>
-                            {`<iframe src='` + process.env.ROOT_URL + `/embed/` + id + `'></iframe>`}
+                            {`<iframe width="500" height="500" src="${process.env.ROOT_URL}/embed/${id}"></iframe>`}
                         </div>
                     </div>
                 </div>
