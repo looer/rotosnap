@@ -9,64 +9,6 @@ import { useRouter } from 'next/router';
 import Button from '@/components/ui/Button';
 import LoadingDots from '@/components/ui/LoadingDots';
 
-export const Project = (props) => {
-
-    const url = props.proj.pictures[0]
-    const [profile, setProfile] = useState('')
-    useEffect(() => {
-        if (url) downloadImage(url)
-    }, [])
-
-    async function downloadImage(path) {
-        try {
-            const { data, error } = await supabase.storage.from('avatars').getPublicUrl(path)
-
-            if (error) {
-                throw error
-            }
-            //const url = URL.createObjectURL(data)
-            setProfile(data.publicURL)
-        }
-        catch (error) {
-            console.log('Error downloading image: ', error.message)
-        }
-    }
-
-    return (
-
-        <div className="border border-gray-200 hover:border-gray-300 bg-primary-2 rounded-md w-64 h-64 flex-grow max-w-xs min-w-1/5">
-            <Link href={"/project/" + props.proj.id}>
-                <a>
-                    {profile &&
-                        <div className="relative w-full h-32">
-                            <Image src={profile}
-                                alt='profile pic'
-                                layout='fill'
-                                objectFit={'cover'}
-                                className='rounded-t-md'
-                            />
-                        </div>}
-                    <div className='mt-3 px-4 break-words'>{props.proj.name.split('.')[0]}</div>
-                    <div className='mb-4 px-4 text-sm text-gray-400'>{props.proj.pictures.length} pictures</div>
-                    <div className='px-4'>
-                        <button>
-                            <svg xmlns="http://www.w3.org/2000/svg" className="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-8l-4-4m0 0L8 8m4-4v12" />
-                            </svg>
-                        </button>
-                        <button onClick={(e) => props.onClick(e, props.index)}>
-                            <svg xmlns="http://www.w3.org/2000/svg" className="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" />
-                            </svg>
-                        </button>
-                    </div>
-                </a>
-            </Link>
-        </div>
-
-    )
-}
-
 
 export default function App() {
     const { userLoaded, user, session, userDetails } = useUser();
@@ -173,16 +115,17 @@ export default function App() {
     if (!user) {
         return (<div>User not defined</div>)
     } else return (
-        <div className='max-w-8xl mx-auto px-8 mt-8'>
-            <div className='w-64'>
+        <div className='max-w-screen-lg mx-auto px-12 mb-12'>
+            <div className='w-full'>
                 <form onSubmit={handleSubmit}>
                     <label>
-                        <input id='projectname' value={projectname} onChange={handleChange} placeholder='New project' type="text" name="nome" className='text-3xl my-5' />
+                        <input id='projectname' autofocus value={projectname} onChange={handleChange} placeholder='New project' type="text" name="nome"
+                            className='font-bold text-3xl my-5 w-full focus:ring-0 placeholder-gray-300' />
                     </label>
                     <FileDrop onDrop={(files, e) => createProject(files)}>
                         <div id='droppable'
-                            className='p-20 border-4 border-gray-200 border-opacity-50 border-dashed rounded-xl hover:bg-gray-100'>
-                            <button>Select files or drop here
+                            className='py-36 flex flex-col items-center border-2 border-gray-400 border-opacity-50 border-dashed rounded-xl hover:bg-gray-100'>
+                            <button className="flex flex-col items-center text-accents-3 font-medium">Select files or drop here
                                 <svg xmlns="http://www.w3.org/2000/svg" className="h-8 w-8" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                                     <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 4v16m8-8H4" />
                                 </svg>

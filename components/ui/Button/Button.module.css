@@ -15,7 +15,7 @@
 }
 
 .loading {
-  @apply bg-accents-1 text-accents-3 border-accents-2 cursor-not-allowed;
+  @apply bg-accents-5 text-accents-8 cursor-not-allowed;
 }
 
 .slim {
