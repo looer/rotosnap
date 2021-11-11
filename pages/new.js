@@ -107,6 +107,7 @@ export default function App() {
         if (!error) {
             const updatedProjects = [...projects, newProject]
             setProjects(updatedProjects)
+            router.push('/dashboard')
             setSubmitting(false);
         } else {
             console.log('Error', error)
@@ -173,21 +174,34 @@ export default function App() {
         return (<div>User not defined</div>)
     } else return (
         <div className='max-w-8xl mx-auto px-8 mt-8'>
-            <div className='flex items-center mb-8'>
-                <h2 className='text-3xl font-extrabold flex-grow'>{loading ? 'Loading projects...' : projects.length + ' projects'}</h2>
-                <Link href='/new'>
-                    <a>
-                        <Button
-                            variant="slim"
-                            loading={loading}
-                        >
-                            New
-                        </Button>
-                    </a>
-                </Link>
-            </div>
-            <div className='flex gap-8 flex-wrap mb-12'>
-                {loading ? <div className='w-16 mt-16 mx-auto'><LoadingDots /></div> : projects.map((p, i) => <Project proj={p} key={i} index={i} onClick={deleteProject} />)}
+            <div className='w-64'>
+                <form onSubmit={handleSubmit}>
+                    <label>
+                        <input id='projectname' value={projectname} onChange={handleChange} placeholder='New project' type="text" name="nome" className='text-3xl my-5' />
+                    </label>
+                    <FileDrop onDrop={(files, e) => createProject(files)}>
+                        <div id='droppable'
+                            className='p-20 border-4 border-gray-200 border-opacity-50 border-dashed rounded-xl hover:bg-gray-100'>
+                            <button>Select files or drop here
+                                <svg xmlns="http://www.w3.org/2000/svg" className="h-8 w-8" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 4v16m8-8H4" />
+                                </svg>
+                            </button>
+                        </div>
+                    </FileDrop>
+                    <button>{submitting ? (
+                        <div className='p-3 m-5'>
+                            Creating... {' '}
+                            <svg xmlns="http://www.w3.org/2000/svg" className="h-6 w-6 inline-block animate-spin" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M10.325 4.317c.426-1.756 2.924-1.756 3.35 0a1.724 1.724 0 002.573 1.066c1.543-.94 3.31.826 2.37 2.37a1.724 1.724 0 001.065 2.572c1.756.426 1.756 2.924 0 3.35a1.724 1.724 0 00-1.066 2.573c.94 1.543-.826 3.31-2.37 2.37a1.724 1.724 0 00-2.572 1.065c-.426 1.756-2.924 1.756-3.35 0a1.724 1.724 0 00-2.573-1.066c-1.543.94-3.31-.826-2.37-2.37a1.724 1.724 0 00-1.065-2.572c-1.756-.426-1.756-2.924 0-3.35a1.724 1.724 0 001.066-2.573c-.94-1.543.826-3.31 2.37-2.37.996.608 2.296.07 2.572-1.065z" />
+                                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 12a3 3 0 11-6 0 3 3 0 016 0z" />
+                            </svg>
+
+                        </div>
+                    ) : (
+                        <div className='p-3 m-5'>Create Project</div>
+                    )}</button>
+                </form>
             </div>
         </div >)
 }
