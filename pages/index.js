@@ -39,8 +39,8 @@ export default function LandingPage() {
       <div className="container px-3 mx-auto flex flex-wrap flex-col md:flex-row items-center">
         <div className="flex flex-col w-full justify-center text-center md:w-2/5 md:text-left bg-gradient-to-r from-green-400 to-blue-500">
           <p className="uppercase tracking-loose w-full"></p>
-          <h1 className="my-4 text-5xl text-primary font-extrabold leading-tight">Add 360 interactive visualization in minutes</h1>
-          <p className="leading-normal text-xl text-accents-3 mb-8">Integrate 360 views of your products into your website. No servers required. It's fast, it's simple, and it just works. </p>
+          <h1 className="my-4 text-5xl text-primary font-extrabold leading-tight text-center">Add 360-degree<br />interactive views<br />in minutes</h1>
+          <p className="leading-normal text-xl text-accents-3 mb-8 text-center">Integrate 360 views of your products into your website. No servers required. It's fast, it's simple, and it just works.</p>
           <a href="/pricing" className="self-center text-center w-1/3 mx-auto lg:mx-0 hover:underline bg-primary text-secondary font-bold rounded-full mt-4 lg:mt-0 py-4 px-8 shadow opacity-75 z-10">Sign Up!</a>
         </div>
         <div className="md:w-3/5 p-20 z-10">

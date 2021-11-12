@@ -13,6 +13,8 @@ export const Project = (props) => {
 
     const url = props.proj.pictures[0]
     const [profile, setProfile] = useState('')
+    const [menuOpen, setMenuOpen] = useState('')
+
     useEffect(() => {
         if (url) downloadImage(url)
     }, [])
@@ -34,7 +36,16 @@ export const Project = (props) => {
 
     return (
 
-        <div className="border border-gray-200 hover:border-gray-300 bg-primary-2 rounded-md w-64 h-64 flex-grow max-w-xs min-w-1/5">
+        <div className="relative border border-gray-200 hover:border-gray-300 bg-primary-2 rounded-md w-64 flex-grow max-w-xs min-w-1/5">
+            <div onClick={() => setMenuOpen(!menuOpen)}>
+                <img src='/ic24-more-hor.svg' className="absolute z-10 right-4 top-2">
+                </img>
+            </div>
+            {menuOpen ?
+                <div className='absolute right-3 top-3 rounded z-20 border border-gray-300 bg-white w-16 h-16'>
+                    Menu
+                </div>
+                : ''}
             <Link href={"/project/" + props.proj.id}>
                 <a>
                     {profile &&
@@ -48,18 +59,6 @@ export const Project = (props) => {
                         </div>}
                     <div className='mt-3 px-4 text-sm font-medium break-words mb-1'>{props.proj.name.split('.')[0]}</div>
                     <div className='mb-4 px-4 text-xs text-gray-400'>{props.proj.pictures.length} pictures</div>
-                    <div className='px-4'>
-                        <button>
-                            <svg xmlns="http://www.w3.org/2000/svg" className="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-8l-4-4m0 0L8 8m4-4v12" />
-                            </svg>
-                        </button>
-                        <button onClick={(e) => props.onClick(e, props.index)}>
-                            <svg xmlns="http://www.w3.org/2000/svg" className="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" />
-                            </svg>
-                        </button>
-                    </div>
                 </a>
             </Link>
         </div>
@@ -188,7 +187,20 @@ export default function App() {
             </div>
             <div className='flex gap-8 flex-wrap mb-12'>
                 {loading ? <div className='w-16 mt-16 mx-auto'><LoadingDots /></div> : projects.map((p, i) => <Project proj={p} key={i} index={i} onClick={deleteProject} />)}
-                {!loading && !projects.length && <div className='w-full my-8 text-accents-4 text-center font-medium'>There are no projects yet</div>}
+                {!loading && !projects.length &&
+                    <div className='w-full my-32 text-accents-4 text-center font-medium'>
+                        <div className='mb-6'>There are no projects yet</div>
+                        <Link href='/new'>
+                            <a>
+                                <Button
+                                    variant="slim"
+                                    loading={loading}>
+                                    New project
+                                </Button>
+                            </a>
+                        </Link>
+                    </div>
+                }
             </div>
         </div >)
 }
