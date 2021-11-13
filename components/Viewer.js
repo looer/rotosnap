@@ -7,27 +7,28 @@ export default function Viewer(props) {
     const [prevIndex, setPrevIndex] = useState(0)
     const [dragging, setDragging] = useState(false)
     const [position, setPosition] = useState(0)
+    const [prevTouch, setPrevTouch] = useState(0)
 
     let n = images.length
 
     useEffect(() => {
         // Find index of next and previous images to avoid flickering
-        var _nextIndex = index + 1;
-        if (_nextIndex + 1 >= n || _nextIndex - 1 <= n) {
-            setNextIndex(_nextIndex % n)
-        } else {
-            setNextIndex(_nextIndex + 1)
-        }
+        //var _nextIndex = index + 1;
+        //if (_nextIndex + 1 >= n || _nextIndex - 1 <= n) {
+        //    setNextIndex(_nextIndex % n)
+        //} else {
+        //    setNextIndex(_nextIndex + 1)
+        //}
 
-        var _prevIndex = index - 1;
-        while (_prevIndex < 0) {
-            _prevIndex += n;
-        }
-        if (_prevIndex + 1 >= n || prevIndex - 1 <= n) {
-            setPrevIndex(_prevIndex % n)
-        } else {
-            setPrevIndex(_prevIndex + 1)
-        }
+        //var _prevIndex = index - 1;
+        //while (_prevIndex < 0) {
+        //    _prevIndex += n;
+        //}
+        //if (_prevIndex + 1 >= n || prevIndex - 1 <= n) {
+        //    setPrevIndex(_prevIndex % n)
+        //} else {
+        //    setPrevIndex(_prevIndex + 1)
+        //}
 
         if (true || debug) console.log(index)
 
@@ -41,7 +42,28 @@ export default function Viewer(props) {
                     draggable={false}
                     src={images[index]}
                     className={embed ? "" : "rounded-3xl shadow-md"}
+                    onTouchStart={e => {
+                        setPrevTouch(e.touches[0])
+                    }}
+                    onTouchMove={e => {
+                        const currentTouch = e.touches[0]
+                        const movementX = currentTouch.clientX - prevTouch.clientX
+                        setPrevTouch(currentTouch)
 
+                        setPosition(position - movementX * 2)
+                        var _index = Math.floor(position / 30)
+                        do {
+                            _index += n;
+                        } while (_index < 0)
+                        setIndex(_index)
+
+                        if (_index + 1 >= n || index - 1 <= n) {
+                            setIndex(_index % n)
+                        }
+                        else {
+                            setIndex(_index + 1)
+                        }
+                    }}
                     onMouseDown={e => {
                         setDragging(true);
                     }}
@@ -54,8 +76,7 @@ export default function Viewer(props) {
                     onMouseMove={e => {
                         if (true) {
 
-                            var pos = position
-                            setPosition(pos - e.movementX)
+                            setPosition(position - e.movementX)
                             var _index = Math.floor(position / 30)
                             do {
                                 _index += n;
