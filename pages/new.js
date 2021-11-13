@@ -125,11 +125,14 @@ export default function App() {
                     <FileDrop onDrop={(files, e) => createProject(files)}>
                         <div id='droppable'
                             className='py-36 flex flex-col items-center border-2 border-gray-400 border-opacity-50 border-dashed rounded-xl hover:bg-gray-100'>
-                            <button className="flex flex-col items-center text-accents-3 font-medium">Select files or drop here
-                                <svg xmlns="http://www.w3.org/2000/svg" className="h-8 w-8" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 4v16m8-8H4" />
-                                </svg>
-                            </button>
+                            <label for="demoPictures">Select files or drop here</label>
+                            <input type="file"
+                                id="demoPictures" name="demoPictures"
+                                accept="image/png, image/jpeg"
+                                multiple={true}
+                                onChange={e => {
+                                    loadFiles(e.target.files)
+                                }} />
                         </div>
                     </FileDrop>
                     <button>{submitting ? (

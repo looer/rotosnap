@@ -39,7 +39,7 @@ export default function LandingPage() {
       <div className="container px-3 mx-auto flex flex-wrap flex-col md:flex-row items-center">
         <div className="flex flex-col w-full justify-center text-center md:w-2/5 md:text-left bg-gradient-to-r from-green-400 to-blue-500">
           <p className="uppercase tracking-loose w-full"></p>
-          <h1 className="my-4 text-5xl text-primary font-extrabold leading-tight text-center">Add 360-degree<br />interactive views<br />in minutes</h1>
+          <h1 className="my-4 text-5xl text-primary font-extrabold leading-tight text-center">Add 360˚<br />interactive views<br />in minutes</h1>
           <p className="leading-normal text-xl text-accents-3 mb-8 text-center">Integrate 360 views of your products into your website. No servers required. It's fast, it's simple, and it just works.</p>
           <a href="/pricing" className="self-center text-center w-1/3 mx-auto lg:mx-0 hover:underline bg-primary text-secondary font-bold rounded-full mt-4 lg:mt-0 py-4 px-8 shadow opacity-75 z-10">Sign Up!</a>
         </div>
@@ -71,12 +71,20 @@ export default function LandingPage() {
                   <FileDrop onDrop={(files, e) => { loadFiles(files) }}>
                     <div id='droppable'
                       className='py-10 border-4 border-gray-300 bg-gray-100 border-dashed rounded-xl hover:bg-gray-200'>
-                      <button>
-                        <p>Select files or drop here</p>
-                        <svg xmlns="http://www.w3.org/2000/svg" className="h-8 w-8 mx-auto" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 4v16m8-8H4" />
-                        </svg>
-                      </button>
+
+                      <label for="demoPictures">Select files or drop here</label>
+                      <input type="file"
+                        id="demoPictures" name="demoPictures"
+                        accept="image/png, image/jpeg"
+                        multiple={true}
+                        onChange={e => {
+                          console.log(e.target.files)
+                          loadFiles(e.target.files)
+                        }} />
+                      <svg xmlns="http://www.w3.org/2000/svg" className="h-8 w-8 mx-auto" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 4v16m8-8H4" />
+                      </svg>
+
                     </div>
                   </FileDrop>
                 </form>
