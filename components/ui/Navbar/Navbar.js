@@ -17,7 +17,7 @@ const Navbar = () => {
           <div className="flex flex-1 items-center">
             <Link href="/">
               <a className="text-xl font-extrabold mr-4 text-accents-0" aria-label="Logo">
-                Simply360
+                <span className='italic'>Roto</span>Snap
               </a>
             </Link>
             <nav className="space-x-2 ml-6 hidden lg:block">
