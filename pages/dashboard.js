@@ -42,8 +42,10 @@ export const Project = (props) => {
                 </img>
             </div>
             {menuOpen ?
-                <div className='absolute right-3 top-3 rounded z-20 border border-gray-300 bg-white w-16 h-16'>
-                    Menu
+                <div className='absolute right-3 top-3 rounded z-20 border border-gray-300 bg-white py-2'>
+                    <div className='text-sm py-4 w-32 pl-4 hover:bg-accents-8'>
+                        Menu Item
+                    </div>
                 </div>
                 : ''}
             <Link href={"/project/" + props.proj.id}>
@@ -57,7 +59,7 @@ export const Project = (props) => {
                                 className='rounded-t-md'
                             />
                         </div>}
-                    <div className='mt-3 px-4 text-sm font-medium break-words mb-1'>{props.proj.name.split('.')[0]}</div>
+                    <div className='mt-3 px-4 text-sm font-medium break-words mb-1 truncate'>{props.proj.name.split('.')[0]}</div>
                     <div className='mb-4 px-4 text-xs text-gray-400'>{props.proj.pictures.length} pictures</div>
                 </a>
             </Link>
@@ -169,11 +171,15 @@ export default function App() {
 
 
     if (!user) {
-        return (<div>User not defined</div>)
+        return (<div className='w-auto mx-auto py-64'>User not found</div>)
     } else return (
         <div className='max-w-8xl mx-auto px-8 mt-8'>
             <div className='flex items-center mb-8'>
-                <h2 className='text-2xl font-bold flex-grow'>{loading ? 'Loading projects...' : projects.length + ' projects'}</h2>
+                <div className='flex-grow'>
+                    <h2 className='text-md font-bold mb-0.5'>All projects</h2>
+                    <div className='text-xs text-accents-3'>{loading ? 'Loading projects...' : projects.length + ' projects'}</div>
+                </div>
+
                 <Link href='/new'>
                     <a>
                         <Button
