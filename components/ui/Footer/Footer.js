@@ -6,7 +6,7 @@ import GitHub from '@/components/icons/GitHub';
 
 export default function Footer() {
   return (
-    <footer className="mx-auto max-w-8xl px-6 bg-primary-2">
+    <footer className="mx-auto max-w-8xl px-6 bg-primary-2 text-sm">
       <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 border-b border-accents-6 py-12 text-primary transition-colors duration-150 bg-primary-2">
         <div className="col-span-1 lg:col-span-2">
           <Link href="/">
