@@ -1,7 +1,13 @@
 module.exports = {
   purge: ['./pages/**/*.{js,ts,jsx,tsx}', './components/**/*.{js,ts,jsx,tsx}'],
   theme: {
+    fontFamily: {
+      'sans': 'Epilogue'
+    },
     extend: {
+      backgroundImage: {
+        'black-fade': 'linear-gradient(0deg, rgba(0,0,0,0.26514355742296913) 0%, rgba(0,0,0,0.20351890756302526) 19%, rgba(0,0,0,0.19511554621848737) 100%)'
+      },
       maxWidth: {
         '8xl': '1920px'
       },

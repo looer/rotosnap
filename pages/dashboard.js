@@ -10,10 +10,10 @@ import Button from '@/components/ui/Button';
 import LoadingDots from '@/components/ui/LoadingDots';
 
 export const Project = (props) => {
-
     const url = props.proj.pictures[0]
     const [profile, setProfile] = useState('')
     const [menuOpen, setMenuOpen] = useState('')
+    const [hover, setHover] = useState(false);
 
     useEffect(() => {
         if (url) downloadImage(url)
@@ -36,45 +36,52 @@ export const Project = (props) => {
 
     return (
 
-        <div className="relative border border-gray-200 hover:border-gray-300 bg-primary-2 rounded-md w-64 flex-grow max-w-xs min-w-1/5">
-            <div onClick={() => setMenuOpen(!menuOpen)}>
-                <img src='/ic24-more-hor.svg' className="absolute z-10 right-4 top-2">
-                </img>
-            </div>
-            {menuOpen ?
-                <div className='absolute right-3 top-3 rounded z-20 border border-gray-300 bg-white py-2'>
-                    <div className='text-sm py-4 w-32 pl-4 hover:bg-accents-8'>
-                        Menu Item
+        <div className="relative border border-gray-200 hover:border-gray-300 bg-primary-2 rounded-md w-64 
+        flex-grow max-w-xs min-w-1/5 transition-all overflow-hidden"
+            onMouseEnter={() => setHover(true)}
+            onMouseLeave={() => setHover(false)}>
+            {hover &&
+                <div onClick={props.onMoreOptions}>
+                    <img src='/ic24-more-hor.svg' className="absolute z-30 right-4 top-2 cursor-pointer">
+                    </img>
+                </div>}
+            {props.selected ?
+                <div className='absolute right-3 top-3 rounded z-40 border border-gray-300 bg-white py-2'>
+                    <div className='text-sm py-4 w-32 pl-4 hover:bg-accents-8 cursor-pointer'
+                        onClick={props.onDelete}>
+                        Delete
                     </div>
                 </div>
                 : ''}
             <Link href={"/project/" + props.proj.id}>
                 <a>
                     {profile &&
-                        <div className="relative w-full h-32">
+                        <div className="relative w-full h-32 overflow-hidden">
+                            <div className={"t-0 absolute w-full h-full bg-black-fade z-20 transition duration-300 animate-none ease-in-out " + (hover ? "bg-opacity-20" : "opacity-0")}></div>
                             <Image src={profile}
                                 alt='profile pic'
                                 layout='fill'
                                 objectFit={'cover'}
-                                className='rounded-t-md'
+                                className={"transform-gpu transition-transform duration-300 ease-in-out " + (hover ? 'scale-110' : "")}
                             />
                         </div>}
                     <div className='mt-3 px-4 text-sm font-medium break-words mb-1 truncate'>{props.proj.name.split('.')[0]}</div>
                     <div className='mb-4 px-4 text-xs text-gray-400'>{props.proj.pictures.length} pictures</div>
                 </a>
             </Link>
-        </div>
+        </div >
 
     )
 }
 
 
-export default function App() {
+export default function Dashboard() {
     const { userLoaded, user, session, userDetails } = useUser();
     const [projectname, setProjectname] = useState('')
     const [submitting, setSubmitting] = useState(false);
     const [projects, setProjects] = useState([])
     const [loading, setLoading] = useState(false);
+    const [selected, setSelected] = useState(null);
     const router = useRouter();
 
     useEffect(() => {
@@ -115,7 +122,7 @@ export default function App() {
         }
     }
 
-    async function deleteProject(e, i) {
+    async function deleteProject(i) {
         const toRemove = projects[i].pictures
         const { data, error } = await supabase.storage.from('avatars').remove(toRemove)
         console.log('pictures to remove ', data, toRemove)
@@ -171,13 +178,13 @@ export default function App() {
 
 
     if (!user) {
-        return (<div className='w-auto mx-auto py-64'>User not found</div>)
+        return (<div className='w-full text-center py-64'>User not found</div>)
     } else return (
         <div className='max-w-8xl mx-auto px-8 mt-8'>
             <div className='flex items-center mb-8'>
                 <div className='flex-grow'>
-                    <h2 className='text-md font-bold mb-0.5'>All projects</h2>
-                    <div className='text-xs text-accents-3'>{loading ? 'Loading projects...' : projects.length + ' projects'}</div>
+                    <h2 className='text-2xl font-bold mb-0.5'>All projects</h2>
+                    {/*<div className='text-xs text-accents-3'>{loading ? 'Loading projects...' : projects.length + ' projects'}</div>*/}
                 </div>
 
                 <Link href='/new'>
@@ -192,7 +199,8 @@ export default function App() {
                 </Link>
             </div>
             <div className='flex gap-8 flex-wrap mb-12'>
-                {loading ? <div className='w-16 mt-16 mx-auto'><LoadingDots /></div> : projects.map((p, i) => <Project proj={p} key={i} index={i} onClick={deleteProject} />)}
+                {loading ? <div className='w-16 mt-16 mx-auto'><LoadingDots /></div> :
+                    projects.map((p, i) => <Project proj={p} key={i} index={i} selected={i == selected} onMoreOptions={() => setSelected(i)} onDelete={() => deleteProject(i)} />)}
                 {!loading && !projects.length &&
                     <div className='w-full my-32 text-accents-4 text-center font-medium'>
                         <div className='mb-6'>There are no projects yet</div>
