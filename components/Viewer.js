@@ -8,6 +8,7 @@ export default function Viewer(props) {
     const [dragging, setDragging] = useState(false)
     const [position, setPosition] = useState(0)
     const [prevTouch, setPrevTouch] = useState(0)
+    const [play, setPlay] = useState(true)
 
     let n = images.length
 
@@ -29,21 +30,32 @@ export default function Viewer(props) {
         //} else {
         //    setPrevIndex(_prevIndex + 1)
         //}
+        if (play) {
+            setTimeout(function () {
+                if (index + 1 >= n) {
+                    setIndex(0)
+                }
+                else {
+                    setIndex(index + 1)
+                }
+            }, 200)
+        }
 
         if (true || debug) console.log(index)
-
-
     }, [index])
+
 
     return (<div className='mx-auto w-auto h-auto cursor-move'>
         <div className="relative">
             <div className='z-10'>
                 <img
+                    id="myviewer"
                     draggable={false}
                     src={images[index]}
                     className={embed ? "" : "rounded-3xl shadow-md"}
                     onTouchStart={e => {
                         setPrevTouch(e.touches[0])
+                        setPlay(false)
                     }}
                     onTouchMove={e => {
                         const currentTouch = e.touches[0]
@@ -66,6 +78,7 @@ export default function Viewer(props) {
                     }}
                     onMouseDown={e => {
                         setDragging(true);
+                        setPlay(false)
                     }}
                     onMouseUp={e => {
                         setDragging(false)
@@ -74,6 +87,8 @@ export default function Viewer(props) {
                         setDragging(false)
                     }}
                     onMouseMove={e => {
+                        setPlay(false)
+
                         if (true) {
 
                             setPosition(position - e.movementX)
@@ -92,13 +107,26 @@ export default function Viewer(props) {
                         }
                     }}
                     width={props.width || 500} height={props.height || 500}></img>
-            </div>
 
-            {images.map((i, k) => <img src={i} key={k} hidden loading="lazy"></img>)}
-            {/* PREVIOUS AND NEXT IMAGES
+
+                {images.map((i, k) => <img src={i} key={k} hidden loading="lazy"></img>)}
+                {/* PREVIOUS AND NEXT IMAGES
 
             <div className="absolute top-0" style={{ 'z-index': '-1' }}><img draggable={false} src={images[nextIndex]} width={400} height={400}></img></div>
             <div className="absolute top-0" style={{ 'z-index': '-1' }}><img draggable={false} src={images[prevIndex]} width={400} height={400}></img></div>*/}
+                <div className="flex m-5">
+
+                    <button className="w-auto text-center" onClick={e => {
+                        e.preventDefault()
+                        if (!play) {
+                            setPlay(true)
+                            setIndex(index + 1)
+                        } else {
+                            setPlay(false)
+                        }
+                    }}>{!play ? 'Play' : 'Stop'}</button>
+                </div>
+            </div>
         </div>
     </div >)
 }

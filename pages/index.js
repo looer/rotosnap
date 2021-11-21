@@ -66,24 +66,22 @@ export default function LandingPage() {
           <h1 className="w-full my-2 text-4xl font-bold leading-tight text-center text-black">Drop some files to try it live!</h1>
           <div className="mt-8 flex flex-col items-center justify-center">
             {pictures.length > 0 ? <Viewer images={pictures} /> :
-              <div onDrop={e => e.preventDefault()} className="mx-auto text-center w-1/4 my-0 py-0 rounded-t text-black">
+              <div onDrop={e => e.preventDefault()} className="mx-auto text-center w-full my-0 py-5 rounded-t text-black">
                 <form>
                   <FileDrop onDrop={(files, e) => { loadFiles(files) }}>
                     <div id='droppable'
-                      className='py-10 border-4 border-gray-300 bg-gray-100 border-dashed rounded-xl hover:bg-gray-200'>
-
-                      <label for="demoPictures">Select files or drop here</label>
-                      <input type="file"
+                      className='py-20 m-5 border-4 border-gray-300 bg-gray-100 border-dashed rounded-xl hover:bg-gray-200'>
+                      <label for="demoPictures">Select files or drop here</label><br />
+                      <input hidden type="file"
                         id="demoPictures" name="demoPictures"
                         accept="image/png, image/jpeg"
                         multiple={true}
                         onChange={e => {
                           console.log(e.target.files)
                           loadFiles(e.target.files)
-                        }} />
-                      <svg xmlns="http://www.w3.org/2000/svg" className="h-8 w-8 mx-auto" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 4v16m8-8H4" />
-                      </svg>
+                        }}>
+
+                      </input>
 
                     </div>
                   </FileDrop>
@@ -93,7 +91,7 @@ export default function LandingPage() {
           </div>
         </div>
       </section>
-    </div>
+    </div >
     <section className="tx-lg bg-white border-b py-8">
       <div className="container max-w-5xl mx-auto m-8">
         <h1 className="w-full my-2 text-4xl font-bold leading-tight text-center text-gray-800">File uploading is a pain</h1>
@@ -128,23 +126,24 @@ export default function LandingPage() {
 
         <div className="flex flex-wrap flex-col-reverse sm:flex-row">
           <div className="w-full sm:w-1/2 p-6 mt-6">
-            <div className="relative pb-2/3">
-              <img className="h-full w-full object-cover absolute" src=" https://static.files-simplefileupload.com/22lhflf0a9jb55m7aoc4r1eiexs5/sfu_v2_frame3@2x.png" />
-            </div>
+
+            <img className="" src="/undraw_Photograph.png" />
 
           </div>
-          <div className="w-full sm:w-1/2 p-6 mt-6">
+          <div className="w-full sm:w-1/2 p-6 mt-6 flex">
             <div className="align-middle">
               <h3 className="text-3xl text-gray-800 font-bold leading-none mb-3">A Better Way</h3>
-              <p className="text-lg text-gray-600 mb-8">What if you could skip all the pain?What if you could add file uploading with two lines of code?Simple File Upload is a simple to use, yet robust file upload tool for your website.Whether you want to build a simple photo gallery application or something more complex, we've got you covered.<br /><br />
-              </p></div>
+              <p className="text-lg text-gray-600 mb-8">What if you could skip all the pain? What if you could upload and host your images with just a drag&drop? RotoSnap is a simple to use tool for your website. If you want to showcase your product or something more complex, we've got you covered.<br /><br />
+              </p>
+
+            </div>
           </div>
         </div>
 
         <div className="flex flex-wrap">
           <div className="w-5/6 sm:w-1/2 p-6">
             <h3 className="text-3xl text-gray-800 font-bold leading-none mb-3 mt-6">Uploading and Storage.Done.</h3>
-            <p className="text-lg text-gray-600 mb-8">Simple File Upload takes care of all the heavy lifting surrounding file uploads.The widget hooks into an input with class of simple-file-upload and replaces it with a dropzone.The user drops a file and the file is automatically uploaded to cloud storage via a direct upload.Files are served via a CDN which is imperitive in today's modern megabyte-sized website world. <br /><br />
+            <p className="text-lg text-gray-600 mb-8">RotoSnap takes care of all the heavy lifting surrounding file uploads.The widget hooks into an input with class of simple-file-upload and replaces it with a dropzone.The user drops a file and the file is automatically uploaded to cloud storage via a direct upload.Files are served via a CDN which is imperitive in today's modern megabyte-sized website world. <br /><br />
             </p></div>
           <div className="w-full sm:w-1/2 p-6">
             <img className="w-5/6 sm:h-64 mx-auto mt-6" src="https://d33wubrfki0l68.cloudfront.net/9475b01d7e8f54ea97bf17911c0882e6a89c32ee/ff7af/assets/server.svg" />
@@ -158,28 +157,28 @@ export default function LandingPage() {
           <div className="w-full sm:w-1/2 p-6 mt-6">
             <div className="align-middle">
               <h3 className="text-3xl text-gray-800 font-bold leading-none mb-3">Will it work for me?</h3>
-              <p className="text-lg text-gray-600 mb-8">Yes!Simple File Upload can be installed via a javascript snippet or React component.It works with all backend languages and databases.<br /><br />
+              <p className="text-lg text-gray-600 mb-8">Yes! It can work with all kinds of languages and backends. RotoSnap can be embedded into any HTML using an iframe or via a javascript snippet or React component.<br /><br />
               </p></div>
           </div>
+          <svg className="wave-top" viewBox="0 0 1439 147" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlnsXlink="http://www.w3.org/1999/xlink">
+            <g stroke="none" strokeWidth="1" fill="none" fillRule="evenodd">
+              <g transform="translate(-1.000000, -14.000000)" fillRule="nonzero">
+                <g className="wave" fill="#f8fafc">
+                  <path d="M1440,84 C1383.555,64.3 1342.555,51.3 1317,45 C1259.5,30.824 1206.707,25.526 1169,22 C1129.711,18.326 1044.426,18.475 980,22 C954.25,23.409 922.25,26.742 884,32 C845.122,37.787 818.455,42.121 804,45 C776.833,50.41 728.136,61.77 713,65 C660.023,76.309 621.544,87.729 584,94 C517.525,105.104 484.525,106.438 429,108 C379.49,106.484 342.823,104.484 319,102 C278.571,97.783 231.737,88.736 205,84 C154.629,75.076 86.296,57.743 0,32 L0,0 L1440,0 L1440,84 Z"></path>
+                </g>
+                <g transform="translate(1.000000, 15.000000)" fill="#FFFFFF">
+                  <g transform="translate(719.500000, 68.500000) rotate(-180.000000) translate(-719.500000, -68.500000) ">
+                    <path d="M0,0 C90.7283404,0.927527913 147.912752,27.187927 291.910178,59.9119003 C387.908462,81.7278826 543.605069,89.334785 759,82.7326078 C469.336065,156.254352 216.336065,153.6679 0,74.9732496" opacity="0.100000001"></path>
+                    <path d="M100,104.708498 C277.413333,72.2345949 426.147877,52.5246657 546.203633,45.5787101 C666.259389,38.6327546 810.524845,41.7979068 979,55.0741668 C931.069965,56.122511 810.303266,74.8455141 616.699903,111.243176 C423.096539,147.640838 250.863238,145.462612 100,104.708498 Z" opacity="0.100000001"></path>
+                    <path d="M1046,51.6521276 C1130.83045,29.328812 1279.08318,17.607883 1439,40.1656806 L1439,120 C1271.17211,77.9435312 1140.17211,55.1609071 1046,51.6521276 Z" opacity="0.200000003"></path>
+                  </g>
+                </g>
+              </g>
+            </g>
+          </svg>
         </div>
       </div>
     </section>
-    <svg className="wave-top" viewBox="0 0 1439 147" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlnsXlink="http://www.w3.org/1999/xlink">
-      <g stroke="none" strokeWidth="1" fill="none" fillRule="evenodd">
-        <g transform="translate(-1.000000, -14.000000)" fillRule="nonzero">
-          <g className="wave" fill="#f8fafc">
-            <path d="M1440,84 C1383.555,64.3 1342.555,51.3 1317,45 C1259.5,30.824 1206.707,25.526 1169,22 C1129.711,18.326 1044.426,18.475 980,22 C954.25,23.409 922.25,26.742 884,32 C845.122,37.787 818.455,42.121 804,45 C776.833,50.41 728.136,61.77 713,65 C660.023,76.309 621.544,87.729 584,94 C517.525,105.104 484.525,106.438 429,108 C379.49,106.484 342.823,104.484 319,102 C278.571,97.783 231.737,88.736 205,84 C154.629,75.076 86.296,57.743 0,32 L0,0 L1440,0 L1440,84 Z"></path>
-          </g>
-          <g transform="translate(1.000000, 15.000000)" fill="#FFFFFF">
-            <g transform="translate(719.500000, 68.500000) rotate(-180.000000) translate(-719.500000, -68.500000) ">
-              <path d="M0,0 C90.7283404,0.927527913 147.912752,27.187927 291.910178,59.9119003 C387.908462,81.7278826 543.605069,89.334785 759,82.7326078 C469.336065,156.254352 216.336065,153.6679 0,74.9732496" opacity="0.100000001"></path>
-              <path d="M100,104.708498 C277.413333,72.2345949 426.147877,52.5246657 546.203633,45.5787101 C666.259389,38.6327546 810.524845,41.7979068 979,55.0741668 C931.069965,56.122511 810.303266,74.8455141 616.699903,111.243176 C423.096539,147.640838 250.863238,145.462612 100,104.708498 Z" opacity="0.100000001"></path>
-              <path d="M1046,51.6521276 C1130.83045,29.328812 1279.08318,17.607883 1439,40.1656806 L1439,120 C1271.17211,77.9435312 1140.17211,55.1609071 1046,51.6521276 Z" opacity="0.200000003"></path>
-            </g>
-          </g>
-        </g>
-      </g>
-    </svg>
     <section className="container mx-auto text-center py-6 mb-12">
       <h1 className="w-full my-2 text-5xl font-bold leading-tight text-center text-white">Try it now!</h1>
       <div className="w-full mb-4">

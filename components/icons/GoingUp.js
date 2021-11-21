@@ -1,7 +1,7 @@
 const GoingUp = ({ ...props }) => {
   return (
-    <svg xmlns="http://www.w3.org/2000/svg" xmlnsXlink="http://www.w3.org/1999/xlink" data-name="Layer 1" width="400"
-      height="400" viewBox="0 0 1139.07 783.9">
+    <svg xmlns="http://www.w3.org/2000/svg" xmlnsXlink="http://www.w3.org/1999/xlink" data-name="Layer 1" width="300"
+      height="300" viewBox="0 0 1139.07 783.9">
       <defs>
         <linearGradient id="a555fdc1-543d-4707-ad9f-6ab871925265-280" x1="403.53" y1="329.2" x2="403.53" y2="58.05"
           gradientUnits="userSpaceOnUse">
