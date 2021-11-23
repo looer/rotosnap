@@ -14,7 +14,7 @@ export default function Footer() {
               <span className="rounded-full border border-gray-700 mr-2">
                 <Logo />
               </span>
-              <span>Simply360</span>
+              <span>RotoSnap</span>
             </a>
           </Link>
         </div>
@@ -37,14 +37,7 @@ export default function Footer() {
             <li className="py-3 md:py-0 md:pb-4">
               <Link href="/">
                 <a className="transition ease-in-out duration-150 hover:text-accents-2">
-                  Careers
-                </a>
-              </Link>
-            </li>
-            <li className="py-3 md:py-0 md:pb-4">
-              <Link href="/">
-                <a className="transition ease-in-out duration-150 hover:text-accents-2">
-                  Blog
+                  Documentation
                 </a>
               </Link>
             </li>
@@ -76,7 +69,7 @@ export default function Footer() {
       </div>
       <div className="py-12 flex flex-col md:flex-row justify-between items-center space-y-4 bg-primary-2">
         <div>
-          <span>&copy; 2020 ACME, Inc. All rights reserved.</span>
+          <span>&copy; 2022 RotoSnap, Inc. All rights reserved.</span>
         </div>
       </div>
     </footer>
