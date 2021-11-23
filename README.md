@@ -1,19 +1,24 @@
-# Next.js Subscription Payments Starter
+# RotoSnap
 
-The all-in-one starter kit for high-performance SaaS applications.
+The all-in-one solution for creating and embedding 360 degrees product views.
 
-## Features
+## Features 
 
-- Secure user management and authentication with [Supabase](https://supabase.io/docs/guides/auth)
-- Powerful data access & management tooling on top of PostgreSQL with [Supabase](https://supabase.io/docs/guides/database)
+- Upload your pictures and embed a 360 view of your product 
+- Made using React, Tailwind and Next.js
+- Secure user management and authentication with [Supabase](https://supabase.io/docs/guides/auth) and with Google OAuth Provider
+- Data access & management on top of PostgreSQL with [Supabase](https://supabase.io/docs/guides/database)
+- Data storage using Supabase Storage, on top of AWS S3
 - Integration with [Stripe Checkout](https://stripe.com/docs/payments/checkout) and the [Stripe customer portal](https://stripe.com/docs/billing/subscriptions/customer-portal)
 - Automatic syncing of pricing plans and subscription statuses via [Stripe webhooks](https://stripe.com/docs/webhooks)
 
 ## Demo
 
-- https://subscription-payments.vercel.app/
+- https://rotosnap.com/
 
-[![Screenshot of demo](./public/demo.png)](https://subscription-payments.vercel.app/)
+[![Screenshot of demo](./public/home.png)](https://rotosnap.com/)
+[![Screenshot of demo](./public/projects.png)](https://rotosnap.com/)
+[![Screenshot of demo](./public/product.png)](https://rotosnap.com/)
 
 ## Architecture
 
@@ -23,7 +28,6 @@ The all-in-one starter kit for high-performance SaaS applications.
 
 The Vercel deployment will guide you through creating a Supabase account and project. After installing the Supabase integration, you'll need to configure Stripe with a few simple steps.
 
-**Note:** We're working on our Stripe integration. We've documented the required steps below under "Configure Stripe" until the integration is ready.
 
 To get started, click the "Deploy with Vercel" button below.
 
@@ -143,24 +147,3 @@ vercel env pull .env.local
 
 Running this command will create a new `.env.local` file in your project folder. For security purposes, you will need to set the `SUPABASE_SERVICE_ROLE_KEY` manually from your [Supabase dashboard](https://app.supabase.io/) (Settings > API). Lastly, the webhook secret differs for local testing vs. when deployed to Vercel. Follow the instructions below to get the corresponding webhook secret.
 
-### Use the Stripe CLI to test webhooks
-
-First [install the CLI](https://stripe.com/docs/stripe-cli) and [link your Stripe account](https://stripe.com/docs/stripe-cli#login-account).
-
-Next, start the webhook forwarding:
-
-```bash
-stripe listen --forward-to=localhost:3000/api/webhooks
-```
-
-Running this Stripe command will print a webhook secret (such as, `whsec_***`) to the console. Set `STRIPE_WEBHOOK_SECRET` to this value in your `.env.local` file.
-
-### Install dependencies and run the Next.js client
-
-```bash
-npm install
-npm run dev
-# or
-yarn
-yarn dev
-```
