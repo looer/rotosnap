@@ -4,8 +4,8 @@ The all-in-one solution for creating and embedding 360 degrees product views.
 
 ## Features 
 
-- Upload your pictures and embed a 360 view of your product 
-- Made using React, Tailwind and Next.js
+- Upload your pictures and embed a 360 view of your product onto any HTML page using an iframe or js snippet
+- Made using React, Tailwind and Next.js for the frontend. Supabase for the backend and Vercel for deployment.
 - Secure user management and authentication with [Supabase](https://supabase.io/docs/guides/auth) and with Google OAuth Provider
 - Data access & management on top of PostgreSQL with [Supabase](https://supabase.io/docs/guides/database)
 - Data storage using Supabase Storage, on top of AWS S3
