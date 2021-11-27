@@ -10,13 +10,13 @@ import Button from '@/components/ui/Button';
 import LoadingDots from '@/components/ui/LoadingDots';
 
 export const Project = (props) => {
-    const url = props.proj.pictures[0]
+    const url = (props.proj ? props.proj.pictures[0] : null);
     const [profile, setProfile] = useState('')
     const [menuOpen, setMenuOpen] = useState('')
     const [hover, setHover] = useState(false);
 
     useEffect(() => {
-        if (url) downloadImage(url)
+        if (url && !props.empty) downloadImage(url)
     }, [])
 
     async function downloadImage(path) {
@@ -36,37 +36,41 @@ export const Project = (props) => {
 
     return (
 
-        <div className="relative border border-gray-200 hover:border-gray-300 bg-primary-2 rounded-md w-64 
+        <div className="relative filter drop-shadow-h-1 bg-white rounded-lg w-64 
         flex-grow max-w-xs min-w-1/5 transition-all overflow-hidden"
             onMouseEnter={() => setHover(true)}
             onMouseLeave={() => setHover(false)}>
             {hover &&
                 <div onClick={props.onMoreOptions}>
-                    <img src='/ic24-more-hor.svg' className="absolute z-30 right-4 top-2 cursor-pointer">
+                    <img src='/ic24-more-hor.svg' className="absolute z-40 right-4 top-2 cursor-pointer">
                     </img>
                 </div>}
             {props.selected ?
-                <div className='absolute right-3 top-3 rounded z-40 border border-gray-300 bg-white py-2'>
+                <div className='absolute right-3 top-3 rounded-lg box-shadow z-50 bg-white py-2'>
+                    <Link href={'/project/' + props.proj.id}><a>
+                        <div className='text-sm py-4 w-32 pl-4 hover:bg-accents-8 cursor-pointer'>
+                            Edit
+                        </div></a>
+                    </Link>
                     <div className='text-sm py-4 w-32 pl-4 hover:bg-accents-8 cursor-pointer'
                         onClick={props.onDelete}>
                         Delete
                     </div>
                 </div>
                 : ''}
-            <Link href={"/project/" + props.proj.id}>
+            <Link href={props.proj ? "/project/" + props.proj.id : "/"}>
                 <a>
-                    {profile &&
-                        <div className="relative w-full h-32 overflow-hidden">
-                            <div className={"t-0 absolute w-full h-full bg-black-fade z-20 transition duration-300 animate-none ease-in-out " + (hover ? "bg-opacity-20" : "opacity-0")}></div>
-                            <Image src={profile}
-                                alt='profile pic'
-                                layout='fill'
-                                objectFit={'cover'}
-                                className={"transform-gpu transition-transform duration-300 ease-in-out " + (hover ? 'scale-110' : "")}
-                            />
-                        </div>}
-                    <div className='mt-3 px-4 text-sm font-medium break-words mb-1 truncate'>{props.proj.name.split('.')[0]}</div>
-                    <div className='mb-4 px-4 text-xs text-gray-400'>{props.proj.pictures.length} pictures</div>
+                    <div className="relative w-full h-32 rounded-t-lg overflow-hidden z-30">
+                        <div className={"t-0 absolute w-full h-full bg-black-fade z-20 transition duration-300 animate-none ease-in-out " + (hover ? "bg-opacity-20" : "opacity-0")}></div>
+                        {profile && <Image src={profile}
+                            alt='profile pic'
+                            layout='fill'
+                            objectFit={'cover'}
+                            className={"transform-gpu transition-transform duration-300 ease-in-out rounded-t-lg " + (hover ? 'scale-110 rounded-t-lg' : "")}
+                        />}
+                    </div>
+                    <div className='mt-3 px-4 text-sm font-medium break-words mb-1 truncate'>{props.empty ? " " : props.proj.name.split('.')[0]}</div>
+                    <div className='mb-4 px-4 text-xs text-gray-400'>{props.proj ? props.proj.pictures.length : ""} pictures</div>
                 </a>
             </Link>
         </div >
@@ -176,6 +180,11 @@ export default function Dashboard() {
     // list of products
     // image of products
 
+    let skeleton = [];
+    for (let i = 0; i < 8; i++) {
+        skeleton.push(" ");
+    }
+
 
     if (!user) {
         return (<div className='w-full text-center py-64'>User not found</div>)
@@ -199,7 +208,7 @@ export default function Dashboard() {
                 </Link>
             </div>
             <div className='flex gap-8 flex-wrap mb-12'>
-                {loading ? <div className='w-16 mt-16 mx-auto'><LoadingDots /></div> :
+                {loading ? skeleton.map(() => <Project empty />) :
                     projects.map((p, i) => <Project proj={p} key={i} index={i} selected={i == selected} onMoreOptions={() => setSelected(i)} onDelete={() => deleteProject(i)} />)}
                 {!loading && !projects.length &&
                     <div className='w-full my-32 text-accents-4 text-center font-medium'>

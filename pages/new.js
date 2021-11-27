@@ -115,18 +115,18 @@ export default function App() {
     if (!user) {
         return (<div>User not defined</div>)
     } else return (
-        <div className='max-w-screen-lg mx-auto px-12 mb-12'>
+        <div className='max-w-screen-lg mx-auto px-12 my-20'>
             <div className='w-full'>
                 <form onSubmit={handleSubmit}>
                     <label>
                         <input id='projectname' autofocus value={projectname} onChange={handleChange} placeholder='New project' type="text" name="nome"
-                            className='font-bold text-3xl my-5 w-full focus:ring-0 placeholder-gray-300' />
+                            className='font-bold text-3xl my-5 w-full focus:ring-0 focus:outline-none placeholder-gray-300' />
                     </label>
                     <FileDrop onDrop={(files, e) => createProject(files)}>
                         <div id='droppable'
                             className='py-36 flex flex-col items-center border-2 border-gray-400 border-opacity-50 border-dashed rounded-xl hover:bg-gray-100'>
-                            <label for="demoPictures">Select files or drop here</label>
-                            <input type="file"
+                            <label for="filepick">Select files or drop here</label>
+                            <input name="filepick" type="file"
                                 id="demoPictures" name="demoPictures"
                                 accept="image/png, image/jpeg"
                                 multiple={true}
@@ -135,7 +135,7 @@ export default function App() {
                                 }} />
                         </div>
                     </FileDrop>
-                    <button>{submitting ? (
+                    <button onClick={(files, e) => createProject(files)}>{submitting ? (
                         <div className='p-3 m-5'>
                             Creating... {' '}
                             <svg xmlns="http://www.w3.org/2000/svg" className="h-6 w-6 inline-block animate-spin" fill="none" viewBox="0 0 24 24" stroke="currentColor">
