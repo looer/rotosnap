@@ -50,6 +50,10 @@ module.exports = {
         magical:
           'rgba(0, 0, 0, 0.02) 0px 30px 30px, rgba(0, 0, 0, 0.03) 0px 0px 8px, rgba(0, 0, 0, 0.05) 0px 1px 0px'
       },
+      dropShadow: {
+        'h-1': '0px 2px 1px rgba(0, 0, 0, 0.16)',
+        'h-2': '0px 2px 8px rgba(0, 0, 0, 0.32)',
+      },
       lineHeight: {
         'extra-loose': '2.2'
       },
