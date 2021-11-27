@@ -66,9 +66,9 @@ export default function Pricing({ products }) {
           <h1 className="text-4xl font-extrabold sm:text-center sm:text-6xl">
             Pricing Plans
           </h1>
-          <p className="mt-5 text-xl text-accents-4 sm:text-center sm:text-2xl max-w-2xl m-auto">
-            Start building for free, then add a site plan to go live. Account
-            plans unlock additional features.
+          <p className="mt-5 text-lg text-accents-3 sm:text-center sm:text-xl max-w-2xl m-auto">
+            Start building for free, then add a site plan to go live.<br />
+            Account plans unlock additional features.
           </p>
           <div className="relative self-center mt-6 bg-primary-2 rounded-lg p-0.5 flex sm:mt-8 border border-accents-1">
             <button

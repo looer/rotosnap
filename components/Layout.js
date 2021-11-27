@@ -4,7 +4,7 @@ import { useRouter } from 'next/router';
 import Navbar from '@/components/ui/Navbar';
 import Footer from '@/components/ui/Footer';
 
-export default function Layout({ children, meta: pageMeta }) {
+export default function Layout({ children, meta: pageMeta, footer }) {
   const router = useRouter();
   const meta = {
     title: 'Simply360',
@@ -36,8 +36,11 @@ export default function Layout({ children, meta: pageMeta }) {
         <meta name="twitter:image" content={meta.cardImage} />
       </Head>
       <Navbar />
-      <main>{children}</main>
-      <Footer />
+      <main className="bg-accents-9">{children}</main>
+      {footer && <Footer />}
     </>
   );
+}
+Layout.defaultProps = {
+  footer: true,
 }

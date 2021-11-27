@@ -60,7 +60,7 @@ export const Project = (props) => {
                 : ''}
             <Link href={props.proj ? "/project/" + props.proj.id : "/"}>
                 <a>
-                    <div className="relative w-full h-32 rounded-t-lg overflow-hidden z-30">
+                    <div className="relative w-full h-40 rounded-t-lg overflow-hidden z-30 bg-gray-100">
                         <div className={"t-0 absolute w-full h-full bg-black-fade z-20 transition duration-300 animate-none ease-in-out " + (hover ? "bg-opacity-20" : "opacity-0")}></div>
                         {profile && <Image src={profile}
                             alt='profile pic'
@@ -69,8 +69,8 @@ export const Project = (props) => {
                             className={"transform-gpu transition-transform duration-300 ease-in-out rounded-t-lg " + (hover ? 'scale-110 rounded-t-lg' : "")}
                         />}
                     </div>
-                    <div className='mt-3 px-4 text-sm font-medium break-words mb-1 truncate'>{props.empty ? " " : props.proj.name.split('.')[0]}</div>
-                    <div className='mb-4 px-4 text-xs text-gray-400'>{props.proj ? props.proj.pictures.length : ""} pictures</div>
+                    <div className='mt-3 px-4 text-sm font-medium break-words mb-1 truncate'>{props.empty ? "..." : props.proj.name.split('.')[0]}</div>
+                    <div className='mb-3 px-4 text-xs text-gray-400'>{props.proj ? props.proj.pictures.length + " pictures" : "..."}</div>
                 </a>
             </Link>
         </div >
@@ -189,7 +189,7 @@ export default function Dashboard() {
     if (!user) {
         return (<div className='w-full text-center py-64'>User not found</div>)
     } else return (
-        <div className='max-w-8xl mx-auto px-8 mt-8'>
+        <div className='max-w-8xl mx-auto px-8 pt-8'>
             <div className='flex items-center mb-8'>
                 <div className='flex-grow'>
                     <h2 className='text-2xl font-bold mb-0.5'>All projects</h2>

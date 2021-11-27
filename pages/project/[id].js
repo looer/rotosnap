@@ -68,7 +68,16 @@ export default function ProjectPage() {
                     <h1 className='text-3xl my-12 font-bold'>{project ? project.name : ''}</h1>
                     <div>{paths && paths.length ? <Viewer images={paths}></Viewer> : 'This product doesn\'t contain any images'}</div>
                     <div className='my-8'>
-                        <div className='mb-4 text-xl font-bold'>Embed</div>
+                        <label className='mb-4 text-xl font-bold block w-40'>Mode</label>
+                        <select className="border border-gray-200 rounded p-2 w-40" name="cars" id="cars" form="carform">
+                            <option value="volvo">Volvo</option>
+                            <option value="saab">Saab</option>
+                            <option value="opel">Opel</option>
+                            <option value="audi">Audi</option>
+                        </select>
+                    </div>
+                    <div className='my-8'>
+                        <label className='mb-4 text-xl font-bold block'>Embed</label>
                         <div className='w-full text-accents-2 font-mono border rounded bg-primary-2 border-gray-200 p-8'>
                             {`<iframe width="500" height="500" src="${process.env.ROOT_URL}/embed/${id}"></iframe>`}
                         </div>

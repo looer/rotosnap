@@ -15,6 +15,9 @@ export default function MyApp({ Component, pageProps, ...appProps }) {
     if (appProps.router.pathname.includes('/embed/'))
       return <Component {...pageProps} />;
 
+    else if (appProps.router.pathname.includes('/dashboard'))
+      return <Layout footer={false}><Component {...pageProps} /></Layout>;
+
     return (
       <Layout>
         <Component {...pageProps} />{" "}
