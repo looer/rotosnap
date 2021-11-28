@@ -15,7 +15,7 @@ export default function MyApp({ Component, pageProps, ...appProps }) {
     if (appProps.router.pathname.includes('/embed/'))
       return <Component {...pageProps} />;
 
-    else if (appProps.router.pathname.includes('/dashboard'))
+    else if (appProps.router.pathname.includes('/dashboard') || appProps.router.pathname.includes('/project/'))
       return <Layout footer={false}><Component {...pageProps} /></Layout>;
 
     return (
@@ -26,7 +26,7 @@ export default function MyApp({ Component, pageProps, ...appProps }) {
   };
 
   return (
-    <div className="bg-white">
+    <div className="bg-accents-9">
       <UserContextProvider>
         {getContent()}
       </UserContextProvider>

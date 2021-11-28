@@ -107,7 +107,7 @@ export default function Pricing({ products }) {
               <div
                 key={product.id}
                 className={cn(
-                  'rounded-lg shadow-sm divide-y divide-accents-2 bg-primary-2',
+                  'rounded-lg filter drop-shadow-h-1 divide-y divide-accents-2 bg-white',
                   {
                     'border border-pink': subscription
                       ? product.name === subscription?.prices?.products.name

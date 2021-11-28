@@ -46,7 +46,7 @@ export const Project = (props) => {
                     </img>
                 </div>}
             {props.selected ?
-                <div className='absolute right-3 top-3 rounded-lg box-shadow z-50 bg-white py-2'>
+                <div className='absolute right-3 top-3 rounded-lg filter drop-shadow-h-2 z-50 bg-white py-2'>
                     <Link href={'/project/' + props.proj.id}><a>
                         <div className='text-sm py-4 w-32 pl-4 hover:bg-accents-8 cursor-pointer'>
                             Edit
