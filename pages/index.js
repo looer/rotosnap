@@ -43,7 +43,7 @@ export default function LandingPage() {
           <p className="leading-normal text-xl text-accents-3 mb-8 text-center">Integrate 360 views of your products into your website. No servers required. It's fast, it's simple, and it just works.</p>
           <a href="/pricing" className="self-center text-center w-1/3 mx-auto lg:mx-0 hover:underline bg-primary text-secondary font-bold rounded-full mt-4 lg:mt-0 py-4 px-8 shadow opacity-75 z-10">Sign Up!</a>
         </div>
-        <div className="md:w-3/5 p-20 z-10">
+        <div className="md:w-3/5 pl-20 pt-20 z-10">
           <Viewer images={garzaImages} />
         </div>
       </div>
