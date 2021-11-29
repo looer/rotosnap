@@ -4,10 +4,27 @@ import { FileDrop } from 'react-file-drop'
 import { useRouter } from 'next/router';
 import { useUser } from '@/utils/useUser';
 import GoingUp from '@/components/icons/GoingUp';
+import { supabase } from '@/utils/supabase-client'
 
 export default function LandingPage() {
   const [pictures, setPictures] = useState([])
   const router = useRouter();
+
+  const [session, setSession] = useState(null)
+
+  useEffect(() => {
+    setSession(supabase.auth.session());
+
+    supabase.auth.onAuthStateChange((event, session) => {
+      setSession(session);
+      fetch("/api/auth", {
+        method: "POST",
+        headers: new Headers({ "Content-Type": "application/json" }),
+        credentials: "same-origin",
+        body: JSON.stringify({ event, session }),
+      }).then((res) => res.json());
+    });
+  }, []);
 
   const loadFiles = (files) => {
     console.log(files)
@@ -16,10 +33,10 @@ export default function LandingPage() {
     setPictures(pics)
   }
 
-  const { userLoaded, user, session, userDetails, subscription } = useUser();
-  useEffect(() => {
-    if (user) router.replace('/dashboard');
-  }, [user]);
+  //const { userLoaded, user, session, userDetails, subscription } = useUser();
+  /*useEffect(() => {
+    if (session.user) router.replace('/dashboard');
+  }, [session.user]);*/
 
   const garzaImages = ['/Garza/F31 garza-360-01.jpg', '/Garza/F31 garza-360-02.jpg', '/Garza/F31 garza-360-03.jpg',
     '/Garza/F31 garza-360-04.jpg', '/Garza/F31 garza-360-05.jpg', '/Garza/F31 garza-360-06.jpg',

@@ -12,7 +12,7 @@ export default function MyApp({ Component, pageProps, ...appProps }) {
 
   const getContent = () => {
     // Opt out of Layout for specific paths
-    if (appProps.router.pathname.includes('/embed/'))
+    if (appProps.router.pathname.includes('/embed/') || appProps.router.pathname.includes('/project/'))
       return <Component {...pageProps} />;
 
     else if (appProps.router.pathname.includes('/dashboard') || appProps.router.pathname.includes('/project/'))
