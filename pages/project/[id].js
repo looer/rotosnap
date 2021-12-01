@@ -5,41 +5,57 @@ import { useUser } from '@/utils/useUser';
 import { useState, useEffect } from 'react';
 import { supabase } from '@/utils/supabase-client'
 
-export default function ProjectPage({ user }) {
+
+export async function getServerSideProps(req) {
+    const { user } = await supabase.auth.api.getUserByCookie(req)
+    const { id } = req.query
+    const { data, error, status } = await supabase.from('projects').select('id, user_id, name, pictures').eq('id', id).single()
+
+    if (!user) {
+        // If no user, redirect to index.
+        console.log('no user')
+        //LA RIGA SOTTO FA SEMPRE REDIRECT
+        //return { props: {}, redirect: { destination: '/', permanent: false } }
+    }
+    if (!data) {
+        return {
+            notFound: true,
+        }
+    }
+
+    // If there is a user, return it.
+    return { props: { data } }
+}
+
+
+export default function ProjectPage({ data }) {
 
     //const { userLoaded, user, session, userDetails } = useUser();
     const [project, setProject] = useState(null);
     const [paths, setPaths] = useState([])
     const [loading, setLoading] = useState(false)
+    const [debug, setDebug] = useState(false)
+    const [shadows, setShadows] = useState(true)
     const router = useRouter()
     const { id } = router.query
 
     //console.log(userDetails, id)
     useEffect(() => {
-        getProject()
-    }, [user]) //user, session, userDetails
+        getProject(data)
+    }, [data]) //user, session, userDetails
 
-    async function getProject() {
+    async function getProject(proj) {
         setLoading(true);
-        if (!user) return []
-        const { data, error, status } = await supabase.from('projects').select('id, user_id, name, pictures').eq('id', id).eq('user_id', user.id).single()
-        if (error) throw error
-        console.log(data)
+        setProject(proj)
+        getPublicUrl(proj)
         setLoading(false);
-        setProject(data)
     }
 
-    useEffect(() => {
-        getPublicUrls()
-    }, [project])
-
-    async function getPublicUrls() {
-        if (project) {
-            let _paths = [];
-            for (const picture of project.pictures) {
-                let newPicture = await downloadImage(picture);
-                _paths.push(newPicture);
-            }
+    async function getPublicUrl(proj) {
+        if (proj) {
+            let firstURL = await downloadImage(proj.pictures[0]);
+            const baseURL = firstURL.substring(0, firstURL.lastIndexOf("/") + 1);
+            const _paths = proj.pictures.map(p => baseURL + p)
             setPaths(_paths)
         }
     }
@@ -68,23 +84,34 @@ export default function ProjectPage({ user }) {
                     <h1 className='text-lg text-center py-4 bg-white border-b border-gray-200 font-bold'>{project ? project.name : ''}</h1>
                     <div className='flex h-100'>
                         <div className='flex-grow flex items-center'>{paths && paths.length ?
-                            <Viewer images={paths}></Viewer>
-                            : 'This product doesn\'t contain any images'}</div>
-                        <div className='w-80 bg-white p-8 flex-grow-0'>
+                            <Viewer className='align-top' images={paths} debug={debug} embed={!shadows}></Viewer>
+                            : 'This product doesn\'t contain any images'}
+                        </div>
+                        <div className='w-80 bg-white p-8 flex-grow'>
                             <div className='my-8'>
-                                <label className='mb-4 text-xl font-bold block w-40'>Mode</label>
+                                <label className='mb-4 text-xl font-bold block w-40'>Options</label>
                                 <select className="border border-gray-200 rounded p-2 w-40" name="cars" id="cars" form="carform">
-                                    <option value="volvo">Volvo</option>
-                                    <option value="saab">Saab</option>
-                                    <option value="opel">Opel</option>
-                                    <option value="audi">Audi</option>
+                                    <option value="volvo">Autoplay</option>
+                                    <option value="saab">Drag</option>
                                 </select>
+                                <div className='my-8'>
+                                    <input type="checkbox" id="debug" name="debug" checked={debug} onChange={(e) => setDebug(!debug)} />
+                                    <label name="debug"> Debug (show picture number in console) </label>
+                                </div>
+                                <div className='my-8'>
+                                    <input type="checkbox" id="shadows" name="shadows" checked={shadows} onChange={e => setShadows(!shadows)} />
+                                    <label name="shadows"> Shadows </label>
+                                </div>
                             </div>
+
                             <div className='py-8'>
                                 <label className='mb-4 text-xl font-bold block'>Embed</label>
                                 <div className='w-full text-accents-2 font-mono border rounded bg-primary-2 border-gray-200 p-8'>
-                                    {`<iframe width="500" height="500" src="${process.env.ROOT_URL}/embed/${id}"></iframe>`}
+                                    {`<iframe width="500" height="500" src="https://rotosnap.com/embed/${id}"></iframe>`}
                                 </div>
+                            </div>
+                            <div>
+                                {project && project.pictures.map((p, i) => <li key={i}>{p}</li>)}
                             </div>
                         </div>
                     </div>
@@ -92,16 +119,4 @@ export default function ProjectPage({ user }) {
             }
         </div >
     )
-}
-
-export async function getServerSideProps({ req }) {
-    const { user } = await supabase.auth.api.getUserByCookie(req)
-
-    if (!user) {
-        // If no user, redirect to index.
-        return { props: {}, redirect: { destination: '/', permanent: false } }
-    }
-
-    // If there is a user, return it.
-    return { props: { user } }
 }

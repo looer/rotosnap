@@ -17,23 +17,11 @@ export default async function handler(req, res) {
     }
 }
 
-async function getPublicUrls(project) {
-    if (project) {
-        let paths = [];
-        for (const picture of project.pictures) {
-            let newPicture = await downloadImage(picture);
-            paths.push(newPicture);
-        }
-        return paths
-    }
-}
 async function getPublicUrl(project) {
     let firstURL = await downloadImage(project.pictures[0]);
     const baseURL = firstURL.substring(0, firstURL.lastIndexOf("/") + 1);
     return baseURL
 }
-
-
 
 async function downloadImage(path) {
     try {

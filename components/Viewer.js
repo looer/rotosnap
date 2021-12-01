@@ -1,7 +1,7 @@
 import { useState, useEffect } from "react";
 
 export default function Viewer(props) {
-    const { id, images, debug, embed } = props
+    const { images, debug, embed } = props
     const [index, setIndex] = useState(0)
     const [nextIndex, setNextIndex] = useState(0)
     const [prevIndex, setPrevIndex] = useState(0)
@@ -41,7 +41,7 @@ export default function Viewer(props) {
             }, 200)
         }
 
-        if (true || debug) console.log(index)
+        if (debug) console.log(index)
     }, [index])
 
 
