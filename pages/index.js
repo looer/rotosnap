@@ -34,9 +34,9 @@ export default function LandingPage() {
   }
 
   //const { userLoaded, user, session, userDetails, subscription } = useUser();
-  /*useEffect(() => {
-    if (session.user) router.replace('/dashboard');
-  }, [session.user]);*/
+  useEffect(() => {
+    if (session) router.replace('/dashboard');
+  }, [session]);
 
   const garzaImages = ['/Garza/F31 garza-360-01.jpg', '/Garza/F31 garza-360-02.jpg', '/Garza/F31 garza-360-03.jpg',
     '/Garza/F31 garza-360-04.jpg', '/Garza/F31 garza-360-05.jpg', '/Garza/F31 garza-360-06.jpg',

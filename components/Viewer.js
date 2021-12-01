@@ -41,7 +41,7 @@ export default function Viewer(props) {
             }, 200)
         }
 
-        if (true || debug) console.log(index)
+        if (debug) console.log(index)
     }, [index])
 
 
