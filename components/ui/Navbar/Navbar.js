@@ -3,9 +3,11 @@ import s from './Navbar.module.css';
 
 import Logo from '@/components/icons/Logo';
 import { useUser } from '@/utils/useUser';
+import { supabase } from '@/utils/supabase-client'
+import { useEffect } from 'react';
 
-const Navbar = () => {
-  const { user, signOut } = useUser();
+function Navbar({ user }) {
+  //const { user, signOut } = useUser();
 
   return (
     <nav className={s.root}>
@@ -35,15 +37,20 @@ const Navbar = () => {
 
           <div className="flex flex-1 justify-end space-x-8">
             {user ? (
-              <Link href="#">
-                <a className={s.link} onClick={() => signOut()}>
-                  Sign out
-                </a>
-              </Link>
+              <div className="flex items-center space-x-8">
+                <div className="font-medium">{user.email}</div>
+                <Link href="#">
+                  <a className={s.link} onClick={() => supabase.auth.signOut()}>
+                    Sign out
+                  </a>
+                </Link>
+              </div>
             ) : (
-              <Link href="/signin">
-                <a className={s.link}>Sign in</a>
-              </Link>
+              <div className="flex">
+                <Link href="/signin">
+                  <a className={s.link}>Sign in</a>
+                </Link>
+              </div>
             )}
           </div>
         </div>
@@ -53,3 +60,10 @@ const Navbar = () => {
 };
 
 export default Navbar;
+
+export async function getServerSideProps({ req }) {
+  const { user } = await supabase.auth.api.getUserByCookie(req)
+
+  // If there is a user, return it.
+  return { props: { user } }
+}

@@ -7,16 +7,15 @@ import Google from '@/components/icons/Google';
 import Input from '@/components/ui/Input';
 import LoadingDots from '@/components/ui/LoadingDots';
 import Logo from '@/components/icons/Logo';
-import { useUser } from '@/utils/useUser';
+import { supabase } from '@/utils/supabase-client'
 
-const SignIn = () => {
+const SignIn = ({ user }) => {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [showPasswordInput, setShowPasswordInput] = useState(false);
   const [loading, setLoading] = useState(false);
   const [message, setMessage] = useState({ type: '', content: '' });
   const router = useRouter();
-  const { user, signIn } = useUser();
 
   const handleSignin = async (e) => {
     e.preventDefault();
@@ -24,7 +23,7 @@ const SignIn = () => {
     setLoading(true);
     setMessage({});
 
-    const { error } = await signIn({ email, password });
+    const { error } = await supabase.auth.signIn({ email, password });
     if (error) {
       setMessage({ type: 'error', content: error.message });
     }
@@ -39,7 +38,8 @@ const SignIn = () => {
 
   const handleOAuthSignIn = async (provider) => {
     setLoading(true);
-    const { error } = await signIn({ provider });
+    // const { error } = await signIn({ provider });
+    const { user, session, error } = await supabase.auth.signIn({ provider: 'google' });
     if (error) {
       setMessage({ type: 'error', content: error.message });
     }
@@ -48,7 +48,7 @@ const SignIn = () => {
 
   useEffect(() => {
     if (user) {
-      router.replace('/account');
+      router.replace('/dashboard');
     }
   }, [user]);
 
@@ -177,3 +177,15 @@ const SignIn = () => {
 };
 
 export default SignIn;
+
+export async function getServerSideProps({ req }) {
+  const { user } = await supabase.auth.api.getUserByCookie(req)
+
+  if (user) {
+    // If no user, redirect to index.
+    return { props: {}, redirect: { destination: '/dashboard', permanent: false } }
+  }
+
+  // If there is a user, return it.
+  return { props: { user } }
+}

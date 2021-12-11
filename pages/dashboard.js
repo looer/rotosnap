@@ -8,6 +8,7 @@ import Link from 'next/link';
 import { useRouter } from 'next/router';
 import Button from '@/components/ui/Button';
 import LoadingDots from '@/components/ui/LoadingDots';
+import Layout from '@/components/Layout';
 
 export const Project = (props) => {
     const url = (props.proj ? props.proj.pictures[0] : null);
@@ -94,6 +95,7 @@ export default function Dashboard({ user }) {
 
     useEffect(() => {
         if (!user) router.replace('/signin');
+        //if (!user) console.log('no user');
     }, [user]);
 
 
@@ -189,43 +191,45 @@ export default function Dashboard({ user }) {
     if (!user) {
         return (<div className='w-full text-center py-64'>User not found</div>)
     } else return (
-        <div className='max-w-8xl mx-auto px-8 pt-8'>
-            <div className='flex items-center mb-8'>
-                <div className='flex-grow'>
-                    <h2 className='text-2xl font-bold mb-0.5'>All projects</h2>
-                    {/*<div className='text-xs text-accents-3'>{loading ? 'Loading projects...' : projects.length + ' projects'}</div>*/}
-                </div>
-
-                <Link href='/new'>
-                    <a>
-                        <Button
-                            variant="slim"
-                            loading={loading}
-                        >
-                            New
-                        </Button>
-                    </a>
-                </Link>
-            </div>
-            <div className='flex gap-8 flex-wrap mb-12'>
-                {loading ? skeleton.map(() => <Project empty />) :
-                    projects.map((p, i) => <Project proj={p} key={i} index={i} selected={i == selected} onMoreOptions={() => setSelected(i)} onDelete={() => deleteProject(i)} />)}
-                {!loading && !projects.length &&
-                    <div className='w-full my-32 text-accents-4 text-center font-medium'>
-                        <div className='mb-6'>There are no projects yet</div>
-                        <Link href='/new'>
-                            <a>
-                                <Button
-                                    variant="slim"
-                                    loading={loading}>
-                                    New project
-                                </Button>
-                            </a>
-                        </Link>
+        <Layout footer={false} user={user}>
+            <div className='max-w-8xl mx-auto px-8 pt-8'>
+                <div className='flex items-center mb-8'>
+                    <div className='flex-grow'>
+                        <h2 className='text-2xl font-bold mb-0.5'>All projects</h2>
+                        {/*<div className='text-xs text-accents-3'>{loading ? 'Loading projects...' : projects.length + ' projects'}</div>*/}
                     </div>
-                }
+
+                    <Link href='/new'>
+                        <a>
+                            <Button
+                                variant="slim"
+                                loading={loading}
+                            >
+                                New
+                            </Button>
+                        </a>
+                    </Link>
+                </div>
+                <div className='flex gap-8 flex-wrap mb-12'>
+                    {loading ? skeleton.map(() => <Project empty />) :
+                        projects.map((p, i) => <Project proj={p} key={i} index={i} selected={i == selected} onMoreOptions={() => setSelected(i)} onDelete={() => deleteProject(i)} />)}
+                    {!loading && !projects.length &&
+                        <div className='w-full my-32 text-accents-4 text-center font-medium'>
+                            <div className='mb-6'>There are no projects yet</div>
+                            <Link href='/new'>
+                                <a>
+                                    <Button
+                                        variant="slim"
+                                        loading={loading}>
+                                        New project
+                                    </Button>
+                                </a>
+                            </Link>
+                        </div>
+                    }
+                </div>
             </div>
-        </div >)
+        </Layout>)
 }
 
 export async function getServerSideProps({ req }) {
@@ -233,7 +237,7 @@ export async function getServerSideProps({ req }) {
 
     if (!user) {
         // If no user, redirect to index.
-        return { props: {}, redirect: { destination: '/', permanent: false } }
+        return { props: {}, redirect: { destination: '/signin', permanent: false } }
     }
 
     // If there is a user, return it.

@@ -16,12 +16,10 @@ export default function MyApp({ Component, pageProps, ...appProps }) {
       return <Component {...pageProps} />;
 
     else if (appProps.router.pathname.includes('/dashboard') || appProps.router.pathname.includes('/project/'))
-      return <Layout footer={false}><Component {...pageProps} /></Layout>;
+      return <Component {...pageProps} />;
 
     return (
-      <Layout>
-        <Component {...pageProps} />{" "}
-      </Layout>
+      <Component {...pageProps} />
     );
   };
 

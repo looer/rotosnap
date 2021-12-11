@@ -83,12 +83,12 @@ export default function ProjectPage({ data }) {
                 <div>
                     <div className='fixed top-0 w-full text-md text-center py-4 bg-white border-b border-gray-200 font-bold'>{project ? project.name : ''}</div>
                     <div className='flex h-screen'>
-                        <div className='flex-grow flex items-center'>{paths && paths.length ?
+                        <div className='flex-grow flex items-center bg-gray-200'>{paths && paths.length ?
                             <Viewer className='align-top' images={paths} debug={debug} embed={!shadows}></Viewer>
                             : 'This product doesn\'t contain any images'}
                         </div>
-                        <div className='w-80 bg-white p-8 flex-grow'>
-                            <div className='my-8'>
+                        <div className='w-3/12 bg-white p-8'>
+                            <div className='mt-16'>
                                 <label className='mb-4 text-xl font-bold block w-40'>Options</label>
                                 <select className="border border-gray-200 rounded p-2 w-40" name="cars" id="cars" form="carform">
                                     <option value="volvo">Autoplay</option>
@@ -110,7 +110,7 @@ export default function ProjectPage({ data }) {
                                     {`<iframe width="500" height="500" src="${process.env.ROOT_URL}/embed/${id}"></iframe>`}
                                 </div>
                             </div>
-                            <div>
+                            <div className='overflow-scroll h-32'>
                                 {project && project.pictures.map((p, i) => <li key={i}>{p}</li>)}
                             </div>
                         </div>
