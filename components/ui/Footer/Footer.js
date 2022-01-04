@@ -2,7 +2,6 @@ import Link from 'next/link';
 import s from './Footer.module.css';
 
 import Logo from '@/components/icons/Logo';
-import GitHub from '@/components/icons/GitHub';
 
 export default function Footer() {
   return (
@@ -28,19 +27,20 @@ export default function Footer() {
               </Link>
             </li>
             <li className="py-3 md:py-0 md:pb-4">
-              <Link href="/">
-                <a className="transition ease-in-out duration-150 hover:text-accents-2">
-                  About
-                </a>
-              </Link>
-            </li>
-            <li className="py-3 md:py-0 md:pb-4">
-              <Link href="/">
+              <Link href="/documentation">
                 <a className="transition ease-in-out duration-150 hover:text-accents-2">
                   Documentation
                 </a>
               </Link>
             </li>
+            <li className="py-3 md:py-0 md:pb-4">
+              <Link href="/pricing">
+                <a className="transition ease-in-out duration-150 hover:text-accents-2">
+                  Pricing
+                </a>
+              </Link>
+            </li>
+
           </ul>
         </div>
         <div className="col-span-1 lg:col-span-2">
