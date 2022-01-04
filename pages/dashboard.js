@@ -14,6 +14,7 @@ export const Project = (props) => {
     const [profile, setProfile] = useState('')
     const [menuOpen, setMenuOpen] = useState('')
     const [hover, setHover] = useState(false);
+    const { user, signIn } = useUser();
 
     useEffect(() => {
         if (url && !props.empty) downloadImage(url)
@@ -80,13 +81,14 @@ export const Project = (props) => {
 
 
 export default function Dashboard() {
-    const { userLoaded, user, session, userDetails } = useUser();
+    //const { userLoaded, user, session, userDetails } = useUser();
     const [projectname, setProjectname] = useState('')
     const [submitting, setSubmitting] = useState(false);
     const [projects, setProjects] = useState([])
     const [loading, setLoading] = useState(false);
     const [selected, setSelected] = useState(null);
     const router = useRouter();
+    const { user, signIn } = useUser();
 
     useEffect(() => {
         allProjects()

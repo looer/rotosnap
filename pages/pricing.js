@@ -1,8 +1,11 @@
 import Pricing from '@/components/Pricing';
 import { getActiveProductsWithPrices } from '@/utils/supabase-client';
+import Layout from '@/components/Layout';
 
 export default function PricingPage({ products }) {
-  return <Pricing products={products} />;
+  return <Layout user={session ? session.user : null}>
+    <Pricing products={products} />
+  </Layout>;
 }
 
 export async function getStaticProps() {

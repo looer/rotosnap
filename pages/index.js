@@ -10,8 +10,6 @@ export default function LandingPage() {
   const [pictures, setPictures] = useState([])
   const router = useRouter();
 
-  const { userLoaded, user, session, userDetails, subscription } = useUser();
-
   const loadFiles = (files) => {
     console.log(files)
     const pics = [...files].map(f => URL.createObjectURL(f))
@@ -19,6 +17,7 @@ export default function LandingPage() {
     setPictures(pics)
   }
 
+  const { userLoaded, user, session, userDetails, subscription } = useUser();
 
   useEffect(() => {
     if (user) router.replace('/dashboard');
