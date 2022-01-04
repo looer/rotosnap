@@ -7,8 +7,8 @@ import Footer from '@/components/ui/Footer';
 export default function Layout({ children, meta: pageMeta, footer }) {
   const router = useRouter();
   const meta = {
-    title: 'Simply360',
-    description: 'Brought to you by Vercel, Stripe, and Supabase.',
+    title: 'RotoSnap',
+    description: 'The easiest way to embed 360° product pictures in your website',
     cardImage: '/og.png',
     ...pageMeta
   };
@@ -30,7 +30,7 @@ export default function Layout({ children, meta: pageMeta, footer }) {
         <meta property="og:title" content={meta.title} />
         <meta property="og:image" content={meta.cardImage} />
         <meta name="twitter:card" content="summary_large_image" />
-        <meta name="twitter:site" content="@vercel" />
+        <meta name="twitter:site" content="@rotosnap" />
         <meta name="twitter:title" content={meta.title} />
         <meta name="twitter:description" content={meta.description} />
         <meta name="twitter:image" content={meta.cardImage} />
