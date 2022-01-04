@@ -10,21 +10,7 @@ export default function LandingPage() {
   const [pictures, setPictures] = useState([])
   const router = useRouter();
 
-  const [session, setSession] = useState(null)
-
-  useEffect(() => {
-    setSession(supabase.auth.session());
-
-    supabase.auth.onAuthStateChange((event, session) => {
-      setSession(session);
-      fetch("/api/auth", {
-        method: "POST",
-        headers: new Headers({ "Content-Type": "application/json" }),
-        credentials: "same-origin",
-        body: JSON.stringify({ event, session }),
-      }).then((res) => res.json());
-    });
-  }, []);
+  const { userLoaded, user, session, userDetails, subscription } = useUser();
 
   const loadFiles = (files) => {
     console.log(files)
@@ -33,10 +19,10 @@ export default function LandingPage() {
     setPictures(pics)
   }
 
-  //const { userLoaded, user, session, userDetails, subscription } = useUser();
+
   useEffect(() => {
-    if (session) router.replace('/dashboard');
-  }, [session]);
+    if (user) router.replace('/dashboard');
+  }, [user]);
 
   const garzaImages = ['/Garza/F31 garza-360-01.jpg', '/Garza/F31 garza-360-02.jpg', '/Garza/F31 garza-360-03.jpg',
     '/Garza/F31 garza-360-04.jpg', '/Garza/F31 garza-360-05.jpg', '/Garza/F31 garza-360-06.jpg',
@@ -119,7 +105,7 @@ export default function LandingPage() {
         <div className="flex flex-wrap">
           <div className="w-5/6 sm:w-1/2 p-6">
             <h3 className="text-3xl text-gray-800 font-bold leading-none mb-3"></h3>
-            <div className="text-lg text-gray-600 mb-8">Think about the last time you added file uploads to your application.You probably had to: <br /><br />
+            <div className="text-lg text-gray-600 mb-8">Let's say you want to showcase your product in a 3D interactive view to attract more customers. <br /><br />
               <ul className="pl-8 text-gray-600 list-disc">
                 <li>Securely configure a cloud storage service</li>
                 <li>Set up IAM credentials</li>
@@ -197,7 +183,7 @@ export default function LandingPage() {
       </div>
     </section>
     <section className="container mx-auto text-center py-6 mb-12">
-      <h1 className="w-full my-2 text-5xl font-bold leading-tight text-center text-white">Try it now!</h1>
+      <h1 className="w-full my-2 text-5xl font-bold leading-tight text-center text-black">Try it now!</h1>
       <div className="w-full mb-4">
 
       </div>

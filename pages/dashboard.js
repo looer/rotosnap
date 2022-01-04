@@ -79,8 +79,8 @@ export const Project = (props) => {
 }
 
 
-export default function Dashboard({ user }) {
-    //const { userLoaded, user, session, userDetails } = useUser();
+export default function Dashboard() {
+    const { userLoaded, user, session, userDetails } = useUser();
     const [projectname, setProjectname] = useState('')
     const [submitting, setSubmitting] = useState(false);
     const [projects, setProjects] = useState([])
@@ -90,11 +90,8 @@ export default function Dashboard({ user }) {
 
     useEffect(() => {
         allProjects()
-    }, [user])
-
-    useEffect(() => {
         if (!user) router.replace('/signin');
-    }, [user]);
+    }, [user])
 
 
     async function allProjects() {
@@ -226,16 +223,4 @@ export default function Dashboard({ user }) {
                 }
             </div>
         </div >)
-}
-
-export async function getServerSideProps({ req }) {
-    const { user } = await supabase.auth.api.getUserByCookie(req)
-
-    if (!user) {
-        // If no user, redirect to index.
-        return { props: {}, redirect: { destination: '/', permanent: false } }
-    }
-
-    // If there is a user, return it.
-    return { props: { user } }
 }

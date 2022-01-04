@@ -6,31 +6,9 @@ import { useState, useEffect } from 'react';
 import { supabase } from '@/utils/supabase-client'
 
 
-export async function getServerSideProps(req) {
-    const { user } = await supabase.auth.api.getUserByCookie(req)
-    const { id } = req.query
-    const { data, error, status } = await supabase.from('projects').select('id, user_id, name, pictures').eq('id', id).single()
+export default function ProjectPage() {
 
-    if (!user) {
-        // If no user, redirect to index.
-        console.log('no user')
-        //LA RIGA SOTTO FA SEMPRE REDIRECT
-        //return { props: {}, redirect: { destination: '/', permanent: false } }
-    }
-    if (!data) {
-        return {
-            notFound: true,
-        }
-    }
-
-    // If there is a user, return it.
-    return { props: { data } }
-}
-
-
-export default function ProjectPage({ data }) {
-
-    //const { userLoaded, user, session, userDetails } = useUser();
+    const { userLoaded, user, session, userDetails } = useUser();
     const [project, setProject] = useState(null);
     const [paths, setPaths] = useState([])
     const [loading, setLoading] = useState(false)
@@ -39,15 +17,21 @@ export default function ProjectPage({ data }) {
     const router = useRouter()
     const { id } = router.query
 
-    //console.log(userDetails, id)
     useEffect(() => {
-        getProject(data)
-    }, [data]) //user, session, userDetails
+        if (!user) {
+            // If no user, redirect to index.
+            console.error('no user logged in')
+            if (!user) router.replace('/');
+        } else {
+            getProject()
+        }
+    }, [user])
 
-    async function getProject(proj) {
+    async function getProject() {
         setLoading(true);
-        setProject(proj)
-        getPublicUrl(proj)
+        const { data, error, status } = await supabase.from('projects').select('id, user_id, name, pictures').eq('id', id).single()
+        setProject(data)
+        getPublicUrl(data)
         setLoading(false);
     }
 
@@ -107,7 +91,7 @@ export default function ProjectPage({ data }) {
                             <div className='py-8'>
                                 <label className='mb-4 text-lg font-bold block'>Embed</label>
                                 <div className='w-full text-accents-2 font-mono border rounded bg-primary-2 border-gray-200 p-4'>
-                                    {`<iframe width="500" height="500" src="${process.env.ROOT_URL}/embed/${id}"></iframe>`}
+                                    {`<iframe width="500" height="500" src="${process.env.NEXT_PUBLIC_ROOT_URL}/embed/${id}" style="border: none;"></iframe>`}
                                 </div>
                             </div>
                             <div>
