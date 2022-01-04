@@ -2,19 +2,15 @@ import { useUser } from '@/utils/useUser';
 import { supabase } from '@/utils/supabase-client'
 import Image from 'next/image'
 import { useState, useEffect } from 'react';
-import { FileDrop } from 'react-file-drop'
-import Viewer from '@/components/Viewer';
 import Link from 'next/link';
 import { useRouter } from 'next/router';
 import Button from '@/components/ui/Button';
-import LoadingDots from '@/components/ui/LoadingDots';
 
 export const Project = (props) => {
     const url = (props.proj ? props.proj.pictures[0] : null);
     const [profile, setProfile] = useState('')
     const [menuOpen, setMenuOpen] = useState('')
     const [hover, setHover] = useState(false);
-    const { user, signIn } = useUser();
 
     useEffect(() => {
         if (url && !props.empty) downloadImage(url)
@@ -36,7 +32,6 @@ export const Project = (props) => {
     }
 
     return (
-
         <div className="relative filter drop-shadow-h-1 bg-white rounded-lg w-64 
         flex-grow max-w-xs min-w-1/5 transition-all overflow-hidden"
             onMouseEnter={() => setHover(true)}
@@ -81,9 +76,6 @@ export const Project = (props) => {
 
 
 export default function Dashboard() {
-    //const { userLoaded, user, session, userDetails } = useUser();
-    const [projectname, setProjectname] = useState('')
-    const [submitting, setSubmitting] = useState(false);
     const [projects, setProjects] = useState([])
     const [loading, setLoading] = useState(false);
     const [selected, setSelected] = useState(null);
@@ -105,26 +97,6 @@ export default function Dashboard() {
         setProjects(data)
     }
 
-    async function createProject(files) {
-        setSubmitting(true)
-        const uploadedImagePaths = await uploadImages(files)
-        const newProject = {
-            user_id: user.id,
-            name: files[0].name,
-            pictures: uploadedImagePaths,
-        }
-        const { error } = await supabase.from('projects').insert(newProject)
-
-        if (!error) {
-            const updatedProjects = [...projects, newProject]
-            setProjects(updatedProjects)
-            setSubmitting(false);
-        } else {
-            console.log('Error', error)
-            setSubmitting(false)
-        }
-    }
-
     async function deleteProject(i) {
         const toRemove = projects[i].pictures
         const { data, error } = await supabase.storage.from('avatars').remove(toRemove)
@@ -132,58 +104,17 @@ export default function Dashboard() {
         //console.log('error', error)
         if (!error) {
             const { data, error } = await supabase.from('projects').delete().match({ id: projects[i].id })
-            //    console.log('deleted project ', data)
+            console.log('deleted project ', data, error)
         }
         const updatedProjects = projects.filter((p, j) => { return j !== i })
         console.log('updated projects', updatedProjects)
         setProjects(updatedProjects)
     }
 
-    const uploadImages = async (files) => {
-        files = [...files]
-        console.log('Files', files)
-        if (files.length === 0) {
-            return [];
-        }
-        const UploadedImageData = await Promise.all(
-            files.map(async (file) => {
-                const { data, error } = await supabase.storage
-                    .from('avatars')
-                    .upload(file.name, file, { returning: 'minimal', cacheControl: '3600', upsert: true });
-                if (error) {
-                    console.log("error in uploading image: ", error);
-                    throw error;
-                }
-                if (data) {
-                    console.log("image uploaded successfully: ", data);
-                    console.log("Logging image_path: ", data.Key);
-                    return data.Key.split('/')[1];
-                }
-            })
-        );
-
-        console.log("UploadedImageData: ", UploadedImageData);
-        return UploadedImageData;
-    }
-
-    const handleSubmit = e => {
-        e.preventDefault()
-
-    }
-
-    const handleChange = e => {
-        setProjectname(e.target.value)
-    }
-
-    // account name = userDetails.full_name.split(' ')[0]
-    // list of products
-    // image of products
-
     let skeleton = [];
     for (let i = 0; i < 8; i++) {
         skeleton.push(" ");
     }
-
 
     if (!user) {
         return (<div className='w-full text-center py-64'>User not found</div>)
