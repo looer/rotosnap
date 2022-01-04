@@ -24,9 +24,12 @@ const Navbar = () => {
               {user ? <Link href="/dashboard">
                 <a className={s.link}>Dashboard</a>
               </Link> : ''}
-              <Link href="/pricing">
-                <a className={s.link}>Pricing</a>
+              <Link href="/documentation">
+                <a className={s.link}>Documentation</a>
               </Link>
+              {!user ? <Link href="/pricing">
+                <a className={s.link}>Pricing</a>
+              </Link> : ''}
               {user ? <Link href="/account">
                 <a className={s.link}>Account</a>
               </Link> : ''}
