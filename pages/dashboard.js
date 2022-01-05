@@ -9,7 +9,6 @@ import Button from '@/components/ui/Button';
 export const Project = (props) => {
     const url = (props.proj ? props.proj.pictures[0] : null);
     const [profile, setProfile] = useState('')
-    const [menuOpen, setMenuOpen] = useState('')
     const [hover, setHover] = useState(false);
 
     useEffect(() => {
@@ -70,7 +69,6 @@ export const Project = (props) => {
                 </a>
             </Link>
         </div >
-
     )
 }
 
@@ -98,23 +96,18 @@ export default function Dashboard() {
     }
 
     async function deleteProject(i) {
-        const toRemove = projects[i].pictures
-        const { data, error } = await supabase.storage.from('avatars').remove(toRemove)
-        console.log('pictures to remove ', data, toRemove)
-        //console.log('error', error)
+        const picsToRemove = projects[i].pictures
+        const { data, error } = await supabase.storage.from('avatars').remove(picsToRemove)
+
         if (!error) {
             const { data, error } = await supabase.from('projects').delete().match({ id: projects[i].id })
             console.log('deleted project ', data, error)
         }
-        const updatedProjects = projects.filter((p, j) => { return j !== i })
-        console.log('updated projects', updatedProjects)
+        const updatedProjects = projects.filter((p, j) => { return (i !== j) })
         setProjects(updatedProjects)
     }
 
-    let skeleton = [];
-    for (let i = 0; i < 8; i++) {
-        skeleton.push(" ");
-    }
+    const skeleton = new Array(6).fill(" ");
 
     if (!user) {
         return (<div className='w-full text-center py-64'>User not found</div>)
@@ -123,7 +116,6 @@ export default function Dashboard() {
             <div className='flex items-center mb-8'>
                 <div className='flex-grow'>
                     <h2 className='text-2xl font-bold mb-0.5'>All projects</h2>
-                    {/*<div className='text-xs text-accents-3'>{loading ? 'Loading projects...' : projects.length + ' projects'}</div>*/}
                 </div>
 
                 <Link href='/new'>
@@ -138,8 +130,8 @@ export default function Dashboard() {
                 </Link>
             </div>
             <div className='flex gap-8 flex-wrap mb-12'>
-                {loading ? skeleton.map(() => <Project empty />) :
-                    projects.map((p, i) => <Project proj={p} key={i} index={i} selected={i == selected} onMoreOptions={() => setSelected(i)} onDelete={() => deleteProject(i)} />)}
+                {loading ? skeleton.map((s, i) => <Project empty key={i} />) :
+                    projects.map((p, i) => <Project proj={p} key={p.id} index={i} selected={i == selected} onMoreOptions={() => setSelected(i)} onDelete={() => deleteProject(i)} />)}
                 {!loading && !projects.length &&
                     <div className='w-full my-32 text-accents-4 text-center font-medium'>
                         <div className='mb-6'>There are no projects yet</div>
