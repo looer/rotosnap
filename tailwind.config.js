@@ -53,6 +53,7 @@ module.exports = {
       dropShadow: {
         'h-1': '0px 2px 1px rgba(0, 0, 0, 0.16)',
         'h-2': '0px 4px 4px rgba(0, 0, 0, 0.16)',
+        'h-3': '0px 0px 16px rgba(0, 0, 0, 0.08)',
       },
       lineHeight: {
         'extra-loose': '2.2'

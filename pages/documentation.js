@@ -7,8 +7,8 @@ export default function DocumentationPage() {
                     <div className="flex flex-wrap justify-center">
                         <div className="w-full lg:w-1/2 p-4">
                             <h2 className="text-5xl font-bold text-center mb-4">Documentation</h2>
-                            <p className="text-xl text-justify leading-normal mb-8">RotoSnap is the easiest way to upload your 360 degrees picture of a product, host them and embed them in any of your websites.</p>
-                            <p className="text-xl text-justify leading-normal mb-8">It's super easy to use. Just drop your images and use the iframe to embed them in your website HTML.</p>
+                            <p className="text-xl leading-normal mb-8">RotoSnap is the easiest way to upload your 360 degrees picture of a product, host them and embed them in any of your websites.</p>
+                            <p className="text-xl leading-normal mb-8">It's super easy to use. Just drop your images and use the iframe to embed them in your website HTML.</p>
                             <div className="text-white bg-gray-700 p-5 rounded-xl">
 
                                 <code className="">
@@ -21,8 +21,8 @@ export default function DocumentationPage() {
                     <div className="flex flex-wrap justify-center">
                         <div className="w-full lg:w-1/2 p-4 mb-8">
                             <h2 className="text-3xl font-bold text-center mb-4">How to use RotoSnap</h2>
-                            <p className="text-xl text-justify leading-normal mb-4">For now only the embed via iframe is supported. But you can use it on any kind of websites.</p>
-                            <ol className='text-xl text-justify'>
+                            <p className="text-xl leading-normal mb-4">For now only the embed via iframe is supported. But you can use it on any kind of websites.</p>
+                            <ol className='text-xl'>
                                 <li>1. Log in. Via magic link to your email or with your Google account.</li>
                                 <li>2. Upload your pictures. Simply drag and drop or select the images of your product.</li>
                                 <li>3. Share your project</li>
@@ -32,29 +32,29 @@ export default function DocumentationPage() {
                     <div className="flex flex-wrap justify-center">
                         <div className="w-full lg:w-1/2 p-4">
                             <h2 className="text-3xl font-bold text-center mb-4">FAQ</h2>
-                            <details>
+                            <details className="flex flex-wrap justify-center">
                                 <summary>
                                     <h2 className="text-3xl font-bold text-center mb-4">What is RotoSnap?</h2>
                                 </summary>
-                                <p className="text-xl text-justify leading-normal mb-8">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nullam quis risus eget urna mollis ornare vel eu leo. Nullam id dolor id nibh ultricies vehicula ut id elit. Nullam id dolor id nibh ultricies vehicula ut id elit.</p>
+                                <p className="text-xl leading-normal mb-8">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nullam quis risus eget urna mollis ornare vel eu leo. Nullam id dolor id nibh ultricies vehicula ut id elit. Nullam id dolor id nibh ultricies vehicula ut id elit.</p>
                             </details>
                             <details>
                                 <summary>
                                     <h2 className="text-3xl font-bold text-center mb-4">How do I upload my pictures?</h2>
                                 </summary>
-                                <p className="text-xl text-justify leading-normal mb-8">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nullam quis risus eget urna mollis ornare vel eu leo. Nullam id dolor id nibh ultricies vehicula ut id elit. Nullam id dolor id nibh ultricies vehicula ut id elit.</p>
+                                <p className="text-xl leading-normal mb-8">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nullam quis risus eget urna mollis ornare vel eu leo. Nullam id dolor id nibh ultricies vehicula ut id elit. Nullam id dolor id nibh ultricies vehicula ut id elit.</p>
                             </details>
                             <details>
                                 <summary>
                                     <h2 className="text-3xl font-bold text-center mb-4">How do I create my project?</h2>
                                 </summary>
-                                <p className="text-xl text-justify leading-normal mb-8">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nullam quis risus eget urna mollis ornare vel eu leo. Nullam id dolor id nibh ultricies vehicula ut id elit. Nullam id dolor id nibh ultricies vehicula ut id elit.</p>
+                                <p className="text-xl leading-normal mb-8">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nullam quis risus eget urna mollis ornare vel eu leo. Nullam id dolor id nibh ultricies vehicula ut id elit. Nullam id dolor id nibh ultricies vehicula ut id elit.</p>
                             </details>
                             <details>
                                 <summary>
                                     <h2 className="text-3xl font-bold text-center mb-4">How do I share my project?</h2>
                                 </summary>
-                                <p className="text-xl text-justify leading-normal mb-8">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nullam quis risus eget urna mollis ornare vel eu leo. Nullam id dolor id nibh ultricies vehicula ut id elit. Nullam id dolor id nibh ultricies vehicula ut id elit.</p>
+                                <p className="text-xl leading-normal mb-8">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nullam quis risus eget urna mollis ornare vel eu leo. Nullam id dolor id nibh ultricies vehicula ut id elit. Nullam id dolor id nibh ultricies vehicula ut id elit.</p>
                             </details>
                             <div className="w-full text-xl my-8 bg-gray-100 text-black py-5 px-10 border-2 border-gray-200 rounded-xl">
                                 Should you have any questions not listed here, please contact us at <a href="mailto:info@rotosnap.com" className="font-bold italic">info@rotosnap.com</a>
