@@ -1,7 +1,7 @@
 import { useUser } from '@/utils/useUser';
 import { supabase } from '@/utils/supabase-client'
 import Image from 'next/image'
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useRef } from 'react';
 import Link from 'next/link';
 import { useRouter } from 'next/router';
 import Button from '@/components/ui/Button';
@@ -30,6 +30,29 @@ export const Project = (props) => {
         }
     }
 
+    const wrapperRef = useRef(null);
+    useOutsideAlerter(wrapperRef);
+
+    function useOutsideAlerter(ref) {
+        useEffect(() => {
+            /**
+             * Alert if clicked on outside of element
+             */
+            function handleClickOutside(event) {
+                if (ref.current && !ref.current.contains(event.target)) {
+                    props.onClickOutside();
+                }
+            }
+
+            // Bind the event listener
+            document.addEventListener("mousedown", handleClickOutside);
+            return () => {
+                // Unbind the event listener on clean up
+                document.removeEventListener("mousedown", handleClickOutside);
+            };
+        }, [ref]);
+    }
+
     return (
         <div className="relative filter drop-shadow-h-1 bg-white rounded-lg w-64 
         flex-grow max-w-xs min-w-1/5 transition-all overflow-hidden"
@@ -41,7 +64,7 @@ export const Project = (props) => {
                     </img>
                 </div>}
             {props.selected ?
-                <div className='absolute right-3 top-3 rounded-lg filter drop-shadow-h-2 z-50 bg-white py-2'>
+                <div ref={wrapperRef} className='absolute right-3 top-3 rounded-lg filter drop-shadow-h-2 z-50 bg-white py-2'>
                     <Link href={'/project/' + props.proj.id}><a>
                         <div className='text-sm py-4 w-32 pl-4 hover:bg-accents-8 cursor-pointer'>
                             Edit
@@ -131,7 +154,10 @@ export default function Dashboard() {
             </div>
             <div className='flex gap-8 flex-wrap mb-12'>
                 {loading ? skeleton.map((s, i) => <Project empty key={i} />) :
-                    projects.map((p, i) => <Project proj={p} key={p.id} index={i} selected={i == selected} onMoreOptions={() => setSelected(i)} onDelete={() => deleteProject(i)} />)}
+                    projects.map((p, i) => <Project proj={p} key={p.id} index={i} selected={i == selected}
+                        onMoreOptions={() => setSelected(i)}
+                        onClickOutside={() => setSelected(null)}
+                        onDelete={() => deleteProject(i)} />)}
                 {!loading && !projects.length &&
                     <div className='w-full my-32 text-accents-4 text-center font-medium'>
                         <div className='mb-6'>There are no projects yet</div>
