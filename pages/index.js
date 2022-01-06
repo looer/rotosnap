@@ -37,15 +37,15 @@ export default function LandingPage() {
   ]
 
   return <div>
-    <div className="">
-      <div className="container px-3 mx-auto flex flex-wrap flex-col md:flex-row items-center">
+    <div>
+      <div className="px-3 flex flex-wrap flex-col md:flex-row items-center justify-center">
         <div className="flex flex-col w-full justify-center text-center md:w-2/5 md:text-left bg-gradient-to-r from-green-400 to-blue-500">
           <p className="uppercase tracking-loose w-full"></p>
           <h1 className="my-4 text-5xl text-primary font-extrabold leading-tight text-center">Add 360˚<br />interactive views<br />in minutes</h1>
-          <p className="leading-normal text-xl text-accents-3 mb-8 text-center">Integrate 360 views of your products into your website. No servers required. It's fast, it's simple, and it just works.</p>
-          <a href="/pricing" className="self-center text-center w-1/3 mx-auto lg:mx-0 hover:underline bg-primary text-secondary font-bold rounded-full mt-4 lg:mt-0 py-4 px-8 shadow opacity-75 z-10">Sign Up!</a>
+          <p className="leading-normal text-xl text-accents-3 mb-8 text-center">Integrate 360 views of your products into your website.</p>
+          <a href="/pricing" className="self-center text-center w-1/3 mx-auto lg:mx-0 hover:underline bg-primary text-secondary font-bold rounded-full mt-4 lg:mt-0 py-4 px-8 shadow z-10">Sign Up!</a>
         </div>
-        <div className="md:w-3/5 pl-20 pt-20 z-10">
+        <div className="pl-20 pt-20 z-10">
           <Viewer images={garzaImages} />
         </div>
       </div>
@@ -65,7 +65,7 @@ export default function LandingPage() {
       </div>
       <section className="tx-lg border-b py-8 bg-white">
         <div className="container max-w-5xl mx-auto m-8">
-          <h1 className="w-full my-2 text-4xl font-bold leading-tight text-center text-black">Drop some files to try it live!</h1>
+          <h1 className="w-full my-2 text-4xl font-bold leading-tight text-center text-black">Drop some pictures to try it live!</h1>
           <div className="mt-8 flex flex-col items-center justify-center">
             {pictures.length > 0 ? <Viewer images={pictures} /> :
               <div onDrop={e => e.preventDefault()} className="mx-auto text-center w-full my-0 py-5 rounded-t text-black">
@@ -73,7 +73,7 @@ export default function LandingPage() {
                   <FileDrop onDrop={(files, e) => { loadFiles(files) }}>
                     <div id='droppable'
                       className='py-20 m-5 border-4 border-gray-300 bg-gray-100 border-dashed rounded-xl hover:bg-gray-200'>
-                      <label for="demoPictures">Select files or drop here</label><br />
+                      <label for="demoPictures">Select images or drop here</label><br />
                       <input hidden type="file"
                         id="demoPictures" name="demoPictures"
                         accept="image/png, image/jpeg"
@@ -96,7 +96,7 @@ export default function LandingPage() {
     </div >
     <section className="tx-lg bg-white border-b py-8">
       <div className="container max-w-5xl mx-auto m-8">
-        <h1 className="w-full my-2 text-4xl font-bold leading-tight text-center text-gray-800">File uploading is a pain</h1>
+        <h1 className="w-full my-2 text-4xl font-bold leading-tight text-center text-gray-800">360 views increase conversions</h1>
         <div className="w-full mb-4">
           <div className="h-1 mx-auto gradient w-64 opacity-25 my-0 py-0 rounded-t"></div>
         </div>
@@ -104,19 +104,8 @@ export default function LandingPage() {
         <div className="flex flex-wrap">
           <div className="w-5/6 sm:w-1/2 p-6">
             <h3 className="text-3xl text-gray-800 font-bold leading-none mb-3"></h3>
-            <div className="text-lg text-gray-600 mb-8">Let's say you want to showcase your product in a 3D interactive view to attract more customers. <br /><br />
-              <ul className="pl-8 text-gray-600 list-disc">
-                <li>Securely configure a cloud storage service</li>
-                <li>Set up IAM credentials</li>
-                <li>Configure your client to send direct uploads</li>
-                <li>Create presigned URLs on your server </li>
-                <li>Configure your bucket CORS</li>
-                <li>Implement client and server-side validations</li>
-                <li>Set up a front end file uploader UI </li>
-              </ul><br />
-              Oh and don’t forget that you’ll need to make it look good and match the rest of your application.
-
-              You need uploading, but you don’t have time for that headache or want to manage that much infrastructure.
+            <div className="text-lg text-gray-600 mb-8">
+              But setting them up can be a real pain. You need to figure out JavaScript, hosting, and repeat for every product.
             </div>
 
           </div>
@@ -135,7 +124,7 @@ export default function LandingPage() {
           <div className="w-full sm:w-1/2 p-6 mt-6 flex">
             <div className="align-middle">
               <h3 className="text-3xl text-gray-800 font-bold leading-none mb-3">A Better Way</h3>
-              <p className="text-lg text-gray-600 mb-8">What if you could skip all the pain? What if you could upload and host your images with just a drag&drop? RotoSnap is a simple to use tool for your website. If you want to showcase your product or something more complex, we've got you covered.<br /><br />
+              <p className="text-lg text-gray-600 mb-8">RotoSnap offers a plug-and-play solution to emebed 360 views of your products – or anything else for that matter – on your website.<br /><br />
               </p>
 
             </div>
@@ -144,7 +133,7 @@ export default function LandingPage() {
 
         <div className="flex flex-wrap">
           <div className="w-5/6 sm:w-1/2 p-6">
-            <h3 className="text-3xl text-gray-800 font-bold leading-none mb-3 mt-6">Uploading and Storage.Done.</h3>
+            <h3 className="text-3xl text-gray-800 font-bold leading-none mb-3 mt-6">Upload and embed. Done.</h3>
             <p className="text-lg text-gray-600 mb-8">RotoSnap takes care of all the heavy lifting surrounding file uploads.The widget hooks into an input with class of simple-file-upload and replaces it with a dropzone.The user drops a file and the file is automatically uploaded to cloud storage via a direct upload.Files are served via a CDN which is imperitive in today's modern megabyte-sized website world. <br /><br />
             </p></div>
           <div className="w-full sm:w-1/2 p-6">

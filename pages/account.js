@@ -57,7 +57,7 @@ export default function Account() {
           <h1 className="text-4xl font-extrabold sm:text-center sm:text-6xl">
             Account
           </h1>
-          <p className="mt-5 text-xl text-accents-4 sm:text-center sm:text-2xl max-w-2xl m-auto">
+          <p className="mt-5 text-lg text-accents-4 sm:text-center sm:text-2xl max-w-2xl m-auto">
             We partnered with Stripe for a simplified billing.
           </p>
         </div>
