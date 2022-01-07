@@ -14,41 +14,25 @@ export default function App() {
     const { userLoaded, user, session, userDetails } = useUser();
     const [projectname, setProjectname] = useState('')
     const [submitting, setSubmitting] = useState(false);
-    const [projects, setProjects] = useState([])
-    const [loading, setLoading] = useState(false);
+    const [filesToUpload, setFiles] = useState([]);
     const router = useRouter();
-
-    useEffect(() => {
-        allProjects()
-    }, [session])
 
     useEffect(() => {
         if (userLoaded && !user) router.replace('/signin');
     }, [userLoaded, user]);
 
-
-    async function allProjects() {
-        setLoading(true)
-        if (!user) return []
-        const { data, error, status } = await supabase.from('projects').select('id, user_id, name, pictures').eq('user_id', user.id)
-        if (error) throw error
-        setLoading(false)
-        setProjects(data)
-    }
-
     async function createProject(files) {
         setSubmitting(true)
         const uploadedImagePaths = await uploadImages(files)
+        const name = projectname || files[0].name
         const newProject = {
             user_id: user.id,
-            name: files[0].name,
+            name: name,
             pictures: uploadedImagePaths,
         }
         const { error } = await supabase.from('projects').insert(newProject)
 
         if (!error) {
-            const updatedProjects = [...projects, newProject]
-            setProjects(updatedProjects)
             router.push('/dashboard')
             setSubmitting(false);
         } else {
@@ -103,20 +87,24 @@ export default function App() {
                         <input id='projectname' autofocus value={projectname} onChange={handleChange} placeholder='New project' type="text" name="nome"
                             className='font-bold text-3xl my-5 w-full focus:ring-0 focus:outline-none placeholder-gray-300 bg-transparent' />
                     </label>
-                    <FileDrop onDrop={(files, e) => createProject(files)}>
+                    <FileDrop onDrop={(files, e) => {
+                        setFiles(files)
+                        setProjectname(projectname || e.target.files[0].name.split('.')[0])
+                    }}>
                         <div id='droppable'
                             className='py-36 flex flex-col items-center border-2 border-gray-400 border-opacity-50 border-dashed rounded-xl hover:bg-gray-100'>
-                            <label for="filepick">Select files or drop here</label>
+                            <label for="filepick">Select files or drop them here</label>
                             <input name="filepick" type="file"
                                 id="demoPictures" name="demoPictures"
                                 accept="image/png, image/jpeg"
                                 multiple={true}
                                 onChange={e => {
-                                    loadFiles(e.target.files)
+                                    setFiles(e.target.files)
+                                    setProjectname(projectname || e.target.files[0].name.split('.')[0])
                                 }} />
                         </div>
                     </FileDrop>
-                    <button onClick={(files, e) => createProject(files)}>{submitting ? (
+                    <button onClick={(e) => createProject(filesToUpload)}>{submitting ? (
                         <div className='p-3 m-5'>
                             Creating... {' '}
                             <svg xmlns="http://www.w3.org/2000/svg" className="h-6 w-6 inline-block animate-spin" fill="none" viewBox="0 0 24 24" stroke="currentColor">
