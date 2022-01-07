@@ -63,6 +63,17 @@ export default function ProjectPage() {
         }
     }
 
+    async function deleteProject() {
+        if (confirm('Are you sure you want to delete the project?')) { alert('Project deleted') } else { return }
+        const toRemove = project.pictures
+        const { data, error } = await supabase.storage.from('avatars').remove(toRemove)
+        console.log('pictures to remove ', toRemove)
+        if (!error) {
+            const { data, error } = await supabase.from('projects').delete().match({ id: id })
+        }
+        router.push('/dashboard')
+    }
+
     const iframeCode = `<iframe width="500" height="500" src="${process.env.NEXT_PUBLIC_ROOT_URL}/embed/${id}" style="border: none;"></iframe>`
 
     return (
@@ -121,6 +132,9 @@ export default function ProjectPage() {
                                 <div className="max-h-48 overflow-scroll border border-gray-200 divide-y divide-gray-200">
                                     {project && project.pictures.map((p, i) => <li className="text-sm list-none p-1 px-4" key={i}>{i} - {p}</li>)}
                                 </div>
+                            </div>
+                            <div className='my-8 absolute bottom-1 text-red'>
+                                <button onClick={() => deleteProject()}>Delete Project</button>
                             </div>
                         </div>
                     </div>

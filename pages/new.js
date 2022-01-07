@@ -57,20 +57,6 @@ export default function App() {
         }
     }
 
-    async function deleteProject(e, i) {
-        const toRemove = projects[i].pictures
-        const { data, error } = await supabase.storage.from('avatars').remove(toRemove)
-        console.log('pictures to remove ', data, toRemove)
-        //console.log('error', error)
-        if (!error) {
-            const { data, error } = await supabase.from('projects').delete().match({ id: projects[i].id })
-            //    console.log('deleted project ', data)
-        }
-        const updatedProjects = projects.filter((p, j) => { return j !== i })
-        console.log('updated projects', updatedProjects)
-        setProjects(updatedProjects)
-    }
-
     const uploadImages = async (files) => {
         files = [...files]
         console.log('Files', files)
@@ -106,11 +92,6 @@ export default function App() {
     const handleChange = e => {
         setProjectname(e.target.value)
     }
-
-    // account name = userDetails.full_name.split(' ')[0]
-    // list of products
-    // image of products
-
 
     if (!user) {
         return (<div>User not defined</div>)
