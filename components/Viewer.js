@@ -131,3 +131,7 @@ export default function Viewer(props) {
         </div>
     </div >)
 }
+
+Viewer.defaultProps = {
+    mode: "autoplay"
+}

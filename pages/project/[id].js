@@ -67,9 +67,9 @@ export default function ProjectPage() {
         <div>
             {loading ? <div className='w-16 pt-16 mx-auto'><LoadingDots /></div> :
                 <div>
-                    <div className='fixed flex align-center top-0 w-full text-md p-4 bg-white border-b border-gray-200 font-bold'>
+                    <div className='fixed flex items-center top-0 w-full text-sm p-4 bg-white border-b border-gray-200 font-bold'>
                         <Link href="/">
-                            <a className="text-xl font-extrabold text-accents-0" aria-label="Logo">
+                            <a className="text-lg font-extrabold text-accents-0" aria-label="Logo">
                                 RS
                             </a>
                         </Link>
@@ -80,10 +80,10 @@ export default function ProjectPage() {
                             <Viewer className='align-top' mode={mode} images={paths} debug={debug} embed={!shadows}></Viewer>
                             : 'This product doesn\'t contain any images'}
                         </div>
-                        <div className='w-96 bg-white p-8 drop-shadow-h-3'>
-                            <div className='mt-12 mb-8'>
-                                <label className='mb-2 text-xl font-bold block w-40'>Mode</label>
-                                <p className='mb-4 text-md text-gray-500'>Choose how the user will interact with the 360 viewer.</p>
+                        <div className='w-80 bg-white p-6 drop-shadow-h-3'>
+                            <div className='mt-14 mb-8'>
+                                <label className='mb-2 text-lg font-bold block w-40'>Mode</label>
+                                <p className='mb-4 text-sm text-gray-500'>Choose how the user will interact with the 360 viewer.</p>
                                 <select className="border border-gray-200 rounded p-2 h-12 w-full" name="mode" form="mode"
                                     onChange={(e) => setMode(e.target.value)}>
                                     <option value="autoplay">Autoplay</option>
@@ -101,16 +101,16 @@ export default function ProjectPage() {
                             </div>
 
                             <div className='my-8'>
-                                <label className='mb-2 text-xl font-bold block'>Embed</label>
-                                <p className='mb-4 text-md text-gray-500'>Choose how the user will interact with the 360 viewer.</p>
-                                <div className='w-full text-accents-2 font-mono border rounded bg-primary-2 border-gray-200 p-4'>
+                                <label className='mb-2 text-lg font-bold block'>Embed</label>
+                                <p className='mb-4 text-sm text-gray-500'>Copy and paste this in your markup.</p>
+                                <div className='w-full text-sm text-accents-2 break-words font-mono border rounded bg-primary-2 border-gray-200 p-4'>
                                     {`<iframe width="500" height="500" src="${process.env.NEXT_PUBLIC_ROOT_URL}/embed/${id}" style="border: none;"></iframe>`}
                                 </div>
                             </div>
                             <div className='my-8'>
-                                <label className='mb-4 text-xl font-bold block'>Images</label>
+                                <label className='mb-4 text-lg font-bold block'>Images</label>
                                 <div className="max-h-48 overflow-scroll border border-gray-200 divide-y divide-gray-200">
-                                    {project && project.pictures.map((p, i) => <li className="list-none p-1 px-4" key={i}>{p}</li>)}
+                                    {project && project.pictures.map((p, i) => <li className="text-sm list-none p-1 px-4" key={i}>{p}</li>)}
                                 </div>
                             </div>
                         </div>

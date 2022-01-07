@@ -38,11 +38,14 @@ const Navbar = () => {
 
           <div className="flex flex-1 justify-end space-x-8">
             {user ? (
-              <Link href="#">
-                <a className={s.link} onClick={() => signOut()}>
-                  Sign out
-                </a>
-              </Link>
+              <div className="flex items-center">
+                <div className="mr-4">{user.email}</div>
+                <Link href="#">
+                  <a className={s.link} onClick={() => signOut()}>
+                    Sign out
+                  </a>
+                </Link>
+              </div>
             ) : (
               <Link href="/signin">
                 <a className={s.link}>Sign in</a>
