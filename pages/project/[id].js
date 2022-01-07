@@ -16,6 +16,7 @@ export default function ProjectPage() {
     const [debug, setDebug] = useState(false)
     const [shadows, setShadows] = useState(false)
     const [mode, setMode] = useState('autoplay')
+    const [copied, setCopied] = useState(false)
     const router = useRouter()
     const { id } = router.query
 
@@ -62,6 +63,7 @@ export default function ProjectPage() {
         }
     }
 
+    const iframeCode = `<iframe width="500" height="500" src="${process.env.NEXT_PUBLIC_ROOT_URL}/embed/${id}" style="border: none;"></iframe>`
 
     return (
         <div>
@@ -102,15 +104,22 @@ export default function ProjectPage() {
 
                             <div className='my-8'>
                                 <label className='mb-2 text-lg font-bold block'>Embed</label>
-                                <p className='mb-4 text-sm text-gray-500'>Copy and paste this in your markup.</p>
-                                <div className='w-full text-sm text-accents-2 break-words font-mono border rounded bg-primary-2 border-gray-200 p-4'>
-                                    {`<iframe width="500" height="500" src="${process.env.NEXT_PUBLIC_ROOT_URL}/embed/${id}" style="border: none;"></iframe>`}
+                                <p className='mb-4 text-sm text-gray-500'>Copy and paste this in your markup. Read more in the <Link href={`/documentation`} ><a className='font-semibold'>documentation.</a></Link></p>
+                                <div onClick={() => {
+                                    navigator.clipboard.writeText(iframeCode)
+                                    setCopied(true)
+                                    setTimeout(() => {
+                                        setCopied(false)
+                                    }, 1000);
+                                }}
+                                    className='w-full text-sm text-accents-2 break-words font-mono border rounded bg-primary-2 border-gray-200 p-4 min-h-2'>
+                                    {copied ? 'Copied to your clipboard!' : iframeCode}
                                 </div>
                             </div>
                             <div className='my-8'>
                                 <label className='mb-4 text-lg font-bold block'>Images</label>
                                 <div className="max-h-48 overflow-scroll border border-gray-200 divide-y divide-gray-200">
-                                    {project && project.pictures.map((p, i) => <li className="text-sm list-none p-1 px-4" key={i}>{p}</li>)}
+                                    {project && project.pictures.map((p, i) => <li className="text-sm list-none p-1 px-4" key={i}>{i} - {p}</li>)}
                                 </div>
                             </div>
                         </div>
