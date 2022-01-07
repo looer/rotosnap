@@ -15,6 +15,7 @@ export default function ProjectPage() {
     const [loading, setLoading] = useState(false)
     const [debug, setDebug] = useState(false)
     const [shadows, setShadows] = useState(false)
+    const [mode, setMode] = useState('autoplay')
     const router = useRouter()
     const { id } = router.query
 
@@ -76,16 +77,18 @@ export default function ProjectPage() {
                     </div>
                     <div className='flex h-screen'>
                         <div className='flex-grow flex items-center bg-gray-200'>{paths && paths.length ?
-                            <Viewer className='align-top' images={paths} debug={debug} embed={!shadows}></Viewer>
+                            <Viewer className='align-top' mode={mode} images={paths} debug={debug} embed={!shadows}></Viewer>
                             : 'This product doesn\'t contain any images'}
                         </div>
                         <div className='w-96 bg-white p-8 drop-shadow-h-3'>
                             <div className='mt-12 mb-8'>
                                 <label className='mb-2 text-xl font-bold block w-40'>Mode</label>
                                 <p className='mb-4 text-md text-gray-500'>Choose how the user will interact with the 360 viewer.</p>
-                                <select className="border border-gray-200 rounded p-2 h-12 w-full" name="cars" id="cars" form="carform">
-                                    <option value="volvo">Autoplay</option>
-                                    <option value="saab">Drag</option>
+                                <select className="border border-gray-200 rounded p-2 h-12 w-full" name="mode" form="mode"
+                                    onChange={(e) => setMode(e.target.value)}>
+                                    <option value="autoplay">Autoplay</option>
+                                    <option value="drag">Drag</option>
+                                    <option value="hover">Hover</option>
                                 </select>
                                 {/*<div className='my-8'>
                                     <input type="checkbox" id="debug" name="debug" checked={debug} onChange={(e) => setDebug(!debug)} />

@@ -120,7 +120,7 @@ export default function App() {
                 <form onSubmit={handleSubmit}>
                     <label>
                         <input id='projectname' autofocus value={projectname} onChange={handleChange} placeholder='New project' type="text" name="nome"
-                            className='font-bold text-3xl my-5 w-full focus:ring-0 focus:outline-none placeholder-gray-300' />
+                            className='font-bold text-3xl my-5 w-full focus:ring-0 focus:outline-none placeholder-gray-300 bg-transparent' />
                     </label>
                     <FileDrop onDrop={(files, e) => createProject(files)}>
                         <div id='droppable'

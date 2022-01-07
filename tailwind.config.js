@@ -43,7 +43,8 @@ module.exports = {
       textColor: {
         base: 'var(--text-base)',
         primary: 'var(--text-primary)',
-        secondary: 'var(--text-secondary)'
+        secondary: 'var(--text-secondary)',
+        links: 'var(--text-links)',
       },
       boxShadow: {
         'outline-2': '0 0 0 2px var(--accents-2)',
