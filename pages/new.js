@@ -1,14 +1,8 @@
 import { useUser } from '@/utils/useUser';
 import { supabase } from '@/utils/supabase-client'
-import Image from 'next/image'
 import { useState, useEffect } from 'react';
 import { FileDrop } from 'react-file-drop'
-import Viewer from '@/components/Viewer';
-import Link from 'next/link';
 import { useRouter } from 'next/router';
-import Button from '@/components/ui/Button';
-import LoadingDots from '@/components/ui/LoadingDots';
-
 
 export default function App() {
     const { userLoaded, user, session, userDetails } = useUser();
@@ -30,10 +24,10 @@ export default function App() {
             name: name,
             pictures: uploadedImagePaths,
         }
-        const { error } = await supabase.from('projects').insert(newProject)
+        const { data, error } = await supabase.from('projects').insert(newProject)
 
         if (!error) {
-            router.push('/dashboard')
+            router.push('/project/' + data[0].id)
             setSubmitting(false);
         } else {
             console.log('Error', error)
