@@ -78,7 +78,7 @@ export default function App() {
             <div className='w-full'>
                 <form onSubmit={handleSubmit}>
                     <label>
-                        <input id='projectname' autofocus value={projectname} onChange={handleChange} placeholder='New project' type="text" name="nome"
+                        <input id='projectname' autoFocus={true} value={projectname} onChange={handleChange} placeholder='New project' type="text" name="nome"
                             className='font-bold text-3xl my-5 w-full focus:ring-0 focus:outline-none placeholder-gray-300 bg-transparent' />
                     </label>
                     <FileDrop onDrop={(files, e) => {
@@ -87,7 +87,7 @@ export default function App() {
                     }}>
                         <div id='droppable'
                             className='py-36 flex flex-col items-center border-2 border-gray-400 border-opacity-50 border-dashed rounded-xl hover:bg-gray-100'>
-                            <label for="filepick">Select files or drop them here</label>
+                            <label htmlFor="filepick">Select files or drop them here</label>
                             <input name="filepick" type="file"
                                 id="demoPictures" name="demoPictures"
                                 accept="image/png, image/jpeg"
