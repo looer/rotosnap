@@ -16,6 +16,7 @@ const Button = forwardRef((props, buttonRef) => {
     disabled = false,
     style = {},
     Component = 'button',
+    type = 'primary',
     ...rest
   } = props;
   const ref = useRef(null);
@@ -24,7 +25,8 @@ const Button = forwardRef((props, buttonRef) => {
     {
       [s.slim]: variant === 'slim',
       [s.loading]: loading,
-      [s.disabled]: disabled
+      [s.disabled]: disabled,
+      [s.negative]: type === 'negative',
     },
     className
   );
@@ -34,7 +36,7 @@ const Button = forwardRef((props, buttonRef) => {
       aria-pressed={active}
       data-variant={variant}
       ref={mergeRefs([ref, buttonRef])}
-      className={rootClassName}
+      className={rootClassName + ((type == 'negative') ? ' border border-gray-300 bg-white' : ' ')}
       disabled={disabled}
       style={{
         width,
@@ -43,12 +45,14 @@ const Button = forwardRef((props, buttonRef) => {
       {...rest}
     >
       {children}
-      {loading && (
-        <i className="pl-2 m-0 flex">
-          <LoadingDots />
-        </i>
-      )}
-    </Component>
+      {
+        loading && (
+          <i className="pl-2 m-0 flex">
+            <LoadingDots />
+          </i>
+        )
+      }
+    </Component >
   );
 });
 

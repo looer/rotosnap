@@ -3,7 +3,8 @@ import LoadingDots from '@/components/ui/LoadingDots';
 import { useRouter } from 'next/router';
 import { useUser } from '@/utils/useUser';
 import { useState, useEffect } from 'react';
-import { supabase } from '@/utils/supabase-client'
+import { supabase } from '@/utils/supabase-client';
+import Button from '@/components/ui/Button';
 import Link from 'next/link';
 
 
@@ -90,20 +91,21 @@ export default function ProjectPage() {
         <div>
             {loading ? <div className='w-16 pt-16 mx-auto'><LoadingDots /></div> :
                 <div>
-                    <div className='fixed flex items-center top-0 w-full text-sm p-4 bg-white border-b border-gray-200 font-bold'>
+                    <div className='fixed flex items-center top-0 w-full text-sm px-4 h-16 bg-white border-b border-gray-200 font-bold'>
                         <Link href="/">
                             <a className="text-lg font-extrabold text-accents-0" aria-label="Logo">
                                 RotoSnap
                             </a>
                         </Link>
-                        <div className="ml-8">{project ? project.name : ''}</div>
+                        <div className="ml-8 flex-grow">{project ? project.name : ''}</div>
+                        <div className="mr-2"><Button variant="slim" className='text-lefttext-accents-0' onClick={() => saveProject()}>Update</Button></div>
                     </div>
                     <div className='flex h-screen'>
                         <div className='flex-grow flex items-center bg-gray-200'>{paths && paths.length ?
                             <Viewer className='align-top' mode={mode} images={paths} debug={debug} embed={!shadows}></Viewer>
                             : 'This product doesn\'t contain any images'}
                         </div>
-                        <div className='w-80 bg-white p-6 drop-shadow-h-3'>
+                        <div className='overflow-scroll w-80 bg-white p-6 drop-shadow-h-3'>
                             <div className='mt-14 mb-8'>
                                 <label className='mb-2 text-lg font-bold block w-40'>Mode</label>
                                 <p className='mb-4 text-sm text-gray-500'>Choose how the user will interact with the 360 viewer.</p>
@@ -127,7 +129,7 @@ export default function ProjectPage() {
 
                             <div className='my-8'>
                                 <label className='mb-2 text-lg font-bold block'>Embed</label>
-                                <p className='mb-4 text-sm text-gray-500'>Copy and paste this in your markup. Read more in the <Link href={`/documentation`} ><a className='font-semibold'>documentation.</a></Link></p>
+                                <p className='mb-4 text-sm text-gray-500'>Copy and paste this in your markup. <Link href={`/documentation`} ><a className='text-links'>Learn more</a></Link></p>
                                 <div onClick={() => {
                                     navigator.clipboard.writeText(iframeCode)
                                     setCopied(true)
@@ -135,7 +137,7 @@ export default function ProjectPage() {
                                         setCopied(false)
                                     }, 1000);
                                 }}
-                                    className='w-full text-sm text-accents-2 break-words font-mono border rounded bg-primary-2 border-gray-200 p-4 min-h-2'>
+                                    className='cursor-pointer transition hover:border-gray-400 w-full text-sm text-accents-2 break-words font-mono border rounded bg-primary-2 border-gray-200 p-4 min-h-2'>
                                     {copied ? 'Copied to your clipboard!' : iframeCode}
                                 </div>
                             </div>
@@ -145,9 +147,8 @@ export default function ProjectPage() {
                                     {project && project.pictures.map((p, i) => <li className="text-sm list-none p-1 px-4" key={i}>{i} - {p}</li>)}
                                 </div>
                             </div>
-                            <div className='flex flex-col my-8 absolute bottom-1'>
-                                <button className='text-left my-2 text-accents-0' onClick={() => saveProject()}>Save Project</button>
-                                <button className='text-red my-2' onClick={() => deleteProject()}>Delete Project</button>
+                            <div className='my-8'>
+                                <Button type="negative" variant="slim" className='text-red my-2 w-full' onClick={() => deleteProject()}>Delete Project</Button>
                             </div>
                         </div>
                     </div>

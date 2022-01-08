@@ -21,6 +21,12 @@
 .slim {
   @apply py-2 transform-none normal-case;
 }
+.negative {
+  @apply bg-white text-red border border-gray-300;
+}
+.negative:hover {
+  @apply border-gray-400 bg-white text-red;
+}
 
 .disabled, .disabled:hover {
   @apply text-accents-8 bg-accents-5 cursor-not-allowed;
