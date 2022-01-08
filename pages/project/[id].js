@@ -32,9 +32,12 @@ export default function ProjectPage() {
 
     async function getProject() {
         setLoading(true);
-        const { data, error, status } = await supabase.from('projects').select('id, user_id, name, pictures').eq('id', id).single()
-        setProject(data)
-        getPublicUrl(data)
+        const { data, error, status } = await supabase.from('projects').select('id, user_id, name, pictures, mode').eq('id', id).single()
+        if (data && !error) {
+            setMode(data.mode)
+            setProject(data)
+            getPublicUrl(data)
+        }
         setLoading(false);
     }
 
@@ -54,20 +57,27 @@ export default function ProjectPage() {
             if (error) {
                 throw error
             }
-            //const url = URL.createObjectURL(data)
-            console.log("Image url: ", data.publicURL)
             return data.publicURL;
         }
         catch (error) {
-            console.log('Error downloading image: ', error.message)
+            console.error('Error downloading image: ', error.message)
         }
+    }
+
+    async function saveProject() {
+        setLoading(true);
+        const { data, error } = await supabase.from('projects').update({
+            name: project.name,
+            pictures: project.pictures,
+            mode: mode
+        }).match({ id: id })
+        setLoading(false);
     }
 
     async function deleteProject() {
         if (confirm('Are you sure you want to delete the project?')) { alert('Project deleted') } else { return }
         const toRemove = project.pictures
         const { data, error } = await supabase.storage.from('avatars').remove(toRemove)
-        console.log('pictures to remove ', toRemove)
         if (!error) {
             const { data, error } = await supabase.from('projects').delete().match({ id: id })
         }
@@ -83,7 +93,7 @@ export default function ProjectPage() {
                     <div className='fixed flex items-center top-0 w-full text-sm p-4 bg-white border-b border-gray-200 font-bold'>
                         <Link href="/">
                             <a className="text-lg font-extrabold text-accents-0" aria-label="Logo">
-                                RS
+                                RotoSnap
                             </a>
                         </Link>
                         <div className="ml-8">{project ? project.name : ''}</div>
@@ -97,8 +107,10 @@ export default function ProjectPage() {
                             <div className='mt-14 mb-8'>
                                 <label className='mb-2 text-lg font-bold block w-40'>Mode</label>
                                 <p className='mb-4 text-sm text-gray-500'>Choose how the user will interact with the 360 viewer.</p>
-                                <select className="border border-gray-200 rounded p-2 h-12 w-full" name="mode" form="mode"
-                                    onChange={(e) => setMode(e.target.value)}>
+                                <select className="border border-gray-200 rounded p-2 h-12 w-full" name="mode" form="mode" value={mode}
+                                    onChange={(e) => {
+                                        setMode(e.target.value)
+                                    }}>
                                     <option value="autoplay">Autoplay</option>
                                     <option value="drag">Drag</option>
                                     <option value="hover">Hover</option>
@@ -133,8 +145,9 @@ export default function ProjectPage() {
                                     {project && project.pictures.map((p, i) => <li className="text-sm list-none p-1 px-4" key={i}>{i} - {p}</li>)}
                                 </div>
                             </div>
-                            <div className='my-8 absolute bottom-1 text-red'>
-                                <button onClick={() => deleteProject()}>Delete Project</button>
+                            <div className='flex flex-col my-8 absolute bottom-1'>
+                                <button className='text-left my-2 text-accents-0' onClick={() => saveProject()}>Save Project</button>
+                                <button className='text-red my-2' onClick={() => deleteProject()}>Delete Project</button>
                             </div>
                         </div>
                     </div>
