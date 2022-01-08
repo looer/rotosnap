@@ -91,7 +91,7 @@ export default function ProjectPage() {
         <div>
             {loading ? <div className='w-16 pt-16 mx-auto'><LoadingDots /></div> :
                 <div>
-                    <div className='fixed flex items-center top-0 w-full text-sm px-4 h-16 bg-white border-b border-gray-200 font-bold'>
+                    <div className='fixed flex items-center top-0 w-full text-sm px-4 pl-8 h-16 bg-white border-b border-gray-200 font-bold'>
                         <Link href="/">
                             <a className="text-lg font-extrabold text-accents-0" aria-label="Logo">
                                 RotoSnap
@@ -143,7 +143,7 @@ export default function ProjectPage() {
                             </div>
                             <div className='my-8'>
                                 <label className='mb-4 text-lg font-bold block'>Images</label>
-                                <div className="max-h-48 overflow-scroll border border-gray-200 divide-y divide-gray-200">
+                                <div className="rounded max-h-48 overflow-scroll border border-gray-200 divide-y divide-gray-200">
                                     {project && project.pictures.map((p, i) => <li className="text-sm list-none p-1 px-4" key={i}>{i} - {p}</li>)}
                                 </div>
                             </div>

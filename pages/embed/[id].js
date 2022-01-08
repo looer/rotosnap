@@ -14,7 +14,7 @@ export default function ProjectPage() {
     }, [id])
 
     async function getProject() {
-        const { data, error, status } = await supabase.from('projects').select('id, name, pictures').eq('id', id).single()
+        const { data, error, status } = await supabase.from('projects').select('id, name, pictures, mode').eq('id', id).single()
         if (error) throw error
         console.log(data)
         setProject(data)
@@ -55,7 +55,7 @@ export default function ProjectPage() {
 
     return (
         <div>
-            {paths && paths.length ? <Viewer images={paths} embed={true}></Viewer> : 'Product not found'}
+            {paths && paths.length ? <Viewer images={paths} embed={true} mode={project.mode}></Viewer> : 'Product not found'}
         </div >
     )
 }

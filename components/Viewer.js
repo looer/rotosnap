@@ -46,7 +46,7 @@ export default function Viewer(props) {
 
 
     return (<div className='mx-auto w-auto h-auto'>
-        <div className="relative">
+        <div className="relative inline-block">
             <div className={mode == 'autoplay' ? '' : 'cursor-move'}>
                 <img
                     id="myviewer"
