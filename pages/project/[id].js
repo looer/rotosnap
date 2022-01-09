@@ -49,6 +49,7 @@ export default function ProjectPage() {
 
             //const baseURL = firstURL.substring(0, firstURL.lastIndexOf("/") + 1);
             const _paths = proj.pictures.map(p => baseURL + p)
+            console.log('pictures', _paths)
             setPaths(_paths)
         }
     }
