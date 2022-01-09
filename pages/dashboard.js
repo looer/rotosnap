@@ -1,6 +1,5 @@
 import { useUser } from '@/utils/useUser';
 import { supabase } from '@/utils/supabase-client'
-import Image from 'next/image'
 import { useState, useEffect, useRef } from 'react';
 import Link from 'next/link';
 import { useRouter } from 'next/router';
@@ -18,13 +17,14 @@ export const Project = (props) => {
 
     async function downloadImage(path) {
         try {
-            const { data, error } = await supabase.storage.from('avatars').getPublicUrl(path)
-            console.log('downloaded data', data)
-            if (error) {
-                throw error
-            }
+            //const { data, error } = await supabase.storage.from('avatars').getPublicUrl(path)
+            //console.log('downloaded data', data)
+            //if (error) {
+            //    throw error
+            //}
             //const url = URL.createObjectURL(data)
-            setProfile(data.publicURL)
+            //setProfile(data.publicURL)
+            setProfile('https://tptzxjqtfoymasdabbzr.supabase.co/storage/v1/object/public/avatars/' + path)
         }
         catch (error) {
             console.log('Error downloading image: ', error.message)
@@ -81,7 +81,7 @@ export const Project = (props) => {
                 <a>
                     <div className="relative w-full h-40 rounded-t-lg overflow-hidden z-30 bg-gray-100">
                         <div className={"t-0 absolute w-full h-full bg-black-fade z-20 transition duration-300 animate-none ease-in-out " + (hover ? "bg-opacity-20" : "opacity-0")}></div>
-                        {profile && <Image src={profile}
+                        {profile && <img src={profile}
                             alt='profile pic'
                             layout='fill'
                             objectFit={'cover'}
