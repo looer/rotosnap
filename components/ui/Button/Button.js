@@ -27,6 +27,7 @@ const Button = forwardRef((props, buttonRef) => {
       [s.loading]: loading,
       [s.disabled]: disabled,
       [s.negative]: type === 'negative',
+      [s.neutral]: type === 'neutral',
     },
     className
   );
@@ -36,7 +37,7 @@ const Button = forwardRef((props, buttonRef) => {
       aria-pressed={active}
       data-variant={variant}
       ref={mergeRefs([ref, buttonRef])}
-      className={rootClassName + ((type == 'negative') ? ' border border-gray-300 bg-white' : ' ')}
+      className={rootClassName}
       disabled={disabled}
       style={{
         width,

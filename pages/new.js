@@ -3,6 +3,7 @@ import { supabase } from '@/utils/supabase-client'
 import { useState, useEffect } from 'react';
 import { FileDrop } from 'react-file-drop'
 import { useRouter } from 'next/router';
+import Button from '@/components/ui/Button';
 
 export default function App() {
     const { userLoaded, user, session, userDetails } = useUser();
@@ -74,7 +75,7 @@ export default function App() {
     if (!user) {
         return (<div>User not defined</div>)
     } else return (
-        <div className='max-w-screen-lg mx-auto px-12 my-20'>
+        <div onDrop={e => { e.preventDefault(); }} className='max-w-screen-lg mx-auto px-12 my-20'>
             <div className='w-full'>
                 <form onSubmit={handleSubmit}>
                     <label>
@@ -87,8 +88,12 @@ export default function App() {
                     }}>
                         <div id='droppable'
                             className='py-36 flex flex-col items-center border-2 border-gray-400 border-opacity-50 border-dashed rounded-xl hover:bg-gray-100'>
-                            <label htmlFor="filepick">Select files or drop them here</label>
-                            <input name="filepick" type="file"
+                            <label className='text-center space-y-2' for="demoPictures">
+                                <div className="mt-4">Drag and drop images here</div>
+                                <div className="text-sm">OR</div>
+                                <Button variant="slim" type='neutral'>Select images</Button>
+                            </label>
+                            <input hidden name="filepick" type="file"
                                 id="demoPictures" name="demoPictures"
                                 accept="image/png, image/jpeg"
                                 multiple={true}
@@ -98,8 +103,8 @@ export default function App() {
                                 }} />
                         </div>
                     </FileDrop>
-                    <button onClick={(e) => createProject(filesToUpload)}>{submitting ? (
-                        <div className='p-3 m-5'>
+                    <Button variant="slim" onClick={(e) => createProject(filesToUpload)}>{submitting ? (
+                        <div>
                             Creating... {' '}
                             <svg xmlns="http://www.w3.org/2000/svg" className="h-6 w-6 inline-block animate-spin" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                                 <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M10.325 4.317c.426-1.756 2.924-1.756 3.35 0a1.724 1.724 0 002.573 1.066c1.543-.94 3.31.826 2.37 2.37a1.724 1.724 0 001.065 2.572c1.756.426 1.756 2.924 0 3.35a1.724 1.724 0 00-1.066 2.573c.94 1.543-.826 3.31-2.37 2.37a1.724 1.724 0 00-2.572 1.065c-.426 1.756-2.924 1.756-3.35 0a1.724 1.724 0 00-2.573-1.066c-1.543.94-3.31-.826-2.37-2.37a1.724 1.724 0 00-1.065-2.572c-1.756-.426-1.756-2.924 0-3.35a1.724 1.724 0 001.066-2.573c-.94-1.543.826-3.31 2.37-2.37.996.608 2.296.07 2.572-1.065z" />
@@ -108,8 +113,8 @@ export default function App() {
 
                         </div>
                     ) : (
-                        <div className='p-3 m-5'>Create Project</div>
-                    )}</button>
+                        <div>Create Project</div>
+                    )}</Button>
                 </form>
             </div>
         </div >)

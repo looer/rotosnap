@@ -57,7 +57,8 @@ const SignIn = () => {
       <div className="flex justify-center height-screen-helper">
         <div className="flex flex-col justify-between max-w-lg p-3 m-auto w-80 ">
           <div className="flex justify-center pb-12 ">
-            <Logo width="64px" height="64px" />
+            {/*<Logo width="64px" height="64px" />*/}
+            <div className="text-links font-extrabold text-3xl">RotoSnap</div>
           </div>
           <div className="flex flex-col space-y-4">
             {message.content && (
@@ -121,7 +122,7 @@ const SignIn = () => {
             <span className="pt-1 text-center text-sm">
               <a
                 href="#"
-                className="text-accents-4 text-accent-9 hover:underline cursor-pointer"
+                className="text-accents-3 hover:underline cursor-pointer"
                 onClick={() => {
                   if (showPasswordInput) setPassword('');
                   setShowPasswordInput(!showPasswordInput);
@@ -134,7 +135,7 @@ const SignIn = () => {
             </span>
 
             <span className="pt-1 text-center text-sm">
-              <span className="text-accents-4">Don't have an account?</span>
+              <span className="text-accents-3">Don't have an account?</span>
               {` `}
               <Link href="/signup">
                 <a className="text-accent-9 font-bold hover:underline cursor-pointer">
@@ -149,7 +150,7 @@ const SignIn = () => {
               className="border-t border-accents-2 flex-grow mr-3"
               aria-hidden="true"
             ></div>
-            <div className="text-accents-4">Or</div>
+            <div className="text-accents-3">Or</div>
             <div
               className="border-t border-accents-2 flex-grow ml-3"
               aria-hidden="true"
@@ -158,12 +159,13 @@ const SignIn = () => {
 
           <Button
             variant="slim"
-            type="submit"
+            type="neutral"
+            className="text-left"
             disabled={loading}
             onClick={() => handleOAuthSignIn('google')}
           >
             <Google />
-            <span className="ml-2">Continue with Google</span>
+            <span className="ml-4">Sign in with Google</span>
           </Button>
         </div>
       </div>

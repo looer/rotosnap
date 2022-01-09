@@ -91,13 +91,13 @@ export default function ProjectPage() {
         <div>
             {loading ? <div className='w-16 pt-16 mx-auto'><LoadingDots /></div> :
                 <div>
-                    <div className='fixed flex items-center top-0 w-full text-sm px-4 pl-8 h-16 bg-white border-b border-gray-200 font-bold'>
+                    <div className='fixed flex items-center top-0 w-full text-md px-4 pl-8 h-16 bg-white border-b border-gray-200 font-bold'>
                         <Link href="/">
-                            <a className="text-lg font-extrabold text-accents-0" aria-label="Logo">
+                            <a className="text-xl font-extrabold text-accents-0" aria-label="Logo">
                                 RotoSnap
                             </a>
                         </Link>
-                        <div className="ml-8 flex-grow">{project ? project.name : ''}</div>
+                        <div className="ml-8 flex-grow ">{project ? project.name : ''}</div>
                         <div className="mr-2"><Button variant="slim" className='text-lefttext-accents-0' onClick={() => saveProject()}>Update</Button></div>
                     </div>
                     <div className='flex h-screen'>

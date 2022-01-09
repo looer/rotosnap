@@ -135,7 +135,7 @@ export default function Dashboard() {
     if (!user) {
         return (<div className='w-full text-center py-64'>User not found</div>)
     } else return (
-        <div className='max-w-8xl mx-auto px-8 pt-8'>
+        <div className='max-w-8xl mx-auto px-8 pt-8 mb-32'>
             <div className='flex items-center mb-8'>
                 <div className='flex-grow'>
                     <h2 className='text-2xl font-bold mb-0.5'>All projects</h2>

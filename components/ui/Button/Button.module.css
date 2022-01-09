@@ -1,5 +1,5 @@
 .root {
-  @apply bg-primary text-sm text-white cursor-pointer inline-flex px-10 rounded-lg leading-6 transition ease-in-out duration-150 shadow-sm font-semibold text-center justify-center uppercase py-4 border border-transparent items-center;
+  @apply bg-primary text-sm text-white cursor-pointer inline-flex px-10 rounded leading-6 transition ease-in-out duration-150 shadow-sm font-semibold text-center justify-center uppercase py-4 border border-transparent items-center;
 }
 
 .root:hover {
@@ -26,6 +26,12 @@
 }
 .negative:hover {
   @apply border-gray-400 bg-white text-red;
+}
+.neutral {
+  @apply bg-white text-base border border-gray-300;
+}
+.neutral:hover {
+  @apply border-gray-400 bg-white text-base;
 }
 
 .disabled, .disabled:hover {
