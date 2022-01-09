@@ -25,7 +25,7 @@ export const Project = (props) => {
             //}
             //const url = URL.createObjectURL(data)
             //setProfile(data.publicURL)
-            setProfile(`${NEXT_PUBLIC_SUPABASE_URL}/storage/v1/object/public/avatars/${path}`)
+            setProfile(`${process.env.NEXT_PUBLIC_SUPABASE_URL}/storage/v1/object/public/avatars/${path}`)
         }
         catch (error) {
             console.log('Error downloading image: ', error.message)
