@@ -3,8 +3,8 @@ export default function DocumentationPage() {
     return (
         <div className="">
             <div className="relative">
-                <div className="container mx-auto px-3">
-                    <div className="max-w-6xl mx-auto pt-8 sm:pt-24 pb-12 px-4 sm:px-6 lg:px-8">
+                <div className="max-w-3xl mx-auto px-3">
+                    <div className="mx-auto pt-8 sm:pt-24 pb-12 px-4 sm:px-6 lg:px-8">
                         <div className="sm:flex sm:flex-col sm:align-center">
                             <h1 className="text-4xl font-extrabold sm:text-center sm:text-6xl">
                                 Documentation
@@ -16,7 +16,7 @@ export default function DocumentationPage() {
                     </div>
                     <div className="flex flex-wrap justify-center">
 
-                        <div className="w-full lg:w-1/2 p-4">
+                        <div className="p-4">
                             <p className="text-lg leading-normal mb-8">RotoSnap is the easiest way to upload your 360 degrees picture of a product, host them and embed them in any of your websites.</p>
                             <p className="text-lg leading-normal mb-8">It's super easy to use. Just drop your images and use the iframe to embed them in your website HTML.</p>
                             <div className="text-white bg-gray-700 p-5 rounded-xl">
@@ -29,7 +29,7 @@ export default function DocumentationPage() {
                         </div>
                     </div>
                     <div className="flex flex-wrap justify-center">
-                        <div className="w-full lg:w-1/2 p-4 my-8">
+                        <div className="p-4 my-8">
                             <h2 className="text-3xl font-bold text-center mb-4">How to use RotoSnap</h2>
                             <p className="text-lg leading-normal mb-4">For now only the embed via iframe is supported. But you can use it on any kind of websites.</p>
                             <ol className='text-lg'>
@@ -40,7 +40,7 @@ export default function DocumentationPage() {
                         </div>
                     </div>
                     <div className="flex flex-wrap justify-center">
-                        <div className="w-full lg:w-1/2 p-4">
+                        <div className="p-4">
                             <h2 className="text-3xl font-bold text-center mb-4">FAQ</h2>
                             <details className="flex flex-wrap justify-center">
                                 <summary>
@@ -66,7 +66,7 @@ export default function DocumentationPage() {
                                 </summary>
                                 <p className="text-lg leading-normal mb-8">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nullam quis risus eget urna mollis ornare vel eu leo. Nullam id dolor id nibh ultricies vehicula ut id elit. Nullam id dolor id nibh ultricies vehicula ut id elit.</p>
                             </details>
-                            <div className="w-full text-lg my-8 bg-gray-100 text-black py-5 px-10 border-2 border-gray-200 rounded-xl">
+                            <div className="text-lg my-8 bg-gray-100 text-black py-5 px-10 border-2 border-gray-200 rounded-xl">
                                 Should you have any questions not listed here, please contact us at <a href="mailto:info@rotosnap.com" className="font-bold">info@rotosnap.com</a>
                             </div>
                         </div>
@@ -91,7 +91,7 @@ export default function DocumentationPage() {
                 </g>
             </svg>
             <section className="container mx-auto text-center py-6 mb-12">
-                <h1 className="w-full my-2 text-5xl font-bold leading-tight text-center">Try it now!</h1>
+                <h1 className="my-2 text-5xl font-bold leading-tight text-center">Try it now!</h1>
                 <h3 className="my-4 p-5 text-3xl leading-tight">Sign up for a free 7 day trial! </h3>
 
                 <a href="/pricing" className="mx-auto lg:mx-0 hover:underline bg-primary text-secondary font-bold
