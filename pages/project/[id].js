@@ -44,8 +44,10 @@ export default function ProjectPage() {
 
     async function getPublicUrl(proj) {
         if (proj) {
-            let firstURL = await downloadImage(proj.pictures[0]);
-            const baseURL = firstURL.substring(0, firstURL.lastIndexOf("/") + 1);
+            //let firstURL = await downloadImage(proj.pictures[0]);
+            const baseURL = `${process.env.NEXT_PUBLIC_SUPABASE_URL}/storage/v1/object/public/avatars/`
+
+            //const baseURL = firstURL.substring(0, firstURL.lastIndexOf("/") + 1);
             const _paths = proj.pictures.map(p => baseURL + p)
             setPaths(_paths)
         }
