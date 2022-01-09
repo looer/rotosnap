@@ -7,6 +7,7 @@ import { useRouter } from 'next/router';
 import Button from '@/components/ui/Button';
 
 export const Project = (props) => {
+    console.log('props', props)
     const url = (props.proj ? props.proj.pictures[0] : null);
     const [profile, setProfile] = useState('')
     const [hover, setHover] = useState(false);
@@ -18,7 +19,7 @@ export const Project = (props) => {
     async function downloadImage(path) {
         try {
             const { data, error } = await supabase.storage.from('avatars').getPublicUrl(path)
-
+            console.log('downloaded data', data)
             if (error) {
                 throw error
             }
@@ -113,6 +114,7 @@ export default function Dashboard() {
         setLoading(true)
         if (!user) return []
         const { data, error, status } = await supabase.from('projects').select('id, user_id, name, pictures').eq('user_id', user.id)
+        console.log('all projects ', data)
         if (error) throw error
         setLoading(false)
         setProjects(data)
