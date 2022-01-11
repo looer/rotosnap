@@ -34,8 +34,13 @@ export default function ProjectPage() {
     async function getProject() {
         setLoading(true);
         console.log('getting project', id)
-        const { data, error, status } = await supabase.from('projects').select('id, user_id, name, pictures, mode').match({ id: id }).order('id', { ascending: true })
+        let { data, error, status } = await supabase.from('projects').select('id, user_id, name, pictures, mode').match({ id: id }).single()
         console.log('got project', data)
+        if (Array.isArray(data)) {
+            console.log('received an array', data)
+            data = proj[0]
+        }
+        console.log('data', data)
         if (error) console.error('error', error.message)
         if (data && !error) {
             setMode(data.mode)
@@ -46,6 +51,7 @@ export default function ProjectPage() {
     }
 
     async function getPublicUrl(proj) {
+
         if (proj) {
             //let firstURL = await downloadImage(proj.pictures[0]);
             const baseURL = `${process.env.NEXT_PUBLIC_SUPABASE_URL}/storage/v1/object/public/avatars/`
@@ -54,20 +60,6 @@ export default function ProjectPage() {
             const _paths = proj.pictures.map(p => baseURL + p)
             console.log('pictures', _paths)
             setPaths(_paths)
-        }
-    }
-
-    async function downloadImage(path) {
-        try {
-            const { data, error } = await supabase.storage.from('avatars').getPublicUrl(path)
-
-            if (error) {
-                throw error
-            }
-            return data.publicURL;
-        }
-        catch (error) {
-            console.error('Error downloading image: ', error.message)
         }
     }
 
