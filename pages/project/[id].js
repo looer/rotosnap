@@ -34,7 +34,7 @@ export default function ProjectPage() {
     async function getProject() {
         setLoading(true);
         console.log('getting project', id)
-        const { data, error, status } = await supabase.from('projects').select('id, user_id, name, pictures, mode').order('id', { ascending: true }).match({ id: id })
+        const { data, error, status } = await supabase.from('projects').select('id, user_id, name, pictures, mode').match({ id: id }).order('id', { ascending: true })
         console.log('got project', data)
         if (error) console.error('error', error.message)
         if (data && !error) {
